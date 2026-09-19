@@ -320,5 +320,6 @@
   "apply.detail.doc.notNeeded": "No document was needed; your details matched the records we check.",
   "apply.detail.face.notNeeded": "No selfie was needed; your details matched the records we check.",
   "apply.review.identity.instant": "Identity: verified from your details",
-  "apply.review.identity.stepup": "Identity: confirmed with ID and selfie"
+  "apply.review.identity.stepup": "Identity: confirmed with ID and selfie",
+  "card.included": "Included with membership"
 }

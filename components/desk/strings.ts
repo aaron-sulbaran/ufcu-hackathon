@@ -45,6 +45,7 @@ export const DESK_STRINGS: Record<string, string> = {
   "card.open.business": "Open a business account",
   "card.open.money_market": "Open a money market account",
   "card.open.certificate": "Open a certificate",
+  "card.included": "Included with membership",
   "card.added": "Added",
 };
 

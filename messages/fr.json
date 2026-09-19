@@ -320,5 +320,6 @@
   "apply.detail.doc.notNeeded": "Aucun document n'a eu besoin d'être vérifié ; vos informations correspondaient aux registres consultés.",
   "apply.detail.face.notNeeded": "Aucun selfie n'a été nécessaire ; vos informations correspondaient aux registres consultés.",
   "apply.review.identity.instant": "Identité : vérifiée à partir de vos informations",
-  "apply.review.identity.stepup": "Identité : confirmée avec une pièce d'identité et un selfie"
+  "apply.review.identity.stepup": "Identité : confirmée avec une pièce d'identité et un selfie",
+  "card.included": "Incluse avec l'adhésion"
 }

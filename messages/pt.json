@@ -320,5 +320,6 @@
   "apply.detail.doc.notNeeded": "Não foi preciso conferir documento; seus dados bateram com os registros que consultamos.",
   "apply.detail.face.notNeeded": "Não foi preciso selfie; seus dados bateram com os registros que consultamos.",
   "apply.review.identity.instant": "Identidade: verificada pelos seus dados",
-  "apply.review.identity.stepup": "Identidade: confirmada com documento e selfie"
+  "apply.review.identity.stepup": "Identidade: confirmada com documento e selfie",
+  "card.included": "Incluída na associação"
 }

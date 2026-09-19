@@ -62,7 +62,13 @@ export function ProductCard({
       </ul>
 
       <div className="mt-auto space-y-3 pt-1">
-        {onToggle && (
+        {onToggle && rawProduct.id === "savings" && (
+          <p className="text-sm font-semibold text-ufcu-navy" data-product-id="savings">
+            <AddedCheck />
+            {t("card.included")}
+          </p>
+        )}
+        {onToggle && rawProduct.id !== "savings" && (
           <button
             type="button"
             aria-pressed={selected ?? false}

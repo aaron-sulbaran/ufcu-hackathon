@@ -320,5 +320,6 @@
   "apply.detail.doc.notNeeded": "정보가 기록과 일치해 서류를 확인할 필요가 없었습니다.",
   "apply.detail.face.notNeeded": "정보가 기록과 일치해 셀카가 필요하지 않았습니다.",
   "apply.review.identity.instant": "신원: 입력하신 정보로 확인됨",
-  "apply.review.identity.stepup": "신원: 신분증과 셀카로 확인됨"
+  "apply.review.identity.stepup": "신원: 신분증과 셀카로 확인됨",
+  "card.included": "회원 가입 시 자동 포함"
 }
