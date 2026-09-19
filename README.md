@@ -1,6 +1,6 @@
 # Front Desk (working title)
 
-Team **LAN Party** (Lisa, Aaron, Nicklas) at UFCU's Develop U Hackathon, Saturday September 19, 2026.
+Team **LAN Party** (Lisa, Aaron, Nick) at UFCU's Develop U Hackathon, Saturday September 19, 2026.
 
 Challenge: **Reimagine UFCU's New Member Onboarding Experience.** Our thesis: UFCU's in-branch
 front desk is welcoming, multilingual, and flexible (no SSN required for international students,
