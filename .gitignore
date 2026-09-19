@@ -1,0 +1,28 @@
+# deps / build
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+.turbo/
+
+# env and secrets
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+.vscode/
+.idea/
+
+# personal agent context (never shared with teammates)
+.claude/
+
+# large media (shared via Drive/Slack instead)
+Resources/*.mp4
+Resources/UFCU-packet/
+
+# logs
+*.log
+pnpm-debug.log*
