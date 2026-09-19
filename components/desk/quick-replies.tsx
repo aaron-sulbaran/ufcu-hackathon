@@ -45,14 +45,24 @@ export function QuickReplies({
   lang,
   audience,
   onPick,
-  disabled, lead }: {
+  disabled, lead, openLabel, onOpen }: {
   lang: Lang;
   audience: Audience;
   onPick: (text: string) => void;
-  disabled?: boolean; lead?: string }) {
+  disabled?: boolean; lead?: string;
+  // "I want to open an account" leads the row once the desk has said something. It is an
+  // action, not a question: it goes straight to the application without a model call.
+  openLabel?: string;
+  onOpen?: () => void }) {
+  const questions = lead ? [lead, ...setFor(lang, audience).slice(0, 2)] : setFor(lang, audience);
   return (
     <div className="flex flex-wrap gap-2">
-      {(lead ? [lead, ...setFor(lang, audience).slice(0, 2)] : setFor(lang, audience)).map((q) => (
+      {openLabel && onOpen && (
+        <button type="button" onClick={onOpen} className="btn btn-cta text-left">
+          {openLabel}
+        </button>
+      )}
+      {questions.map((q) => (
         <button
           key={q}
           type="button"

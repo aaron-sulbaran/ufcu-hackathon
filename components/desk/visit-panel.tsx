@@ -3,10 +3,9 @@
 // persistent place to continue, so the conversation itself never has to repeat the offer.
 // Gray side panel per DESIGN.md, with the handoff as the site's teal promo card.
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
 import { pathLabel } from "@/lib/ai/eligibility";
-import { savePrefill } from "@/lib/apply/prefill";
 import { productById } from "@/lib/products";
 import { useDeskT } from "@/components/desk/strings";
 
@@ -16,15 +15,19 @@ export interface Visit {
   prefill: ApplicationPrefill | null;
 }
 
-export function VisitPanel({ context, visit }: { context: PersonaContext; visit: Visit }) {
+export function VisitPanel({
+  context,
+  visit,
+  onBecome,
+}: {
+  context: PersonaContext;
+  visit: Visit;
+  onBecome?: () => void;
+}) {
   const t = useDeskT();
   const [open, setOpen] = useState(false);
   const { products, eligibility, prefill } = visit;
-
-  // The panel is where the handoff lives, so it is also where the prefill is written.
-  useEffect(() => {
-    if (prefill) savePrefill(prefill);
-  }, [prefill]);
+  // The conversation owns the prefill now and writes it as it changes, so the panel only reads.
 
   const who =
     context.goal === "unsure"
@@ -35,18 +38,25 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
 
   return (
     <aside className="md:sticky md:top-4 md:w-80 md:shrink-0">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        className="panel-gray flex w-full items-center justify-between gap-3 text-left md:hidden"
-        style={{ padding: "0.75rem 1rem" }}
-      >
-        <span className="font-heading text-base font-bold text-ufcu-navy">{t("desk.visit.title")}</span>
-        <span className="text-sm font-semibold text-ufcu-link">
-          {prefill ? t("desk.visit.ready") : open ? t("desk.visit.hide") : t("desk.visit.show")}
-        </span>
-      </button>
+      <div className="flex flex-wrap items-center gap-2 md:hidden">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="panel-gray flex min-w-0 flex-1 items-center justify-between gap-3 text-left"
+          style={{ padding: "0.75rem 1rem" }}
+        >
+          <span className="font-heading text-base font-bold text-ufcu-navy">{t("desk.visit.title")}</span>
+          <span className="text-sm font-semibold text-ufcu-link">
+            {prefill ? t("desk.visit.ready") : open ? t("desk.visit.hide") : t("desk.visit.show")}
+          </span>
+        </button>
+        {onBecome && (
+          <button type="button" onClick={onBecome} className="btn btn-cta shrink-0">
+            {t("desk.become")}
+          </button>
+        )}
+      </div>
 
       <div className={`${open ? "mt-3 block" : "hidden"} panel-gray space-y-5 text-ufcu-ink md:mt-0 md:block`}>
         <h3 className="hidden md:block" style={{ fontSize: "1.25rem", lineHeight: 1.4 }}>

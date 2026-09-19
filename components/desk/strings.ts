@@ -27,6 +27,8 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.receipt.products": "Accounts",
 
   "desk.promo.title": "Ready to open your accounts?",
+  "desk.become": "Become a member",
+  "desk.quick.open": "I want to open an account",
 
   "desk.error": "That did not go through.",
   "desk.retry": "Try again",
@@ -35,6 +37,15 @@ export const DESK_STRINGS: Record<string, string> = {
   "card.monthlyFee": "Monthly fee",
   "card.path": "Your path",
   "card.bring": "What to bring",
+  "card.open": "Open this account",
+  "card.open.checking": "Open a checking account",
+  "card.open.savings": "Open a savings account",
+  "card.open.credit_card": "Apply for this card",
+  "card.open.loan": "Start this loan",
+  "card.open.business": "Open a business account",
+  "card.open.money_market": "Open a money market account",
+  "card.open.certificate": "Open a certificate",
+  "card.added": "Added",
 };
 
 function fill(text: string, vars?: Record<string, string | number>): string {

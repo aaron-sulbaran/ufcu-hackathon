@@ -1,7 +1,7 @@
 // Identity-path rules. Inputs come from the conversation, never from a sensitive field:
 // the assistant asks "do you have a Social Security Number yet?", never for the number itself.
 import rules from "@/data/eligibility.json";
-import type { EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
+import type { Audience, EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
 
 export interface EligibilityInput {
   hasSsn?: boolean;
@@ -32,6 +32,13 @@ const BUSINESS = rules.business as BusinessRule;
 
 export function pathLabel(path: IdentityPath): string {
   return PATHS[path].label;
+}
+
+// The path to assume before the conversation has established one, so the desk can hand off to
+// the application on the first click. An international student is on the foreign-status path;
+// everyone else starts on the Social Security Number path and the application can correct it.
+export function defaultPathFor(audience: Audience): IdentityPath {
+  return audience === "international_student" ? "foreign_status" : "ssn";
 }
 
 function localizedDocuments(path: IdentityPath, lang: Lang): string[] {

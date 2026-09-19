@@ -27,10 +27,24 @@ export function DeskNote({ text, children }: { text?: string; children?: ReactNo
   );
 }
 
-export function AssistantTurn({ parts }: { parts: { type: string }[] }) {
+// The live model still emits an em dash now and then despite the instruction not to. The rule
+// is a house style rule, so it is enforced where the text is drawn rather than in the stream.
+function noEmDash(text: string): string {
+  return text.replace(/\s*\u2014\s*/g, ", ");
+}
+
+export function AssistantTurn({
+  parts,
+  selected,
+  onToggleProduct,
+}: {
+  parts: { type: string }[];
+  selected?: ReadonlySet<string>;
+  onToggleProduct?: (product: Product) => void;
+}) {
   const t = useDeskT();
   const scripted = parts.some(isScriptedMarker);
-  const text = parts.map(partText).filter(Boolean).join(" ").trim();
+  const text = noEmDash(parts.map(partText).filter(Boolean).join(" ").trim());
 
   return (
     <div className="space-y-4">
@@ -49,7 +63,11 @@ export function AssistantTurn({ parts }: { parts: { type: string }[] }) {
             <div key={`products-${i}`} className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible">
               {products.map((product) => (
                 <div key={product.id} className="w-64 shrink-0 snap-start sm:w-auto">
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    selected={selected?.has(product.id) ?? false}
+                    onToggle={onToggleProduct}
+                  />
                 </div>
               ))}
             </div>
