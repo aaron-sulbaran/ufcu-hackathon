@@ -38,5 +38,18 @@
   "apply.submit": "Submit application",
   "apply.simulated": "Simulated",
   "common.call": "Call (512) 467-8080",
-  "common.branch": "University Branch, 2244 Guadalupe St"
+  "common.branch": "University Branch, 2244 Guadalupe St",
+  "common.ncua": "Insured by NCUA. Equal Housing Lender.",
+  "chip.maya.name": "Maya",
+  "chip.maya.blurb": "UT sophomore opening her first account and building credit.",
+  "chip.joon.name": "Joon",
+  "chip.joon.blurb": "Grad student on F-1, no SSN yet, just arrived from Korea.",
+  "chip.daniela.name": "Daniela",
+  "chip.daniela.blurb": "Opening a food truck LLC and moving from Wells Fargo.",
+  "chip.robert.name": "Robert",
+  "chip.robert.blurb": "Moving to Austin for a new job, switching from Chase.",
+  "trust.noSsn": "No Social Security number needed to start",
+  "trust.sourced": "Every answer links to ufcu.org",
+  "trust.secure": "Your application is a separate secure page, no AI reads it",
+  "a11y.largerText": "Larger text"
 }
