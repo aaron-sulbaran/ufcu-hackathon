@@ -1,11 +1,11 @@
 "use client";
 // The persona sentence: "I am [audience] and I want [goal]." Saves the choice and starts the chat.
+// Montserrat 600 navy, with the two selects wearing the site's own input recipe.
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePersona } from "@/lib/context";
 import { useT } from "@/lib/i18n";
 import type { Audience, Goal } from "@/lib/types";
-import { Button } from "@/components/ui/button";
 
 const AUDIENCES: Audience[] = [
   "student",
@@ -18,8 +18,8 @@ const AUDIENCES: Audience[] = [
 ];
 const GOALS: Goal[] = ["checking", "savings", "build_credit", "credit_card", "loan", "unsure"];
 
-const selectClass =
-  "mx-1 rounded-md border border-ufcu-primary-subtle bg-white px-2 py-1 font-heading text-2xl text-ufcu-primary underline decoration-ufcu-accent decoration-2 underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-ufcu-secondary sm:text-3xl";
+// .input-ufcu is a full-width field; in the sentence it sits inline and sizes to its option.
+const selectStyle = { width: "auto", maxWidth: "100%" } as const;
 
 export function PersonaSentence() {
   const { setContext } = usePersona();
@@ -35,10 +35,11 @@ export function PersonaSentence() {
 
   return (
     <div className="space-y-6">
-      <p className="flex flex-wrap items-center gap-y-2 font-heading text-2xl text-ufcu-primary sm:text-3xl">
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-3 font-heading text-[1.5rem] font-semibold leading-snug text-ufcu-navy sm:text-[1.75rem]">
         <span>{t("landing.iam")}</span>
         <select
-          className={selectClass}
+          className="input-ufcu"
+          style={selectStyle}
           value={audience}
           onChange={(e) => setAudience(e.target.value as Audience)}
           aria-label={t("landing.iam")}
@@ -51,7 +52,8 @@ export function PersonaSentence() {
         </select>
         <span>{t("landing.iwant")}</span>
         <select
-          className={selectClass}
+          className="input-ufcu"
+          style={selectStyle}
           value={goal}
           onChange={(e) => setGoal(e.target.value as Goal)}
           aria-label={t("landing.iwant")}
@@ -63,13 +65,9 @@ export function PersonaSentence() {
           ))}
         </select>
       </p>
-      <Button
-        type="button"
-        onClick={start}
-        className="h-11 bg-ufcu-secondary-darker px-6 text-base text-white hover:opacity-90"
-      >
+      <button type="button" onClick={start} className="btn btn-cta btn-hero">
         {t("landing.start")}
-      </Button>
+      </button>
     </div>
   );
 }

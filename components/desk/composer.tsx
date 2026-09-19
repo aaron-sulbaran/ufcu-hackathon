@@ -32,12 +32,13 @@ export function Composer({
         onChange={(e) => setValue(e.target.value)}
         placeholder={t("desk.placeholder2")}
         autoComplete="off"
-        className="min-w-0 flex-1 rounded-lg border border-ufcu-primary-subtle bg-white px-4 py-3 text-ufcu-primary outline-none focus:border-ufcu-secondary-darker"
+        className="input-ufcu min-w-0 flex-1"
+        style={{ width: "auto" }}
       />
       <button
         type="submit"
         disabled={busy || value.trim().length === 0}
-        className="shrink-0 rounded-lg bg-ufcu-secondary-darker px-5 py-3 font-semibold text-white disabled:opacity-40"
+        className="btn btn-cta shrink-0"
       >
         {t("desk.send")}
       </button>

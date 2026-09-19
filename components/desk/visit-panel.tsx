@@ -1,6 +1,7 @@
 "use client";
-// "Your visit so far": the left panel that fills in as the conversation goes. It is the
+// "Your Visit So Far": the left panel that fills in as the conversation goes. It is the
 // persistent place to continue, so the conversation itself never has to repeat the offer.
+// Gray side panel per DESIGN.md, with the handoff as the site's teal promo card.
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
@@ -38,35 +39,36 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-3 rounded-xl border border-ufcu-primary-subtle bg-white px-4 py-3 text-left text-ufcu-primary md:hidden"
+        className="panel-gray flex w-full items-center justify-between gap-3 text-left md:hidden"
+        style={{ padding: "0.75rem 1rem" }}
       >
-        <span className="font-heading text-base">{t("desk.visit")}</span>
-        <span className="text-sm font-medium text-ufcu-secondary-darker">
+        <span className="font-heading text-base font-bold text-ufcu-navy">{t("desk.visit.title")}</span>
+        <span className="text-sm font-semibold text-ufcu-link">
           {prefill ? t("desk.visit.ready") : open ? t("desk.visit.hide") : t("desk.visit.show")}
         </span>
       </button>
 
-      <div
-        className={`${open ? "mt-3 block" : "hidden"} space-y-5 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary md:mt-0 md:block`}
-      >
-        <h2 className="hidden font-heading text-lg leading-tight md:block">{t("desk.visit")}</h2>
+      <div className={`${open ? "mt-3 block" : "hidden"} panel-gray space-y-5 text-ufcu-ink md:mt-0 md:block`}>
+        <h3 className="hidden md:block" style={{ fontSize: "1.25rem", lineHeight: 1.4 }}>
+          {t("desk.visit.title")}
+        </h3>
 
         <section className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">{t("desk.visit.who")}</p>
+          <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who")}</p>
           <p className="text-sm leading-snug">{who}</p>
           {prefill?.firstName && <p className="text-sm font-semibold">{prefill.firstName}</p>}
         </section>
 
-        {empty && <p className="text-sm text-muted-foreground">{t("desk.visit.empty")}</p>}
+        {empty && <p className="text-sm text-ufcu-muted">{t("desk.visit.empty")}</p>}
 
         {products && products.length > 0 && (
           <section className="space-y-1.5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">{t("desk.visit.bundle")}</p>
+            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bundle")}</p>
             <ul className="space-y-2">
               {products.map((p) => (
                 <li key={p.id} className="text-sm leading-snug">
                   <span className="font-semibold">{p.name}</span>
-                  {p.reason && <span className="block text-muted-foreground">{p.reason}</span>}
+                  {p.reason && <span className="block text-ufcu-muted">{p.reason}</span>}
                 </li>
               ))}
             </ul>
@@ -75,14 +77,12 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
 
         {eligibility && (
           <section className="space-y-1.5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">{t("desk.visit.bring")}</p>
+            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bring")}</p>
             <p className="text-sm font-semibold leading-snug">{pathLabel(eligibility.path)}</p>
             <ul className="space-y-1 text-sm leading-snug">
               {eligibility.documents.map((doc) => (
-                <li key={doc} className="flex gap-2">
-                  <span aria-hidden="true" className="text-ufcu-primary-lighter">
-                    -
-                  </span>
+                <li key={doc} className="flex items-start gap-2">
+                  <CheckIcon />
                   <span>{doc}</span>
                 </li>
               ))}
@@ -91,22 +91,20 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
         )}
 
         {prefill && (
-          <section className="space-y-2 rounded-lg bg-ufcu-secondary-subtle p-3">
-            <Link
-              href="/apply"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-ufcu-secondary-darker px-4 py-3 text-center font-semibold text-white hover:bg-ufcu-secondary-darkest"
-            >
-              <LockIcon />
-              {t("desk.continue")}
-            </Link>
-            <p className="text-xs leading-snug">{t("desk.secure.note")}</p>
-            <dl className="space-y-0.5 text-xs">
-              {prefill.firstName && (
-                <Row label={t("desk.receipt.name")} value={prefill.firstName} />
-              )}
+          <section className="promo-teal space-y-3" style={{ padding: "1.25rem" }}>
+            <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700, color: "#fff" }}>
+              {t("desk.promo.title")}
+            </h3>
+            <p className="text-sm leading-snug text-white">{t("desk.secure.note")}</p>
+            <dl className="space-y-0.5 text-sm text-white">
+              {prefill.firstName && <Row label={t("desk.receipt.name")} value={prefill.firstName} />}
               <Row label={t("desk.receipt.path")} value={pathLabel(prefill.path)} />
               <Row label={t("desk.receipt.products")} value={names.join(", ")} />
             </dl>
+            <Link href="/apply" className="btn btn-white w-full" style={{ color: "var(--ufcu-cta)" }}>
+              <LockIcon />
+              {t("desk.continue")}
+            </Link>
           </section>
         )}
       </div>
@@ -120,6 +118,14 @@ function Row({ label, value }: { label: string; value: string }) {
       <dt className="shrink-0 font-semibold">{label}:</dt>
       <dd className="min-w-0">{value}</dd>
     </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 16 16" className="mt-0.5 size-4 shrink-0 fill-ufcu-navy">
+      <path d="M6.3 12.2 2.4 8.3l1.2-1.2 2.7 2.7 6.1-6.1 1.2 1.2-7.3 7.3Z" />
+    </svg>
   );
 }
 

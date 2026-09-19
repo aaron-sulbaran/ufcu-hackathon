@@ -1,10 +1,10 @@
 "use client";
 // Four demo personas. Each chip preloads a full context and jumps straight into the conversation.
+// White site cards, Montserrat name, Inter blurb, a teal "Try it" line at the foot.
 import { useRouter } from "next/navigation";
 import { usePersona } from "@/lib/context";
 import { useT } from "@/lib/i18n";
 import type { Audience, Goal, Lang } from "@/lib/types";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface Chip {
   id: string;
@@ -33,17 +33,21 @@ export function PersonaChips() {
   };
 
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-medium text-ufcu-primary">{t("landing.try")}</p>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <div className="space-y-4">
+      <p className="font-semibold text-ufcu-navy">{t("landing.try")}</p>
+      <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
         {CHIPS.map((chip) => (
-          <button key={chip.id} type="button" onClick={() => choose(chip)} className="text-left">
-            <Card className="h-full ring-ufcu-primary-subtle transition-colors hover:ring-ufcu-secondary">
-              <CardContent className="space-y-1">
-                <p className="font-heading text-base text-ufcu-primary">{t(chip.nameKey)}</p>
-                <p className="text-sm text-muted-foreground">{t(chip.blurbKey)}</p>
-              </CardContent>
-            </Card>
+          <button
+            key={chip.id}
+            type="button"
+            onClick={() => choose(chip)}
+            className="card-ufcu flex h-full flex-col gap-2 p-5 text-left transition-shadow hover:shadow-ufcu"
+          >
+            <span className="font-heading text-[1.125rem] font-bold leading-snug text-ufcu-navy">
+              {t(chip.nameKey)}
+            </span>
+            <span className="text-sm leading-snug text-ufcu-ink">{t(chip.blurbKey)}</span>
+            <span className="mt-auto pt-2 text-sm font-semibold text-ufcu-link">{t("landing.tryIt")}</span>
           </button>
         ))}
       </div>

@@ -3,35 +3,33 @@
 // Nothing here asks for a number; it says what to bring to the secure application.
 import type { EligibilityResult } from "@/lib/types";
 import { pathLabel } from "@/lib/ai/eligibility";
+import { CardCheck } from "@/components/cards/card-check";
 import { SourceLink } from "@/components/cards/source-link";
 import { useDeskT } from "@/components/desk/strings";
 
 export function EligibilityCard({ result }: { result: EligibilityResult }) {
   const t = useDeskT();
   return (
-    <article className="flex flex-col gap-3 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary shadow-sm">
+    <article className="card-ufcu flex flex-col gap-3 text-ufcu-ink" style={{ padding: "1.25rem" }}>
       <header className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">{t("card.path")}</p>
-        <h3 className="font-heading text-lg leading-tight">{pathLabel(result.path)}</h3>
+        <p className="text-sm font-semibold text-ufcu-navy">{t("card.path")}</p>
+        <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700 }}>{pathLabel(result.path)}</h3>
       </header>
 
       <div>
-        <p className="mb-1.5 text-sm font-semibold">{t("card.bring")}</p>
+        <p className="mb-1.5 text-sm font-semibold text-ufcu-navy">{t("card.bring")}</p>
         <ul className="space-y-1.5">
           {result.documents.map((doc) => (
             <li key={doc} className="flex items-start gap-2 text-sm">
-              <span
-                aria-hidden="true"
-                className="mt-1.5 inline-block size-3 shrink-0 rounded-[3px] border-2 border-ufcu-primary-lighter"
-              />
-              <span>{doc}</span>
+              <CardCheck />
+              <span className="leading-snug">{doc}</span>
             </li>
           ))}
         </ul>
       </div>
 
       {result.notes.length > 0 && (
-        <ul className="space-y-1 rounded-lg bg-ufcu-secondary-subtle px-3 py-2 text-sm leading-snug">
+        <ul className="space-y-1 rounded-lg bg-ufcu-gray-panel px-3 py-2 text-sm leading-snug">
           {result.notes.map((note) => (
             <li key={note}>{note}</li>
           ))}

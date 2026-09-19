@@ -9,6 +9,7 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.placeholder2": "Ask the desk anything",
 
   "desk.visit": "Your visit so far",
+  "desk.visit.title": "Your Visit So Far",
   "desk.visit.empty": "This fills in as we talk.",
   "desk.visit.show": "Show",
   "desk.visit.hide": "Hide",
@@ -24,6 +25,8 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.receipt.name": "Name",
   "desk.receipt.path": "Path",
   "desk.receipt.products": "Accounts",
+
+  "desk.promo.title": "Ready to open your accounts?",
 
   "desk.error": "That did not go through.",
   "desk.retry": "Try again",
@@ -51,7 +54,7 @@ export function useDeskT() {
   };
 }
 
-// The first sentence of a desk note is set in the serif face; the rest is body copy.
+// The first sentence of a desk note leads in Montserrat; the rest is Inter body copy.
 // Handles the Korean full stop as well as the Latin terminators.
 export function splitFirstSentence(text: string): [string, string] {
   const match = /[.!?。！？](\s|$)/.exec(text);

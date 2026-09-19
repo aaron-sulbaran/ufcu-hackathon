@@ -1,6 +1,6 @@
 "use client";
 // A desk turn is a short note with a label, then cards. No bubbles: this is a front desk,
-// not a chat app. The first sentence is set in the serif face, the rest is body copy.
+// not a chat app. The first sentence leads in Montserrat, the rest is Inter body copy.
 import type { ReactNode } from "react";
 import type { ApplicationPrefill, EligibilityResult, ProductCard as Product, ResourceCard as Resource } from "@/lib/types";
 import { ProductCard } from "@/components/cards/product-card";
@@ -14,12 +14,14 @@ export function DeskNote({ text, children }: { text?: string; children?: ReactNo
   const t = useDeskT();
   const [lead, rest] = text ? splitFirstSentence(text) : ["", ""];
   return (
-    <div className="border-l-2 border-ufcu-accent pl-4">
-      <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-ufcu-accent-darker">{t("desk.label")}</p>
+    <div className="border-l-2 border-ufcu-gray-line pl-4">
+      <p className="mb-1.5 text-sm font-semibold text-ufcu-navy">{t("desk.label")}</p>
       {lead && (
-        <p className="max-w-prose font-heading text-xl leading-snug text-ufcu-primary">{lead}</p>
+        <p className="max-w-prose font-heading text-[1.25rem] font-semibold leading-snug text-ufcu-navy">
+          {lead}
+        </p>
       )}
-      {rest && <p className="mt-1 max-w-prose leading-relaxed text-ufcu-primary">{rest}</p>}
+      {rest && <p className="mt-1.5 max-w-prose leading-relaxed text-ufcu-ink">{rest}</p>}
       {children}
     </div>
   );
@@ -33,7 +35,7 @@ export function AssistantTurn({ parts }: { parts: { type: string }[] }) {
   return (
     <div className="space-y-4">
       {scripted && (
-        <span className="inline-block rounded-full bg-ufcu-accent-subtle px-2.5 py-0.5 text-xs font-semibold text-ufcu-accent-darkest">
+        <span className="inline-block rounded-full bg-ufcu-gray-panel px-2.5 py-0.5 text-xs font-semibold text-ufcu-navy">
           {t("desk.offline")}
         </span>
       )}

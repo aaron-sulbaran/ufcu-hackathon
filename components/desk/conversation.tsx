@@ -101,7 +101,7 @@ export function Conversation() {
 
           {messages.map((message) =>
             message.role === "user" ? (
-              <p key={message.id} className="max-w-prose pl-4 text-right italic leading-relaxed text-muted-foreground sm:ml-auto">
+              <p key={message.id} className="max-w-prose pl-4 text-right leading-relaxed text-ufcu-ink/90 sm:ml-auto">
                 {message.parts.map((part) => (part.type === "text" ? part.text : "")).join("")}
               </p>
             ) : (
@@ -110,18 +110,18 @@ export function Conversation() {
           )}
 
           {busy && (
-            <p className="pl-4 text-sm text-muted-foreground" aria-live="polite">
+            <p className="pl-4 text-sm text-ufcu-muted" aria-live="polite">
               ...
             </p>
           )}
 
           {error && (
-            <div className="flex flex-wrap items-center gap-3 rounded-lg border border-ufcu-primary-subtle bg-white px-4 py-3 text-sm text-ufcu-primary">
+            <div className="card-ufcu flex flex-wrap items-center gap-3 px-4 py-3 text-sm text-ufcu-ink">
               <span>{t("desk.error")}</span>
               <button
                 type="button"
                 onClick={() => regenerate()}
-                className="rounded-lg bg-ufcu-secondary-darker px-3 py-1.5 font-semibold text-white"
+                className="btn btn-cta"
               >
                 {t("desk.retry")}
               </button>
@@ -134,7 +134,7 @@ export function Conversation() {
           <div ref={bottom} />
         </div>
 
-        <div className="sticky bottom-0 border-t border-ufcu-primary-subtle bg-background pb-4 pt-3">
+        <div className="sticky bottom-0 border-t border-ufcu-gray-line bg-background pb-4 pt-3">
           <Composer busy={busy} onSend={(text) => send(text)} />
         </div>
       </div>

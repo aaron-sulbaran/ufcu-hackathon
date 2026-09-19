@@ -283,5 +283,9 @@
   "card.opensWith": "Opens with",
   "card.monthlyFee": "Monthly fee",
   "card.path": "Your path",
-  "card.bring": "What to bring"
+  "card.bring": "What to bring",
+  "apply.checklist.heading": "What You'll Need",
+  "apply.trust.heading": "Identity Check",
+  "apply.trust.confidenceLabel": "Confidence out of 100",
+  "apply.accounts.memberPill": "Membership account"
 }

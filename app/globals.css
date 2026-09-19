@@ -249,6 +249,6 @@ a:hover { text-decoration: underline; }
 .panel-gray { background: var(--ufcu-gray-panel); border-radius: 8px; padding: 1.5rem; }
 .card-ufcu { background: #fff; border: 1px solid var(--ufcu-gray-line); border-radius: 12px; }
 .promo-teal { background: var(--ufcu-link); color: #fff; border-radius: 16px; padding: 2rem; }
-.promo-teal a { color: #fff; }
+.promo-teal a:not(.btn) { color: #fff; }
 input[type="radio"], input[type="checkbox"] { accent-color: var(--ufcu-navy); width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) { .btn, .hdr-block { transition: none; } }

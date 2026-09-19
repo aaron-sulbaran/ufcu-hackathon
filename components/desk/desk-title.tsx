@@ -1,15 +1,9 @@
 "use client";
-// Page title. Client-side because the copy follows the language switch in the header.
+// The one line under the page band. The band itself carries the "Front Desk" title, so this
+// stays a quiet tagline. Client-side because the copy follows the language switch in the header.
 import { useT } from "@/lib/i18n";
 
 export function DeskTitle() {
   const t = useT();
-  return (
-    <div className="space-y-1 py-5">
-      <h1 className="font-heading text-3xl leading-tight text-ufcu-primary sm:text-4xl">
-        {t("landing.headline")}
-      </h1>
-      <p className="text-sm text-muted-foreground">{t("app.tagline")}</p>
-    </div>
-  );
+  return <p className="py-4 text-sm text-ufcu-muted">{t("app.tagline")}</p>;
 }

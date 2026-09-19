@@ -5,22 +5,24 @@ import { SourceLink } from "@/components/cards/source-link";
 
 export function ResourceCard({ resource }: { resource: Resource }) {
   return (
-    <article className="flex flex-col gap-2 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary shadow-sm">
-      <h3 className="font-heading text-base leading-tight">{resource.title}</h3>
-      <p className="text-sm leading-snug text-muted-foreground">{resource.summary}</p>
+    <article className="card-ufcu flex flex-col gap-2 text-ufcu-ink" style={{ padding: "1.25rem" }}>
+      <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700 }}>{resource.title}</h3>
+      <p className="text-sm leading-snug text-ufcu-muted">{resource.summary}</p>
       {resource.tags.length > 0 && (
         <ul className="flex flex-wrap gap-1.5">
           {resource.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full bg-ufcu-primary-subtle px-2 py-0.5 text-xs font-medium text-ufcu-primary"
+              className="rounded-full bg-ufcu-gray-panel px-2.5 py-0.5 text-xs font-semibold text-ufcu-navy"
             >
               {tag}
             </li>
           ))}
         </ul>
       )}
-      <SourceLink href={resource.sourceUrl} />
+      <div className="mt-auto pt-1">
+        <SourceLink href={resource.sourceUrl} />
+      </div>
     </article>
   );
 }
