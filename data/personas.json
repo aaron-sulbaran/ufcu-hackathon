@@ -329,9 +329,9 @@
       "firstName": "Joon",
       "schoolAffiliation": "University of Texas at Austin",
       "notes": [
-        "No SSN yet",
-        "F-1 student, arrived three weeks ago",
-        "Has passport, I-20, and a West Campus lease"
+        "아직 SSN(소셜 시큐리티 번호)이 없습니다",
+        "F-1 학생 비자로 3주 전에 입국했습니다",
+        "여권, I-20, 웨스트 캠퍼스 임대 계약서를 보유하고 있습니다"
       ],
       "productReasons": {
         "savings": "회원 자격을 만드는 계좌입니다. $1로 열리고, 다른 모든 계좌가 여기에 연결됩니다.",
@@ -562,22 +562,22 @@
         {
           "id": "document",
           "status": "pass",
-          "detail": "Passport read clean; machine-readable zone checks out."
+          "detail": "여권 스캔 결과가 깨끗하고, 기계 판독 영역(MRZ) 검증도 통과했습니다."
         },
         {
           "id": "face",
           "status": "pass",
-          "detail": "Selfie matches the passport photo."
+          "detail": "셀카 사진이 여권 사진과 일치합니다."
         },
         {
           "id": "consistency",
           "status": "review",
-          "detail": "Address is three weeks old and does not appear in third-party records yet."
+          "detail": "주소지 등록이 3주밖에 되지 않아 아직 제3자 기록에서 확인되지 않습니다."
         },
         {
           "id": "watchlist",
           "status": "pass",
-          "detail": "No sanctions or watchlist match."
+          "detail": "제재 목록이나 감시 목록에 해당 사항이 없습니다."
         }
       ],
       "confidence": 82,
@@ -586,31 +586,31 @@
     },
     "decision": {
       "kind": "needs_item",
-      "item": "A five-minute video call with a banker to confirm your passport",
+      "item": "여권 확인을 위한 은행원과의 5분 화상 통화",
       "how": [
-        "Book a slot at the University Branch, 2244 Guadalupe St; the next opening is today.",
-        "Or walk in Monday to Friday, 10 AM to 4 PM, and bring your passport and I-20."
+        "University Branch(2244 Guadalupe St)에서 예약하세요. 가장 빠른 시간은 오늘입니다.",
+        "또는 월요일부터 금요일, 오전 10시부터 오후 4시 사이에 여권과 I-20을 지참하고 방문하세요."
       ]
     },
     "nextSteps": [
       {
-        "title": "Campus ATMs, no fee",
-        "detail": "More than 25 fee-free ATMs on and around campus. Gregory Gym, the PCL, and the Student Services Building take deposits.",
+        "title": "캠퍼스 ATM, 수수료 없음",
+        "detail": "캠퍼스 안팎에 수수료 없는 ATM이 25개 이상 있습니다. Gregory Gym, PCL, Student Services Building에서 입금이 가능합니다.",
         "sourceUrl": "https://ufcu.org/locations/fee-free-atms"
       },
       {
-        "title": "Receiving money from home",
-        "detail": "Incoming wires are free. The sending bank abroad must route through its US correspondent; UFCU cannot receive foreign currency.",
+        "title": "본국에서 송금 받기",
+        "detail": "수신 전신 송금은 무료입니다. 해외 송금 은행은 반드시 미국 내 환거래은행(correspondent bank)을 거쳐야 하며, UFCU는 외화를 직접 수취할 수 없습니다.",
         "sourceUrl": "https://ufcu.org/resources/member-services/banking"
       },
       {
-        "title": "Zelle needs an SSN",
-        "detail": "Per UFCU branch staff. Use Transfer to a Non-UFCU Member, which has no UFCU fee, until you have one.",
+        "title": "Zelle 이용에는 SSN이 필요합니다",
+        "detail": "UFCU 지점 직원에 따른 안내입니다. SSN을 받기 전까지는 UFCU 수수료가 없는 Transfer to a Non-UFCU Member를 이용하세요.",
         "sourceUrl": "https://ufcu.org/resources/member-services/banking/zelle"
       },
       {
-        "title": "Add your SSN later",
-        "detail": "When your SSN or ITIN arrives, bring it to the branch and it gets added to the account you already have.",
+        "title": "나중에 SSN 추가하기",
+        "detail": "SSN이나 ITIN을 받으면 지점에 가져오세요. 이미 개설된 계좌에 추가해 드립니다.",
         "sourceUrl": "https://ufcu.org/open-account"
       }
     ]
@@ -639,9 +639,9 @@
       ],
       "firstName": "Daniela",
       "notes": [
-        "Food truck LLC in Austin, has EIN and formation documents",
-        "Business documents step follows the personal membership",
-        "Moving personal banking from Wells Fargo"
+        "LLC de food truck en Austin, cuenta con EIN y documentos de constitucion",
+        "El paso de documentos de negocio sigue a la membresia personal",
+        "Esta trasladando su banca personal desde Wells Fargo"
       ],
       "productReasons": {
         "savings": "Abre su membresia con $1 y es la cuenta a la que se conecta la cuenta de negocio.",
@@ -834,22 +834,22 @@
         {
           "id": "document",
           "status": "pass",
-          "detail": "Texas driver license read clean, no tampering detected."
+          "detail": "La licencia de conducir de Texas se leyo correctamente, sin indicios de alteracion."
         },
         {
           "id": "face",
           "status": "pass",
-          "detail": "Selfie matches the photo on the ID."
+          "detail": "La selfie coincide con la foto de la identificacion."
         },
         {
           "id": "consistency",
           "status": "pass",
-          "detail": "Name and address agree across every document."
+          "detail": "El nombre y la direccion coinciden en todos los documentos."
         },
         {
           "id": "watchlist",
           "status": "pass",
-          "detail": "No sanctions or watchlist match for the member or the listed owners."
+          "detail": "No hay coincidencias en listas de sanciones o vigilancia para el miembro ni para los propietarios registrados."
         }
       ],
       "confidence": 94,
@@ -861,23 +861,23 @@
     },
     "nextSteps": [
       {
-        "title": "Upload your business documents",
-        "detail": "Certificate of Formation, EIN letter, assumed-name certificate if the truck name is not yours, and an ID for every signer.",
+        "title": "Suba sus documentos de negocio",
+        "detail": "Certificado de Constitucion, carta del EIN, certificado de nombre comercial (DBA) si el nombre del food truck no es el suyo, y una identificacion de cada firmante.",
         "sourceUrl": "https://ufcu.org/business/business-requirements"
       },
       {
-        "title": "Business rates and fees",
-        "detail": "The basic Business Checking tier has no monthly service fee and 50 free account events a month.",
+        "title": "Tarifas y cuotas de negocio",
+        "detail": "El nivel basico de Business Checking no tiene cuota mensual de servicio e incluye 50 movimientos de cuenta gratis al mes.",
         "sourceUrl": "https://ufcu.org/resources/tools/rates-fees"
       },
       {
-        "title": "Enroll in digital banking",
-        "detail": "One password covers the app and online banking, with alerts on both accounts.",
+        "title": "Registrese en la banca digital",
+        "detail": "Una sola contrasena cubre la aplicacion y la banca en linea, con alertas en ambas cuentas.",
         "sourceUrl": "https://ufcu.org/resources/member-services/banking/mobile"
       },
       {
-        "title": "Switch Kit: move your direct deposit",
-        "detail": "Point your paycheck at UFCU first, then re-point autopays, keep Wells Fargo open one statement cycle, then close it.",
+        "title": "Switch Kit: traslade su deposito directo",
+        "detail": "Dirija primero su pago a UFCU, luego redirija sus pagos automaticos, mantenga Wells Fargo abierto un ciclo de estado de cuenta mas, y despues cierrela.",
         "sourceUrl": "https://ufcu.org/resources/tools/forms"
       }
     ]
