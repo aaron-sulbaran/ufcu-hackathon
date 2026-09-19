@@ -119,6 +119,17 @@ export async function POST(req: Request) {
     });
   }
 
+  // Persona chips follow the script even when the model is available, so the demo is repeatable
+  // and instant. Anything typed off-script goes to the model.
+  const userCount = messages.filter((m) => m.role === "user").length;
+  const scriptedTurn = nextScriptedTurn(personaId, Math.max(0, userCount - 1));
+  if (scriptedTurn && sameQuestion(scriptedTurn.user, lastUserText(messages))) {
+    return createUIMessageStreamResponse({
+      stream: scriptedStream(fallbackPayload(context, personaId, messages)),
+      headers: { "x-frontdesk-mode": "scripted" },
+    });
+  }
+
   const result = streamText({
     model: anthropic(process.env.FRONT_DESK_MODEL ?? DEFAULT_MODEL),
     instructions: systemPrompt(context),

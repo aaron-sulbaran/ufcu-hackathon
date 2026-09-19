@@ -45,16 +45,14 @@ export function QuickReplies({
   lang,
   audience,
   onPick,
-  disabled,
-}: {
+  disabled, lead }: {
   lang: Lang;
   audience: Audience;
   onPick: (text: string) => void;
-  disabled?: boolean;
-}) {
+  disabled?: boolean; lead?: string }) {
   return (
     <div className="grid gap-2 sm:grid-cols-3">
-      {setFor(lang, audience).map((q) => (
+      {(lead ? [lead, ...setFor(lang, audience).slice(0, 2)] : setFor(lang, audience)).map((q) => (
         <button
           key={q}
           type="button"

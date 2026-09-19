@@ -25,6 +25,9 @@ export function Conversation() {
   const [transport] = useState(() => new DefaultChatTransport({ api: "/api/chat" }));
   const { messages, sendMessage, status, error, regenerate } = useChat({ transport });
   const busy = status === "submitted" || status === "streaming";
+  // When a persona script is active, its next line leads the quick replies so the demo can be tapped through.
+  const userCount = messages.filter((m) => m.role === "user").length;
+  const scriptLead = context.personaId ? getPersona(context.personaId)?.turns[userCount]?.user : undefined;
 
   const send = useCallback(
     (text: string, override?: PersonaContext) => {
@@ -126,7 +129,7 @@ export function Conversation() {
           )}
 
           {showReplies && (
-            <QuickReplies lang={context.lang} audience={context.audience} disabled={busy} onPick={(text) => send(text)} />
+            <QuickReplies lang={context.lang} audience={context.audience} disabled={busy} lead={scriptLead} onPick={(text) => send(text)} />
           )}
           <div ref={bottom} />
         </div>
