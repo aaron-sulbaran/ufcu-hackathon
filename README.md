@@ -9,6 +9,9 @@ people away at step one. Front Desk brings the branch experience online: a guide
 source-linked conversation that gets a person from "I think I need a bank account" to a prefilled,
 trustworthy application in minutes, without ever typing sensitive data into a chatbot.
 
+## Live
+https://ufcu-hackathon.vercel.app (production, live Claude behind the desk; pushes to main redeploy automatically).
+
 ## Status
 Build day. The full vertical slice runs locally: landing, Front Desk conversation (live Claude plus scripted personas), Secure Zone application with a simulated trust readout, five languages. See docs/11-demo-runbook.md for the exact demo clicks.
 
