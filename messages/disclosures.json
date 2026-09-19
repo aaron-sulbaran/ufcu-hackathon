@@ -108,7 +108,7 @@
     },
     "why_we_ask_cip": {
       "title": "Por qué lo pedimos",
-      "summary": "Las reglas federales, el Programa de Identificación de Clientes de la Ley PATRIOT, exigen que todo banco recopile tu nombre, fecha de nacimiento, dirección y un número de identificación antes de abrir tu cuenta. Para personas estadounidenses, ese número suele ser un Número de Seguro Social; para personas no estadounidenses, puede ser un número de pasaporte u otra identificación gubernamental. No es una decisión de UFCU, es la ley, y lo pedimos porque debemos hacerlo antes de que tu cuenta exista.",
+      "summary": "Las reglas federales, el Programa de Identificación de Clientes de la Ley PATRIOT, exigen que todo banco recopile tu nombre, fecha de nacimiento, dirección y un número de identificación antes de abrir tu cuenta. Para personas estadounidenses, ese número suele ser un Número de Seguro Social; para personas no estadounidenses, un pasaporte u otra identificación gubernamental sirve en su lugar. No es una decisión de UFCU, es la ley.",
       "bullets": [
         "La ley exige cuatro cosas antes de abrir cualquier cuenta: nombre, fecha de nacimiento, dirección y un número de identificación",
         "Para personas estadounidenses, el número de identificación suele ser un Número de Seguro Social",
@@ -274,7 +274,7 @@
     },
     "courtesy_pay": {
       "title": "Courtesy Pay (couverture de découvert optionnelle)",
-      "summary": "Courtesy Pay est une couverture optionnelle qui permet à l'UFCU de payer une transaction même si votre solde est insuffisant, plutôt que de la refuser. Chaque transaction couverte coûte 35 $, selon le barème de frais de l'UFCU. Les plafonds varient selon le compte et cette option n'est pas proposée sur Simply U. Vous devez y adhérer, ce n'est pas automatique. (Non vérifié : si ces frais s'appliquent pareil à tous les types de transactions n'est pas détaillé dans notre recherche.)",
+      "summary": "Courtesy Pay est une couverture optionnelle qui permet à l'UFCU de payer une transaction même si votre solde est insuffisant, plutôt que de la refuser. Chaque transaction couverte coûte 35 $, selon le barème de frais de l'UFCU. Les plafonds varient selon le compte, sans cette option sur Simply U. Vous devez y adhérer, ce n'est pas automatique. (Non vérifié : l'application uniforme de ces frais n'est pas détaillée dans notre recherche.)",
       "bullets": [
         "Chaque transaction couverte par Courtesy Pay coûte 35 $, selon le barème de frais de l'UFCU",
         "Cette option n'est pas du tout proposée sur le compte Simply U",
