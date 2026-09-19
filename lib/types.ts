@@ -21,6 +21,9 @@ export interface EligibilityResult { path: IdentityPath; documents: string[]; no
 export interface ApplicationPrefill {
   context: PersonaContext; path: IdentityPath; products: string[];
   firstName?: string; preferredName?: string; email?: string; schoolAffiliation?: string; notes: string[];
+  // One line per recommended product, carried from the conversation so the account step can
+  // show the same reason the person already read. Keyed by product id.
+  productReasons?: Record<string, string>;
 }
 
 export interface TrustCheck {

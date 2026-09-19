@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FileCheck, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { StepNav, StepShell } from "@/components/apply/step-shell";
+import { DisclosureNote } from "@/components/apply/disclosures";
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
 import { PATH_RULES, SELECTABLE_PATHS, pathRule } from "@/lib/apply/rules";
@@ -92,6 +93,8 @@ export function StepPath() {
           </div>
         </CardContent>
       </Card>
+
+      <DisclosureNote id="why_we_ask_cip" titleKey="apply.cip.title" subKey="apply.cip" />
 
       <StepNav onContinue={onContinue} formError={formError} />
     </StepShell>

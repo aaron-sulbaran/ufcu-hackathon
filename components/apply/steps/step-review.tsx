@@ -16,7 +16,6 @@ export function StepReview() {
   const { state, personaId, update } = useApplication();
   const { context } = usePersona();
   const [busy, setBusy] = useState(false);
-  const [elapsed, setElapsed] = useState<{ m: number; s: string } | null>(null);
 
   const audience = state.prefill?.context?.audience ?? context.audience;
   const goal = state.prefill?.context?.goal ?? context.goal;
@@ -25,22 +24,34 @@ export function StepReview() {
     setBusy(true);
     // MOCK: 1.2 seconds stands in for the core banking call that would open the accounts.
     await new Promise((resolve) => setTimeout(resolve, 1200));
-    const { data: decision } = await decide({ path: state.path, personaId, trust: state.trust });
-    const steps = await nextStepsFor({ audience, goal, path: state.path, personaId });
-    const seconds = Math.max(0, Math.floor((Date.now() - state.startedAt) / 1000));
-    setElapsed({ m: Math.floor(seconds / 60), s: String(seconds % 60).padStart(2, "0") });
-    update({ decision, nextSteps: steps });
+    const { data } = await decide({ path: state.path, personaId, trust: state.trust });
+    const steps = await nextStepsFor({
+      audience, goal, path: state.path, personaId, notes: state.prefill?.notes,
+    });
+    // A slot the person already picked beats the script's "book a slot" line.
+    const booked = state.trust?.route === "video" ? state.verify.slot : "";
+    const decision =
+      data && data.kind === "needs_item" && booked
+        ? { ...data, how: [t("apply.route.video.picked", { time: booked }), ...data.how.slice(1)] }
+        : data;
+    update({ decision, nextSteps: steps, finishedAt: Date.now() });
     setBusy(false);
   };
 
   if (state.decision) {
+    // Derived from the stored timestamps, so the number survives a refresh on the decision screen.
+    const seconds = Math.max(0, Math.floor(((state.finishedAt ?? state.startedAt) - state.startedAt) / 1000));
+    const elapsed = { m: Math.floor(seconds / 60), s: String(seconds % 60).padStart(2, "0") };
     return (
       <section className="flex flex-col gap-5 py-6">
         <Decision decision={state.decision} />
-        {elapsed && (
-          <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-            {t("apply.done.elapsed", elapsed)}
-          </p>
+        {state.finishedAt && (
+          <div className="flex flex-col gap-1">
+            <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+              {t("apply.done.elapsed", elapsed)}
+            </p>
+            <p className="text-sm text-muted-foreground">{t("apply.done.compare")}</p>
+          </div>
         )}
         <NextSteps steps={state.nextSteps ?? []} />
       </section>

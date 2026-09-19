@@ -2,7 +2,7 @@
 // the persona's scripted one (data/personas.json) or the rule-based default below, so the demo is
 // deterministic. In production these four checks map to a KYC vendor and the core.
 import type { IdentityPath, Result, TrustCheck, TrustReadout } from "@/lib/types";
-import { findPersona } from "@/lib/apply/personas";
+import { findPersonaForPath } from "@/lib/apply/personas";
 
 const pass = (id: TrustCheck["id"], detail: string): TrustCheck => ({ id, status: "pass", detail });
 
@@ -32,7 +32,7 @@ export async function mockVerify(input: {
   personaId?: string;
 }): Promise<Result<TrustReadout>> {
   try {
-    const persona = await findPersona(input.personaId);
+    const persona = await findPersonaForPath(input.personaId, input.path);
     if (persona?.trust) return { data: persona.trust };
     return { data: ruleBased(input.path) };
   } catch {

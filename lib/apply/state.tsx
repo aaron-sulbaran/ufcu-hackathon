@@ -2,7 +2,7 @@
 // Secure Zone state: one React context, one localStorage key, no server calls.
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { ApplicationPrefill, Decision, IdentityPath, NextStep, TrustReadout } from "@/lib/types";
-import { loadPrefill } from "@/lib/apply/prefill";
+import { clearPrefill, loadPrefill } from "@/lib/apply/prefill";
 import { DEFAULT_PRODUCTS, MEMBERSHIP_PRODUCT } from "@/lib/apply/rules";
 import type { AboutValues, AccountsValues, VerifyValues } from "@/lib/apply/schemas";
 
@@ -20,6 +20,7 @@ export interface ApplicationState {
   decision?: Decision;
   nextSteps?: NextStep[];
   startedAt: number;
+  finishedAt?: number;
 }
 
 function emptyAbout(): AboutValues {
@@ -61,11 +62,25 @@ function withPrefill(base: ApplicationState, prefill: ApplicationPrefill | null)
   };
 }
 
+// The three identity numbers never reach localStorage; they live in React state for this tab only.
+function withoutIdNumbers(state: ApplicationState): ApplicationState {
+  return { ...state, about: { ...state.about, ssn: "", itin: "", passportNumber: "" } };
+}
+
+// A stored application is stale when a newer handoff belongs to someone else, or when it already
+// finished. Either way the person is starting a different run and should not land mid-flow.
+function isStale(stored: Partial<ApplicationState>, prefill: ApplicationPrefill | null): boolean {
+  if (!prefill) return false;
+  if (stored.decision) return true;
+  return stored.prefill?.context?.personaId !== prefill.context?.personaId;
+}
+
 interface Ctx {
   state: ApplicationState;
   ready: boolean;
   saved: boolean;
   personaId?: string;
+  reset: () => void;
   update: (patch: Partial<ApplicationState>) => void;
   setAbout: (patch: Partial<AboutValues>) => void;
   setVerify: (patch: Partial<VerifyValues>) => void;
@@ -85,24 +100,25 @@ export function ApplicationProvider({ children }: { children: ReactNode }) {
     // Hydrate once from localStorage, then from the handoff the conversation left behind.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setState((prev) => {
+      const { data: prefill } = loadPrefill();
+      let stored: Partial<ApplicationState> | null = null;
       try {
         const raw = localStorage.getItem(KEY);
-        if (raw) {
-          const stored = JSON.parse(raw) as Partial<ApplicationState>;
-          return { ...prev, ...stored, about: { ...prev.about, ...stored.about } };
-        }
+        if (raw) stored = JSON.parse(raw) as Partial<ApplicationState>;
       } catch {
         // storage unavailable; fall through to the prefill
       }
-      const { data } = loadPrefill();
-      return withPrefill(prev, data ?? null);
+      if (stored && !isStale(stored, prefill ?? null)) {
+        return { ...prev, ...stored, about: { ...prev.about, ...stored.about } };
+      }
+      return withPrefill(prev, prefill ?? null);
     });
     setReady(true);
   }, []);
 
   const persist = useCallback((next: ApplicationState) => {
     try {
-      localStorage.setItem(KEY, JSON.stringify(next));
+      localStorage.setItem(KEY, JSON.stringify(withoutIdNumbers(next)));
       setSaved(true);
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(() => setSaved(false), 1600);
@@ -129,13 +145,23 @@ export function ApplicationProvider({ children }: { children: ReactNode }) {
     setState((prev) => { const next = { ...prev, accounts: { ...prev.accounts, ...patch } }; persist(next); return next; });
   }, [persist]);
 
+  // Start over: drop the stored application and the handoff, then begin at step 1.
+  const reset = useCallback(() => {
+    try { localStorage.removeItem(KEY); } catch {
+      // storage unavailable; the in-memory reset below is still enough
+    }
+    clearPrefill();
+    setState(emptyState());
+    setSaved(false);
+  }, []);
+
   const goTo = useCallback((step: number) => {
     update({ step: Math.min(Math.max(step, 1), TOTAL_STEPS) });
   }, [update]);
 
   return (
     <ApplicationCtx.Provider
-      value={{ state, ready, saved, personaId: state.prefill?.context?.personaId, update, setAbout, setVerify, setAccounts, goTo }}
+      value={{ state, ready, saved, personaId: state.prefill?.context?.personaId, reset, update, setAbout, setVerify, setAccounts, goTo }}
     >
       {children}
     </ApplicationCtx.Provider>

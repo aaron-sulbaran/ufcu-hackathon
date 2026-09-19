@@ -138,7 +138,7 @@
   "apply.route.video.picked": "Booked for {time} today.",
   "apply.route.branch.title": "Finish at the University Branch",
   "apply.route.branch.body": "This path is signed in person. Bring your documents and your parent or guardian.",
-  "apply.branch.hours": "Weekdays 10am to 4pm",
+  "apply.branch.hours": "Monday to Friday, 10 AM to 4 PM",
   "apply.accounts.sub": "Verified once, applied to every account in this bundle.",
   "apply.accounts.membership": "Membership account. Always included.",
   "apply.accounts.add": "Add",
@@ -211,5 +211,18 @@
   "apply.err.products": "Savings is the membership account and stays in the bundle.",
   "apply.err.esign": "Agree to receive your documents by email.",
   "apply.err.agreement": "Agree to the Membership and Account Agreement.",
-  "desk.greeting": "Hi, welcome in. I'm the front desk at the University Branch. What brings you in today?"
+  "desk.greeting": "Hi, welcome in. I'm the front desk at the University Branch. What brings you in today?",
+  "apply.startover": "Start over",
+  "apply.cip.title": "Why we ask for this",
+  "apply.and": "and",
+  "apply.sample.fill": "Use sample data",
+  "apply.sample.note": "Fills this step with invented details so a demo does not need ten typed fields.",
+  "apply.review.name": "Name",
+  "apply.accounts.money": "{min} to open, {fee} monthly",
+  "apply.accounts.applied": "Verified once, applied to {names}.",
+  "apply.review.memory": "Your ID number stays in this browser tab. It is masked here and never written to storage, so a refresh asks for it again.",
+  "apply.done.compare": "The same opening today takes two hosts, a branch appointment, and a callback.",
+  "apply.next.atm.any.title": "Fee-free ATMs near you",
+  "apply.next.atm.any.detail": "UFCU's ATM map shows the machines you can use without a fee, including shared network ATMs.",
+  "apply.next.switchkit": "Switch Kit"
 }

@@ -3,11 +3,12 @@
 // packet transcription (W-8BEN, government ID list, University Branch details).
 import type { IdentityPath } from "@/lib/types";
 
+// One source for the branch schedule: the branch packet transcription. Every screen reads BRANCH.hours.
 export const BRANCH = {
   name: "University Branch",
   address: "2244 Guadalupe St, Austin, TX 78705",
   phone: "(512) 467-8080",
-  hoursKey: "apply.branch.hours",
+  hours: "Monday to Friday, 10 AM to 4 PM",
 };
 
 export const DISCLOSURES_URL = "https://ufcu.org/policies-legal/disclosures";
@@ -115,6 +116,13 @@ export function lacksSsn(path: IdentityPath): boolean {
 
 // MOCK: a fixed set of banker slots so the demo is identical every run.
 export const VIDEO_SLOTS = ["10:30 AM", "1:15 PM", "3:45 PM"];
+
+// Courtesy Pay is not offered on Simply U, so the disclosure only shows for the other checking accounts.
+export const COURTESY_PAY_PRODUCTS = ["free-checking", "plus-checking"];
+
+export function offersCourtesyPay(products: string[]): boolean {
+  return products.some((id) => COURTESY_PAY_PRODUCTS.includes(id));
+}
 
 export const DEFAULT_PRODUCTS = ["savings", "simply-u"];
 export const MEMBERSHIP_PRODUCT = "savings";

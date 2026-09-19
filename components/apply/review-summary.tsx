@@ -6,11 +6,16 @@ import { useApplyT } from "@/lib/apply/strings";
 import { pathRule } from "@/lib/apply/rules";
 import { productById } from "@/lib/products";
 
-function mask(value: string): string {
-  const digits = value.replace(/\D/g, "");
-  if (digits.length >= 4) return `••• •• ${digits.slice(-4)}`;
+// An SSN or ITIN keeps its familiar shape. Anything else (a passport number) shows its last three
+// characters behind a generic prefix, so the mask never implies a format the value does not have.
+function mask(value: string, ssnShape: boolean): string {
   const trimmed = value.trim();
-  return trimmed ? `${"•".repeat(Math.max(trimmed.length - 3, 2))}${trimmed.slice(-3)}` : "";
+  if (!trimmed) return "";
+  if (ssnShape) {
+    const digits = trimmed.replace(/\D/g, "");
+    if (digits.length >= 4) return `••• •• ${digits.slice(-4)}`;
+  }
+  return `${"•".repeat(Math.max(trimmed.length - 3, 3))}${trimmed.slice(-3)}`;
 }
 
 function Section({ titleKey, step, children }: { titleKey: string; step: number; children: React.ReactNode }) {
@@ -42,6 +47,9 @@ export function ReviewSummary() {
   const rule = pathRule(path);
   const idValue =
     path === "itin" ? about.itin : path === "foreign_status" ? about.passportNumber : about.ssn;
+  const names = accounts.products.map((id) => productById(id)?.name ?? id);
+  const productNames =
+    names.length > 1 ? `${names.slice(0, -1).join(", ")} ${t("apply.and")} ${names[names.length - 1]}` : names[0] ?? "";
 
   return (
     <div className="flex flex-col gap-3">
@@ -52,7 +60,7 @@ export function ReviewSummary() {
 
       <Section titleKey="apply.review.about" step={2}>
         <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
-          <div><dt className="inline text-muted-foreground">{t("apply.f.firstName")}: </dt><dd className="inline">{about.firstName} {about.lastName}</dd></div>
+          <div><dt className="inline text-muted-foreground">{t("apply.review.name")}: </dt><dd className="inline">{about.firstName} {about.lastName}</dd></div>
           <div><dt className="inline text-muted-foreground">{t("apply.f.dob")}: </dt><dd className="inline">{about.dob}</dd></div>
           <div><dt className="inline text-muted-foreground">{t("apply.f.email")}: </dt><dd className="inline">{about.email}</dd></div>
           <div><dt className="inline text-muted-foreground">{t("apply.f.phone")}: </dt><dd className="inline">{about.phone}</dd></div>
@@ -62,10 +70,10 @@ export function ReviewSummary() {
             <dt className="inline text-muted-foreground">
               {t(path === "itin" ? "apply.f.itin" : path === "foreign_status" ? "apply.f.passport" : "apply.f.ssn")}:{" "}
             </dt>
-            <dd className="inline font-mono">{mask(idValue)}</dd>
+            <dd className="inline font-mono">{mask(idValue, path !== "foreign_status")}</dd>
           </div>
         </dl>
-        <p className="text-xs text-muted-foreground">{t("apply.review.masked")}</p>
+        <p className="text-xs text-muted-foreground">{t("apply.review.memory")}</p>
       </Section>
 
       <Section titleKey="apply.review.verify" step={3}>
@@ -83,10 +91,15 @@ export function ReviewSummary() {
         <ul className="flex list-disc flex-col gap-1 pl-5 text-sm">
           {accounts.products.map((id) => {
             const product = productById(id);
-            return <li key={id}>{product ? `${product.name} - ${product.monthlyFee}` : id}</li>;
+            if (!product) return <li key={id}>{id}</li>;
+            return (
+              <li key={id}>
+                {product.name}: {t("apply.accounts.money", { min: product.minToOpen, fee: product.monthlyFee })}
+              </li>
+            );
           })}
         </ul>
-        <p className="text-sm text-ufcu-primary">{t("apply.accounts.sub")}</p>
+        <p className="text-sm text-ufcu-primary">{t("apply.accounts.applied", { names: productNames })}</p>
       </Section>
     </div>
   );

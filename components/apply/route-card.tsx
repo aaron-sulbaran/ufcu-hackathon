@@ -8,7 +8,6 @@ import { BRANCH, VIDEO_SLOTS } from "@/lib/apply/rules";
 import type { TrustReadout } from "@/lib/types";
 
 function BranchLines() {
-  const t = useApplyT();
   return (
     <ul className="flex flex-col gap-1 text-sm">
       <li className="flex items-center gap-2">
@@ -17,7 +16,7 @@ function BranchLines() {
       </li>
       <li className="flex items-center gap-2">
         <CalendarClock className="size-4 shrink-0" aria-hidden />
-        {t(BRANCH.hoursKey)}
+        {BRANCH.hours}
       </li>
       <li className="flex items-center gap-2">
         <Phone className="size-4 shrink-0" aria-hidden />

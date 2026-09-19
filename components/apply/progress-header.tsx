@@ -32,8 +32,8 @@ export function useElapsed(startedAt: number, running: boolean) {
 
 export function ProgressHeader() {
   const t = useApplyT();
-  const { state, ready } = useApplication();
-  const { m, s } = useElapsed(state.startedAt, ready);
+  const { state, ready, reset } = useApplication();
+  const { m, s } = useElapsed(state.startedAt, ready && !state.decision);
   const pct = Math.round((state.step / TOTAL_STEPS) * 100);
   return (
     <div className="border-b border-border bg-card">
@@ -48,6 +48,13 @@ export function ProgressHeader() {
           <span className="ml-auto font-mono text-xs text-muted-foreground tabular-nums">
             {ready ? t("apply.elapsed", { m, s }) : ""}
           </span>
+          <button
+            type="button"
+            onClick={reset}
+            className="font-mono text-xs text-ufcu-secondary-darker underline-offset-2 uppercase hover:underline"
+          >
+            {t("apply.startover")}
+          </button>
         </Progress>
       </div>
     </div>

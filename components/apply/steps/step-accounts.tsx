@@ -45,7 +45,7 @@ export function StepAccounts() {
             <BundleCard
               key={id}
               product={product}
-              reason={product.reason}
+              reason={state.prefill?.productReasons?.[id] ?? product.reason}
               locked={id === MEMBERSHIP_PRODUCT}
               included={accounts.products.includes(id)}
               onToggle={() => toggle(id)}

@@ -5,6 +5,10 @@ import { useState } from "react";
 import { StepNav, StepShell } from "@/components/apply/step-shell";
 import { Field } from "@/components/apply/field";
 import { IdFields } from "@/components/apply/steps/id-fields";
+import { DisclosureNote } from "@/components/apply/disclosures";
+import { SimulatedBadge } from "@/components/apply/simulated-badge";
+import { Button } from "@/components/ui/button";
+import { sampleAbout } from "@/lib/apply/sample";
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
 import { aboutSchema, fieldErrors, type FieldErrors } from "@/lib/apply/schemas";
@@ -25,6 +29,14 @@ export function StepAbout() {
 
   return (
     <StepShell step={2} titleKey="apply.step2.title" subKey="apply.cip">
+      <div className="flex flex-wrap items-center gap-2">
+        <Button type="button" variant="outline" size="sm" onClick={() => setAbout(sampleAbout(state.path, prefill))}>
+          {t("apply.sample.fill")}
+        </Button>
+        <SimulatedBadge />
+        <span className="text-xs text-muted-foreground">{t("apply.sample.note")}</span>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
           name="firstName" labelKey="apply.f.firstName" value={about.firstName} error={errors.firstName}
@@ -78,6 +90,8 @@ export function StepAbout() {
       </div>
 
       <IdFields path={state.path} about={about} errors={errors} setAbout={setAbout} />
+
+      <DisclosureNote id="why_we_ask_cip" titleKey="apply.cip.title" subKey="apply.cip" />
 
       <StepNav onContinue={onContinue} />
     </StepShell>
