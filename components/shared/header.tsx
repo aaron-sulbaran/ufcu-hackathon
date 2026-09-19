@@ -13,6 +13,9 @@ import type { Lang } from "@/lib/types";
 import { AccessibilityToggle } from "@/components/home/accessibility-toggle";
 
 const ROUTING = "314977405";
+// Same entry the live ufcu.org header uses. Do not paste an identity.ufcu.org authorize URL:
+// those carry one-time state, nonce, and PKCE values and expire.
+const LOGIN = "https://myaccounts.ufcu.org/";
 
 // The real site sections. Labels are dictionary keys so they follow the selected language.
 const NAV: { label: string; href: string; active?: boolean }[] = [
@@ -127,7 +130,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
             <UserPlus className="size-5" aria-hidden />
             {t("nav.apply")}
           </Link>
-          <a href="https://ufcu.org/login" target="_blank" rel="noreferrer" className="hdr-block hdr-block-purple whitespace-nowrap">
+          <a href={LOGIN} target="_blank" rel="noreferrer" className="hdr-block hdr-block-purple whitespace-nowrap">
             <Lock className="size-4" aria-hidden />
             {t("nav.login")}
           </a>
@@ -172,7 +175,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
               <UserPlus className="size-5" aria-hidden />
               {t("nav.apply")}
             </Link>
-            <a href="https://ufcu.org/login" target="_blank" rel="noreferrer" className="hdr-block hdr-block-purple flex-1 py-3">
+            <a href={LOGIN} target="_blank" rel="noreferrer" className="hdr-block hdr-block-purple flex-1 py-3">
               <Lock className="size-4" aria-hidden />
               {t("nav.login")}
             </a>
