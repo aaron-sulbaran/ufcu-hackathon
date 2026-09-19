@@ -39,8 +39,8 @@ That is the before and after in one frame. If time allows, ten seconds on Daniel
 Fargo, gets a document checklist by entity type, and her approval ends with a Switch Kit. "Switching
 costs a conversation, not a form."
 
-## Slide 5: Trust is layered (Owner B, 3:45 to 4:15)
-"Trust is layered, not gated." Walk the three paths (SSN, ITIN, foreign status), the four checks
+## Slide 5: Trust is layered (two stages: details first, document and selfie only when details cannot be matched, the step-up large banks already run; the upload is a placeholder for a third-party vendor) (Owner B, 3:45 to 4:15)
+"Trust is layered (two stages: details first, document and selfie only when details cannot be matched, the step-up large banks already run; the upload is a placeholder for a third-party vendor), not gated." Walk the three paths (SSN, ITIN, foreign status), the four checks
 (document, face, consistency, watchlist), the confidence score, and the three routes (instant, video
 banker, branch). Read the CIP line: the rule requires name, date of birth, address, and an ID number
 before an account opens, and that governs what is collected, not the order a website asks for it. Close

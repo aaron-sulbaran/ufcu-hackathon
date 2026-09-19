@@ -26,15 +26,18 @@ reason, and the resource card "Opening an account without an SSN" linking to ufc
 "Can I use Zelle?" and the assistant says no, because Zelle requires an SSN, and links the page.
 Click "Continue to secure application". Point out the chrome change: dark header, lock, "no AI reads
 this page." Step 1 shows the Foreign status path with the checklist: passport, I-20, W-8BEN, campus
-address. Sample ID, sample selfie. Trust readout: document pass, face pass, consistency pass,
-watchlist pass, confidence 82, route: video verification with a banker, mock scheduler shows the
-University Branch. Decision: "Almost there: verify by video at 3:15 today" with the next-steps list
+address. Step 3 checks his details on its own and cannot match a taxpayer number. Today's flow stops
+here and sends him to a branch. Ours steps up: government ID and a quick selfie online, labeled as
+the place a third-party verification vendor runs. Sample ID, sample selfie, Verify. Trust readout:
+document pass, face pass, consistency review, watchlist pass, confidence 82, route: video
+verification with a banker, mock scheduler shows the University Branch. Decision: "Almost there: verify by video at 3:15 today" with the next-steps list
 including the Zelle caveat and campus ATMs.
 
 **2:15 Demo, Maya.** English. Chip "Try as Maya". "I want to build credit and I have never had a bank
 account." Cards: Simply U plus Credit Builder Loan with the reason ("$500 deposit held in savings,
 six monthly payments, deposit returned, reported to bureaus") and the source link. Continue. SSN path,
-prefilled name and school, sample ID, instant route, Approved, next steps: direct deposit from UT
+prefilled name and school. Step 3 clears her from her details in two seconds, no upload, document
+and face marked "Not needed". Instant route, Approved, next steps: direct deposit from UT
 Workday, enroll in digital banking, credit builder loan card. 
 
 **3:00 Bundle and speed beat.** On Maya's review screen point at the step counter and the line "verified once, applied to savings, checking, and the credit builder loan", then the elapsed time. That is the before-and-after in one frame.
@@ -44,8 +47,10 @@ food-truck LLC, she gets a document checklist by entity type before she fills a 
 approval ends with the Switch Kit: move direct deposit, re-point autopays, keep the old account one
 cycle, close it. "Switching costs a conversation, not a form."
 
-**3:45 Trust slide (Owner B).** Paths, four checks, confidence, three routes. "Trust is layered, not
-gated. Every check is simulated today and labeled that way; in production each maps to a KYC vendor
+**3:45 Trust slide (Owner B).** Paths, a two-stage check (details first, document and selfie only
+when the details cannot be matched), confidence, three routes. "Trust is layered, not gated. The
+upload is a step-up, the same extra line of defense large banks already run, and it replaces the
+branch visit. Every check is simulated today and labeled that way; in production each maps to a KYC vendor
 and the core."
 
 **4:15 Architecture slide (Aaron).** One diagram: Next.js, one route handler, Claude with four tools,
@@ -77,9 +82,11 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
 - "Why should we trust an LLM with onboarding?" It never touches sensitive data; the application is a
   separate zone with no model calls. The model does recommendation and explanation, which is what
   the banker does verbally today.
-- "What about fraud and synthetic identity?" The trust readout is the surface for whatever KYC stack
-  UFCU runs; confidence thresholds decide instant versus human. Foreign-status applicants route to a
-  human by default, which is the policy today, just faster.
+- "What about fraud and synthetic identity?" Two stages. Details are checked first against the
+  records a credit union must check; if they do not match, the flow steps up to a government ID and
+  a selfie through a third-party verification vendor (simulated here) instead of sending the person
+  to a branch. Confidence thresholds then decide instant, video banker, or branch. Foreign-status
+  applicants route to a human by default, which is the policy today, just online and faster.
 - "Compliance: CIP, Patriot Act, W-8BEN?" Paths map to the documents the branch already accepts. The
   W-8BEN is in the branch packet. We show the acknowledgment where the branch would hand over paper.
 - "Accessibility for older members?" Big type mode, plain language, phone number always visible,

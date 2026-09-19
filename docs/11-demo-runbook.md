@@ -24,8 +24,12 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 6. Step 1: foreign-status path preselected, checklist visible. Continue.
 7. Step 2: click "Use sample data" (labeled Simulated). Point at "Why we ask" and the W-8BEN
    acknowledgment. Continue.
-8. Step 3: "Use sample" on both panels, Verify. Trust readout: consistency "review", confidence 82,
-   route: video call with a banker. Pick 10:30 AM. Continue.
+8. Step 3 runs "Checking your information" on its own. For Joon it cannot match a taxpayer number, so
+   the step-up appears: "Today's flow stops here and sends you to a branch. Instead we ask for a
+   government ID and a quick selfie online." Say that line. "Use sample" on the panels, Verify. Trust
+   readout: document pass, face pass, consistency "review", confidence 82, route: video call with a
+   banker. Point at the "placeholder for a third-party identity verification service" note. Pick
+   10:30 AM. Continue.
 9. Step 4: bundle with Savings locked and "Verified once, applied to Savings and Free Checking".
    Tick the three disclosures (ESIGN, Membership Agreement, W-8BEN). Continue.
 10. Step 5: Submit. Decision: "One more thing", booked slot echoed, elapsed time, next steps
@@ -35,8 +39,9 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 1. Header: Start over. Landing: "Try as Maya".
 2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Tap the lead
    quick reply twice. Continue card appears.
-3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Samples, Verify:
-   instant, confidence 96. Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
+3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Step 3 checks her details
+   and clears her in two seconds: no upload, document and face marked "Not needed", confidence 96.
+   Say: "Verified from what she typed. No document, no branch." Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
    Credit Builder Loan". Tick. Continue. Submit.
 4. Decision: approved, "Start to finish 0:3x" next to "The same opening today takes two hosts, a
    branch appointment, and a callback." Next steps: UT Workday direct deposit, digital banking,
@@ -46,7 +51,10 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 Type "Can I use Zelle without an SSN?" in the composer as Maya or Joon. The answer comes from
 Claude with the Zelle source card. If wifi is dead the same question gets the scripted card.
 
-## Beat 4: Daniela (Spanish, business, switching) one slide or 20 seconds live
+## Beat 4: Daniela (Spanish, business, switching) one slide, not live
+The five minutes are Joon (step-up), Maya (no step-up), the trust slide, the architecture slide, and
+the close. Daniela's Switch Kit lives on the persona slide; only go live if the first two beats
+finish under 3:00.
 "Try as Daniela": Spanish desk, business document checklist, then the Switch Kit under its own
 heading on the decision screen.
 
