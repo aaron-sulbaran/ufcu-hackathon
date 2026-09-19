@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePersona } from "@/lib/context";
+import { AskBlock } from "@/components/home/ask-block";
 import { useT } from "@/lib/i18n";
 import type { Audience, Goal } from "@/lib/types";
 
@@ -69,6 +70,11 @@ export function PersonaSentence() {
       <button type="button" onClick={start} className="btn btn-cta btn-hero">
         {t("landing.start")}
       </button>
+      {/* Same block, quieter: a hairline, then the question path for people who already know what
+          they want to ask. The sentence's choices ride along with whichever one they use. */}
+      <div className="border-t border-ufcu-gray-line pt-5">
+        <AskBlock audience={audience} goal={goal} />
+      </div>
     </div>
   );
 }

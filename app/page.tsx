@@ -12,8 +12,9 @@ export default function Home() {
       <Header />
       <main className="mx-auto w-full max-w-3xl flex-1 space-y-12 px-4 py-12 sm:py-16">
         <Hero />
-        <PersonaChips />
         <TrustStrip />
+        {/* The scripted visits sit last and closed: the chat above is the way in. */}
+        <PersonaChips />
       </main>
       <SiteFooter />
     </>
