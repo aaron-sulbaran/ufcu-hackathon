@@ -1,7 +1,8 @@
 # 11. Demo runbook (exact clicks)
 
 Run on the presenting laptop with `pnpm dev` already up and http://localhost:3000 open in a fresh
-window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted turns either way.
+window at 125% zoom. Judges can click around the same build at https://ufcu-hackathon.vercel.app
+(live model, same personas); the local copy is the fallback if venue wifi dies. Wifi may be on or off; the persona chips serve the scripted turns either way.
 
 ## How the modes work
 - Persona chips live under "See a sample visit" at the bottom of the landing (collapsed; click it
