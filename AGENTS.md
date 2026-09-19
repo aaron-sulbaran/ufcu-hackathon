@@ -5,7 +5,7 @@ except at the check-ins listed in docs/05-build-plan.md. Applies to every AI cod
 (Claude Code, Cursor, Copilot, Codex) any of the three of us runs.
 
 ## What this is
-Team LAN Party's entry for UFCU's Develop U Hackathon (Sat 2026-09-19, 9:25 AM to 3:00 PM build window).
+Team LAN Party's entry for UFCU's Develop U Hackathon (Sat 2026-09-19, 9:25 AM to 2:30 PM build window).
 Challenge: reimagine UFCU's new-member onboarding. Working title: **Front Desk**. See docs/03-prd.md.
 
 ## Stack (fixed; do not add frameworks)
@@ -25,12 +25,16 @@ Challenge: reimagine UFCU's new-member onboarding. Working title: **Front Desk**
 
 Edit only inside your directories unless you asked in the team chat. Shared types live in one file.
 
+## Brand
+Colors come from `docs/08-brand.md` via CSS variables in `app/globals.css`. Never hardcode a hex in a component.
+Orange `#EF6820` is never body text; CTAs use `#D14D10` with white text. Secure Zone uses the `.secure-zone` overrides.
+
 ## Rules that keep the codebase clean
 1. Small commits every 20 to 30 minutes with a plain message: `feat(apply): mock ID step`.
 2. `git pull --rebase origin main` before every push. Never force push. Never commit `.env.local`.
 3. No new npm dependency after the 12:00 check-in without a message in the team chat.
 4. No file over ~250 lines. Split components instead of growing them.
-5. No dead code, no commented-out blocks, no console.log left behind at freeze (1:45 PM).
+5. No dead code, no commented-out blocks, no console.log left behind at freeze (1:30 PM). Deliverables due 2:30 PM.
 6. Every AI recommendation shown to a user must carry a `sourceUrl` that resolves to a real ufcu.org page from `data/corpus/`.
 7. The chat never asks for SSN, ITIN, passport number, DOB, or address. Those fields exist only in `app/apply/`.
 8. Mocks are labeled in code (`// MOCK:`) and in the UI ("Simulated" badge) so judges never think we faked a real system.

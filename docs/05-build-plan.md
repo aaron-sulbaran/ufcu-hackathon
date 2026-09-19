@@ -24,7 +24,7 @@ All times Saturday. "CI" = check-in, five to ten minutes, everyone stops typing,
 - Settle the four open questions in docs/03-prd.md. Assign lanes.
 
 ### 9:25 to 9:50  Setup sprint (CI-0 at 9:50)
-Captain runs these on the shared repo while B and C get keys and clone:
+Captain runs these on the shared repo while B and C get keys and clone (brand tokens from docs/08-brand.md go into globals.css in this sprint):
 ```bash
 pnpm create next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias "@/*"
 pnpm add ai @ai-sdk/react @ai-sdk/anthropic zod
@@ -54,22 +54,22 @@ CI-2 at 12:00 (lunch at desks): run persona Maya end to end from landing to deci
 **Scope freeze.** Captain writes the cut list on the whiteboard. Stretch items only get in if
 every MVP acceptance line in docs/03-prd.md is green.
 
-### 12:15 to 1:45  Build block 3: personas, language, polish
+### 12:15 to 1:30  Build block 3: personas, language, polish
 - A: Daniela and Robert scripted turns, eligibility rules, next-steps checklist content, prompt tuning
   against hallucination (fees, rates, student loans).
 - B: decision explanations, next-steps checklist UI, video-banker scheduler mock, "Simulated" badges.
 - C: Korean and Spanish pass through the whole flow, accessibility mode if time, screenshots for Figma.
-CI-3 at 1:15: full run in Korean as Joon. Bug list on the whiteboard, ranked. Nothing new starts.
-**1:45 feature freeze.** After this only bug fixes, copy, and demo prep. Any commit that is not a
+CI-3 at 1:05: full run in Korean as Joon. Bug list on the whiteboard, ranked. Nothing new starts.
+**1:30 feature freeze.** After this only bug fixes, copy, and demo prep. Any commit that is not a
 fix needs the captain's ok.
 
-### 1:45 to 2:30  Demo prep
+### 1:30 to 2:15  Demo prep
 - C builds the deck (docs/06-demo-and-pitch.md outline) and the Figma flow from screenshots.
 - A records a backup screen capture of the full demo (QuickTime) in case the laptop or wifi dies.
 - B runs the code hygiene sweep (below) and fixes the README run steps on a fresh clone.
-CI-4 at 2:15: dress rehearsal with a timer. Two runs. Cut words until it lands at 4:30.
+CI-4 at 2:00: dress rehearsal with a timer. Two runs. Cut words until it lands at 4:30.
 
-### 2:30 to 2:50  Pencils down
+### 2:15 to 2:30  Pencils down (deliverables due 2:30)
 Final commit tagged `demo`. Laptop that presents: wifi checked, offline mode tested, zoom level set,
 notifications off, battery charged, HDMI adapter located.
 
@@ -126,5 +126,5 @@ The captain spends at most 50% of the day coding; the other half is integrating 
   and their lane's section of this file in context.
 - Ask for one component or one function at a time. Paste the shared types. Review the diff before
   accepting. Reject anything that adds a dependency, a folder, or touches another lane.
-- When the agent suggests a refactor, the answer is no until 1:45 PM, and then still no.
+- When the agent suggests a refactor, the answer is no until 1:30 PM, and then still no.
 - If an agent output is over 250 lines, ask it to split before you paste it.

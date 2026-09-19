@@ -35,6 +35,8 @@ six monthly payments, deposit returned, reported to bureaus") and the source lin
 prefilled name and school, sample ID, instant route, Approved, next steps: direct deposit from UT
 Workday, enroll in digital banking, credit builder loan card. 
 
+**3:00 Bundle and speed beat.** On Maya's review screen point at the step counter and the line "verified once, applied to savings, checking, and the credit builder loan", then the elapsed time. That is the before-and-after in one frame.
+
 **3:15 One line on Daniela.** Slide or ten seconds live: the business persona gets a document
 checklist by entity type before she ever fills a form.
 

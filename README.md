@@ -21,7 +21,9 @@ Planning complete, build day pending. No application code exists yet by design; 
 6. [docs/05-build-plan.md](docs/05-build-plan.md): roles, timeline, check-ins, scope-cut ladder, QA.
 7. [docs/06-demo-and-pitch.md](docs/06-demo-and-pitch.md): 5-minute demo script, deck outline, judge Q&A prep.
 8. [docs/07-personas.md](docs/07-personas.md): the hard-coded demo personas and their scripted paths.
-9. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
+9. [docs/08-brand.md](docs/08-brand.md): UFCU palette, contrast rules, CSS variables.
+10. [docs/09-rubric-map.md](docs/09-rubric-map.md): the official scorecard mapped to what we build and demo.
+11. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
 
 Coding agents: read [AGENTS.md](AGENTS.md) first.
 

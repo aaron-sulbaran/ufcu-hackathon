@@ -18,7 +18,7 @@ of us with an AI coding agent, Risk (what breaks). MVP takes everything with val
 | 11 | Business persona branch: entity type picker, document checklist, personal membership first | 3 | 1h | corpus thinness | Stretch (persona 3 scripted only if short on time) |
 | 12 | Accessibility mode: large type, high contrast, "call me instead" button with branch phone, voice input | 3 | 1h | low | Stretch, shows "all generations" |
 | 13 | Save and resume via a magic link or code | 2 | 1h | needs storage | Cut, mock with localStorage only |
-| 14 | Figma design prototype of the flow | 3 | 1h (parallel) | none | Required deliverable; build from screenshots at 1:45 PM |
+| 14 | Figma design prototype of the flow | 3 | 1h (parallel) | none | Required deliverable; build from screenshots at 1:30 PM |
 | 15 | Joint account and minor (Teen Checking with guardian) paths | 2 | 1h | branching | Cut, mention in future work |
 | 16 | Real UFCU brand extraction (colors, type) from ufcu.org | 3 | 0.5h | none | MVP, do it in the setup sprint |
 | 17 | Video call with a banker (mock scheduling screen) as the medium-risk identity route | 3 | 0.5h | none | MVP as a static screen in the trust routing |

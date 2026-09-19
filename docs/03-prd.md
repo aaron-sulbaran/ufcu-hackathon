@@ -31,7 +31,7 @@ without typing sensitive data into an AI.
 - No "ChatGPT wrapper" design. Assistant turns render cards, checklists, and actions, not essays.
 - Architecture simple enough to explain on one slide. Model API only where it earns its place.
 
-## MVP scope (must ship by 1:45 PM feature freeze)
+## MVP scope (must ship by 1:30 PM feature freeze)
 
 ### M1. Persona entry (Owner C)
 Landing page in UFCU brand. Headline plus a two-dropdown sentence: "I am a [student / international
@@ -103,6 +103,14 @@ Language persists across chat and application.
 
 Acceptance: switching to Korean before starting as Joon yields a Korean landing page, Korean assistant
 turns, and a Korean application.
+
+### M7. Rubric-driven additions (from docs/09-rubric-map.md, all small)
+- Step and elapsed-time counter in the Secure Zone header (speed, 20 points).
+- "Why we ask" helper line under every sensitive field, with the one-sentence regulatory reason
+  (compliance and UX).
+- The application opens the whole recommended bundle in one pass and says "verified once, applied to
+  all" on the review screen (speed).
+- Inline validation with friendly error copy and state feedback ("Saved", "Verifying", "Done").
 
 ## Stretch (only after the 12:00 scope freeze confirms MVP is green)
 S1. Portuguese and French dictionaries. S2. Translated disclosure summaries. S3. Accessibility mode
