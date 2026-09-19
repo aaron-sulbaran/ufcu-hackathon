@@ -101,17 +101,14 @@ export function SiteFooter() {
           className="pointer-events-none absolute -right-[28%] -top-[25%] h-[170%] w-[62%] rounded-full border-[90px] border-white/[0.06]"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-12">
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[repeat(3,minmax(0,1fr))_minmax(0,1.35fr)]">
             {COLUMNS.map((col) => (
               <div key={col.title} className="space-y-3">
                 <h3 className="text-white">{t(col.title)}</h3>
                 {col.lines?.map((l) => <p key={l} className="text-white">{t(l)}</p>)}
-                <div className={col.inline ? "flex flex-wrap items-center gap-x-3" : "flex flex-col gap-2"}>
-                  {col.links.map((l, i) => (
-                    <span key={l.href + l.label} className="flex items-center gap-3">
-                      {col.inline && i > 0 && <span className="text-white/60" aria-hidden>|</span>}
-                      <a className={link} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{t(l.label)}</a>
-                    </span>
+                <div className={col.inline ? "sep-row text-white" : "flex flex-col gap-2"}>
+                  {col.links.map((l) => (
+                    <a key={l.href + l.label} className={link} href={l.href} target={l.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{t(l.label)}</a>
                   ))}
                 </div>
                 {col.after && <p className="text-white">{col.after}</p>}
@@ -122,13 +119,10 @@ export function SiteFooter() {
           <div className="my-8 border-t border-dotted border-white/40" />
 
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+            <p className="sep-row text-white">
               <span>&copy; 2026 UFCU PO Box 9350 Austin, TX 78766-9350</span>
-              <span className="text-white/60" aria-hidden>|</span>
-              <span>{t("footer.routing")} 314977405</span>
-              <span className="text-white/60" aria-hidden>|</span>
+              <span className="whitespace-nowrap">{t("footer.routing")} 314977405</span>
               <a className={link} href="https://ufcu.org/privacy" target="_blank" rel="noreferrer">{t("footer.privacy")}</a>
-              <span className="text-white/60" aria-hidden>|</span>
               <a className={link} href="https://ufcu.org/policies-legal/disclosures" target="_blank" rel="noreferrer">{t("footer.disclosures")}</a>
             </p>
             <div className="flex items-center gap-5">
@@ -140,15 +134,14 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-white">
             <span>{t("footer.partners")}</span>
-            {PARTNERS.map((p, i) => (
-              <span key={p.label} className="flex items-center gap-3">
-                {i > 0 && <span className="text-white/60" aria-hidden>|</span>}
-                <a className={link} href={p.href} target="_blank" rel="noreferrer">{p.label}</a>
-              </span>
-            ))}
-          </p>
+            <p className="sep-row">
+              {PARTNERS.map((p) => (
+                <a key={p.label} className={link} href={p.href} target="_blank" rel="noreferrer">{p.label}</a>
+              ))}
+            </p>
+          </div>
           <p className="disclaimer mt-4 text-white/70">{t("footer.prototype")}</p>
         </div>
       </section>

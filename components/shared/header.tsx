@@ -84,14 +84,14 @@ export function Header({ secure = false }: { secure?: boolean }) {
           <Image src="/brand/ufcu-logo.svg" alt="UFCU" width={96} height={49} priority className="h-9 w-24 md:h-11 md:w-[96px]" />
         </Link>
 
-        <nav aria-label="UFCU" className="hidden items-stretch lg:flex">
+        <nav aria-label="UFCU" className="hidden items-stretch xl:flex">
           {NAV.map((item) => (
             <a
               key={item.label}
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className={`flex items-center gap-2 px-2.5 font-sans text-sm font-semibold text-ufcu-navy hover:no-underline xl:px-5 xl:text-base ${
+              className={`flex items-center gap-2 whitespace-nowrap px-3 font-sans text-sm font-semibold text-ufcu-navy hover:no-underline 2xl:px-5 2xl:text-base ${
                 item.active ? "bg-ufcu-gray-panel" : ""
               }`}
             >
@@ -101,24 +101,24 @@ export function Header({ secure = false }: { secure?: boolean }) {
           ))}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 px-3 lg:flex xl:gap-5 xl:px-4">
+        <div className="ml-auto hidden items-center gap-4 px-4 xl:flex 2xl:gap-5">
           <LangSelect />
-          <RoutingNumber className="hidden xl:flex" />
+          <RoutingNumber className="hidden min-[110rem]:flex" />
           <a
             href="https://ufcu.org/search"
             target="_blank"
             rel="noreferrer"
             aria-label={t("nav.search")}
-            className="hidden text-ufcu-navy hover:text-ufcu-cta xl:block"
+            className="text-ufcu-navy hover:text-ufcu-cta"
           >
             <Search className="size-5" aria-hidden />
           </a>
-          <span className="hidden xl:inline-flex"><AccessibilityToggle /></span>
+          <AccessibilityToggle compact />
         </div>
 
         {/* The .hdr-block recipe is unlayered CSS, so it outranks a `hidden` utility on the same
             element. The wrapper is what hides the blocks on phones. */}
-        <div className="hidden items-stretch lg:flex">
+        <div className="hidden items-stretch xl:flex">
           <Link
             href="/apply"
             aria-current={secure ? "page" : undefined}
@@ -133,7 +133,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
           </a>
         </div>
 
-        <div className="ml-auto flex items-center gap-2 pr-3 lg:hidden">
+        <div className="ml-auto flex items-center gap-2 pr-3 xl:hidden">
           <LangSelect />
           <button
             type="button"
@@ -148,7 +148,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
       </div>
 
       {open && (
-        <div className="border-t border-ufcu-gray-line lg:hidden">
+        <div className="border-t border-ufcu-gray-line xl:hidden">
           <nav aria-label="UFCU" className="flex flex-col">
             {NAV.map((item) => (
               <a

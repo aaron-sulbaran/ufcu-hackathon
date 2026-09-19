@@ -18,8 +18,9 @@ const AUDIENCES: Audience[] = [
 ];
 const GOALS: Goal[] = ["checking", "savings", "build_credit", "credit_card", "loan", "unsure"];
 
-// .input-ufcu is a full-width field; in the sentence it sits inline and sizes to its option.
-const selectStyle = { width: "auto", maxWidth: "100%" } as const;
+// .input-ufcu is a full-width field; in the sentence it sits inline and sizes to the chosen option
+// (field-sizing), not the longest one, so long translations do not push the sentence apart.
+const selectStyle = { width: "auto", maxWidth: "100%", fieldSizing: "content" } as const;
 
 export function PersonaSentence() {
   const { setContext } = usePersona();

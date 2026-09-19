@@ -31,6 +31,8 @@ export function PersonaProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setState((prev) => (prev.hydrated ? prev : { context: readStored(), hydrated: true }));
   }, []);
+  // <html lang> follows the chosen language so line breaking, hyphenation, and screen readers match it.
+  useEffect(() => { document.documentElement.lang = state.context.lang; }, [state.context.lang]);
   const setContext = (next: Partial<PersonaContext>) =>
     setState((prev) => {
       const merged = { ...(prev.hydrated ? prev.context : readStored()), ...next };
