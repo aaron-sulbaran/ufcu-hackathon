@@ -20,10 +20,10 @@ Switching from another bank is a first-class audience (docs/10-competitor-switch
 ## Directory ownership (avoid merge conflicts)
 | Path | Owner |
 |------|-------|
-| `app/api/chat/`, `lib/ai/`, `data/` | Aaron (AI layer, corpus, personas) |
-| `app/apply/`, `components/apply/`, `lib/apply/` | Owner B (Secure Zone application flow, mock identity) |
-| `app/(home)/`, `components/home/`, `components/cards/`, `messages/` | Owner C (landing, persona entry, product/resource cards, i18n) |
-| `lib/types.ts`, `components/ui/` (shadcn), `app/layout.tsx` | Shared. Aaron merges; others propose in chat first |
+| `app/api/chat/`, `app/desk/`, `components/desk/`, `components/cards/`, `lib/ai/`, `data/` | Lane A (AI layer, corpus, personas, cards) |
+| `app/apply/`, `components/apply/`, `lib/apply/` | Lane B (Secure Zone application flow, mock identity, decision) |
+| `app/page.tsx`, `components/home/`, `components/shared/`, `messages/` | Lane C (landing, persona entry, header, i18n) |
+| `lib/types.ts`, `lib/context.tsx`, `lib/i18n.tsx`, `lib/products.ts`, `app/layout.tsx`, `app/globals.css`, `components/ui/` | Shared. Captain merges; propose in chat first |
 
 Edit only inside your directories unless you asked in the team chat. Shared types live in one file.
 

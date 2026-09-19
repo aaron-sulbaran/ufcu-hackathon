@@ -37,3 +37,15 @@ export interface NextStep { title: string; detail: string; sourceUrl?: string }
 
 // { data, error } result at module boundaries
 export type Result<T> = { data: T; error?: undefined } | { data?: undefined; error: string };
+
+// Scripted persona (data/personas.json). Lane A writes, lanes B and C read.
+export type ToolName = "recommendProducts" | "showResources" | "checkEligibility" | "startApplication";
+export interface ScriptedTurn {
+  user: string;
+  assistant: { text: string; tools?: { name: ToolName; result: unknown }[] };
+}
+export interface PersonaScript {
+  id: string; chipLabel: string; blurb: string;
+  context: PersonaContext; prefill: ApplicationPrefill;
+  turns: ScriptedTurn[]; trust: TrustReadout; decision: Decision; nextSteps: NextStep[];
+}
