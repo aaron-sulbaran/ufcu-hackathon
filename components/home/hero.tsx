@@ -27,7 +27,7 @@ export function Hero() {
           {wink && <span className="u">{wink}</span>}
           {tail}
         </h1>
-        <p className="max-w-xl text-ufcu-ink">{t("landing.sub")}</p>
+        <p className="max-w-3xl text-ufcu-ink [hyphens:none]">{t("landing.sub")}</p>
       </div>
 
       <div className="space-y-5">

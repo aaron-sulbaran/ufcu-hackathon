@@ -211,7 +211,7 @@ h3, .h3 { font-size: clamp(1.5rem, 4.5vw, 1.75rem); font-weight: 600; line-heigh
 h4, .h4 { font-size: 1.125rem; line-height: 1.4; }
 /* Copy changes length with the language (<html lang> follows it): no lone last words, long French
    and Portuguese words hyphenate in narrow cards, and Korean breaks between words, not syllables. */
-p, li, dd { text-wrap: pretty; overflow-wrap: break-word; hyphens: auto; }
+p, li, dd { text-wrap: pretty; overflow-wrap: break-word; }
 :lang(ko) { word-break: keep-all; }
 /* "a | b | c" rows that wrap cleanly at any text length: each item draws its own bar in the gap
    before it, and the row is shifted left and clipped so a bar that would start a line is hidden. */
