@@ -91,7 +91,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className={`flex items-center gap-2 px-3 font-sans text-[15px] font-semibold text-ufcu-navy hover:no-underline xl:px-5 xl:text-base ${
+              className={`flex items-center gap-2 px-2.5 font-sans text-sm font-semibold text-ufcu-navy hover:no-underline xl:px-5 xl:text-base ${
                 item.active ? "bg-ufcu-gray-panel" : ""
               }`}
             >
@@ -113,7 +113,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
           >
             <Search className="size-5" aria-hidden />
           </a>
-          <AccessibilityToggle className="hidden xl:inline-flex" />
+          <span className="hidden xl:inline-flex"><AccessibilityToggle /></span>
         </div>
 
         {/* The .hdr-block recipe is unlayered CSS, so it outranks a `hidden` utility on the same
