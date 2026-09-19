@@ -11,7 +11,7 @@ leadership. They know the current flow; they do not need it explained, they need
 Everyone speaks. Rotate who answers Q&A by topic: product (C), identity and trust (B), technical (A).
 
 ## Script
-**0:00 Opener.** One slide: Capital One, a second bank, Wells Fargo, and UFCU's own first screens side
+**0:00 Opener.** One slide: Capital One, Chase, Wells Fargo, and UFCU's own first screens side
 by side, the SSN field circled on each (docs/research/competitors/). "Every other first screen asks
 who you are. Ours asks what you need." Then the UFCU sidebar text: "your social security
 number/ITIN ... otherwise schedule an appointment at your local branch." Say: "Yesterday we
@@ -61,7 +61,7 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
 
 ## Deck outline (8 slides max, docs/deck/)
 1. Title: Front Desk, LAN Party.
-2. The gate: four first screens (Capital One, second bank, Wells Fargo, UFCU) with SSN fields circled,
+2. The gate: four first screens (Capital One, Chase, Wells Fargo, UFCU) with SSN fields circled,
    banker quote. "Every other first screen asks who you are. Ours asks what you need."
 3. Who we built for: the four personas in one row.
 4. Live demo (placeholder slide, switch to browser).
