@@ -84,7 +84,7 @@ exists online.
 - No mortgage page at guessable URLs and no UFCU student loan. The assistant must not invent either.
 
 ## Competitors' first screens (2026-09-19, docs/research/competitors/)
-Capital One: last name, SSN or ITIN, date of birth. A second bank: account number, SSN, username. Wells
+Capital One: last name, SSN or ITIN, date of birth. Chase: account number, SSN, username. Wells
 Fargo: SSN or ITIN, date of birth, with a "Why do we ask for this?" link and an "I don't have an SSN"
 checkbox. All three identify first and help later; UFCU's own flow does the same with more fields.
 Detail and the switching use case in docs/10-competitor-switch.md.

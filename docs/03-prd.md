@@ -34,6 +34,8 @@ first screen asks for an SSN; Front Desk asks what you need first and ends with 
   non-chat way to start the application, prefilled from the conversation.
 - The application looks and feels different from the chat so nobody types an SSN into a chatbot.
 - No "ChatGPT wrapper" design. Assistant turns render cards, checklists, and actions, not essays.
+- The invitation to apply is an offer made once when the person has enough to decide, never a nag
+  (docs/10-competitor-switch.md). The assistant keeps helping if they keep asking.
 - Architecture simple enough to explain on one slide. Model API only where it earns its place.
 
 ## MVP scope (must ship by 1:30 PM feature freeze)

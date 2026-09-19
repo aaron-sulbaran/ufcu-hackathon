@@ -91,6 +91,11 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
   anything else (show the slide). Ours asks what you need, recommends, prefills, and ends with a Switch
   Kit that moves direct deposit and autopays. The person types their identity number once, late, with
   the reason next to the field.
+- "Isn't asking for the SSN up front a regulatory requirement?" The CIP rule requires name, date of
+  birth, address, and an ID number before an account is opened, and for non-U.S. persons that number
+  can be a passport. It says what to collect before opening, not when a website asks. We collect all
+  of it in the Secure Zone with the reason beside each field, after the person has decided. The
+  branch already opens accounts with passport plus W-8BEN; we put that path online.
 - "Why not just fix the existing Narmi flow?" We did not replace it; we put a front desk in front of
   it and prefilled it. The Secure Zone could be Narmi tomorrow.
 
