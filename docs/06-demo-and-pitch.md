@@ -57,6 +57,10 @@ and the core."
 a static corpus of 18 ufcu.org pages, no database. "Every recommendation carries the URL it came
 from. The assistant cannot cite a page that is not in the corpus, and it never sees an SSN."
 
+**4:30 The number (Aaron).** "Acquiring a member costs UFCU on the order of $487 (a third-party
+estimate we heard at the event; say the source when asked). A Front Desk conversation costs cents.
+Every screen you saw had one job: make becoming a member the next click."
+
 **4:35 Future (Aaron).** Real KYC vendor behind the same readout, save-and-resume by SMS, the
 banker's translation of printed disclosures, joint and teen accounts, and the same assistant inside
 the mobile app after onboarding.
@@ -73,7 +77,8 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
 5. Trust is layered: paths, checks, confidence, routes.
 6. Architecture on one slide.
 7. What we did not build and why (honest non-goals win trust with a CTO audience).
-8. Future and thanks. Optional: Figma flow thumbnail.
+8. The number: about $487 to acquire a member today; cents per Front Desk conversation; every screen
+   makes joining the next click. Then future and thanks. Optional: Figma flow thumbnail.
 
 ## Judge Q&A prep
 - "How do you know the assistant is accurate?" It can only cite pages in the corpus we curated from
@@ -91,7 +96,8 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
   W-8BEN is in the branch packet. We show the acknowledgment where the branch would hand over paper.
 - "Accessibility for older members?" Big type mode, plain language, phone number always visible,
   "call me instead" button, language switch. (Show if built, otherwise say it is next.)
-- "Cost to run?" One Haiku-class call per turn, cached system prompt, static corpus. Cents per applicant.
+- "Cost to run?" One Haiku-class call per turn, cached system prompt, static corpus. Cents per applicant,
+  against an acquisition cost around $487 per member (third-party estimate; not UFCU's own number).
 - "What would you do with two more weeks?" Real KYC vendor, save-and-resume, joint and teen paths,
   translated disclosures, analytics on drop-off per step.
 - "How is this easier than switching to Chase or Wells?" Their first screen asks for an SSN before

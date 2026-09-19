@@ -2,7 +2,7 @@
 // the assistant asks "do you have a Social Security Number yet?", never for the number itself.
 import rules from "@/data/eligibility.json";
 import { t } from "@/lib/i18n-core";
-import type { EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
+import type { Audience, EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
 
 export interface EligibilityInput {
   hasSsn?: boolean;
@@ -35,6 +35,13 @@ export function pathLabel(path: IdentityPath, lang: Lang = "en"): string {
   const base = PATHS[path];
   if (lang === "en") return base.label;
   return base.i18n?.[lang]?.label ?? base.label;
+}
+
+// The path to assume before the conversation has established one, so the desk can hand off to
+// the application on the first click. An international student is on the foreign-status path;
+// everyone else starts on the Social Security Number path and the application can correct it.
+export function defaultPathFor(audience: Audience): IdentityPath {
+  return audience === "international_student" ? "foreign_status" : "ssn";
 }
 
 function localizedDocuments(path: IdentityPath, lang: Lang): string[] {

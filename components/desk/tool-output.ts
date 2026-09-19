@@ -28,6 +28,19 @@ export function partText(part: { type: string }): string | null {
   return p.type === "text" && typeof p.text === "string" ? p.text : null;
 }
 
+// Every product the desk has shown this visit, latest card per id. The person can click "Open"
+// on a card from an earlier turn, so the reason lines have to outlive the turn that produced them.
+export function collectRecommended<P extends { id: string }>(messages: { parts: { type: string }[] }[]): P[] {
+  const byId = new Map<string, P>();
+  for (const message of messages) {
+    for (const part of message.parts) {
+      const list = toolOutput<P[]>(part, "recommendProducts");
+      if (list) for (const product of list) byId.set(product.id, product);
+    }
+  }
+  return [...byId.values()];
+}
+
 // The left panel reads the latest result of each tool, so "Your visit so far" always shows
 // the current bundle and checklist rather than whatever scrolled past.
 export function collectVisit<P, E, A>(messages: { parts: { type: string }[] }[]) {
