@@ -4,7 +4,7 @@
   "nav.lang": "Language",
   "nav.apply": "Start application",
   "landing.headline": "Tell us what you need. We'll tell you what fits.",
-  "landing.sub": "No account numbers, no Social Security number, no forms yet. Just a conversation, like walking up to the desk at the University Branch.",
+  "landing.sub": "Walk up, tell us what you're here for, and we'll point you to the right accounts. Nothing to fill out until you decide to join.",
   "landing.iam": "I am",
   "landing.iwant": "and I want",
   "landing.start": "Talk to the front desk",
@@ -210,5 +210,6 @@
   "apply.err.slot": "Pick a time for the video call.",
   "apply.err.products": "Savings is the membership account and stays in the bundle.",
   "apply.err.esign": "Agree to receive your documents by email.",
-  "apply.err.agreement": "Agree to the Membership and Account Agreement."
+  "apply.err.agreement": "Agree to the Membership and Account Agreement.",
+  "desk.greeting": "Hi, welcome in. I'm the front desk at the University Branch. What brings you in today?"
 }

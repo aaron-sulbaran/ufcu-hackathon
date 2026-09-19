@@ -4,7 +4,7 @@
   "nav.lang": "Idioma",
   "nav.apply": "Iniciar solicitud",
   "landing.headline": "Cuéntanos qué necesitas. Te decimos qué te conviene.",
-  "landing.sub": "Sin números de cuenta, sin número de Seguro Social, sin formularios todavía. Solo una conversación, como acercarte a la recepción de University Branch.",
+  "landing.sub": "Acercate, cuentanos que necesitas y te indicamos las cuentas que te convienen. No hay nada que llenar hasta que decidas unirte.",
   "landing.iam": "Soy",
   "landing.iwant": "y quiero",
   "landing.start": "Habla con la recepción",
@@ -51,5 +51,6 @@
   "trust.noSsn": "No necesitas número de Seguro Social para empezar",
   "trust.sourced": "Cada respuesta enlaza a ufcu.org",
   "trust.secure": "Tu solicitud es una página segura aparte; ninguna IA la lee",
-  "a11y.largerText": "Texto más grande"
+  "a11y.largerText": "Texto más grande",
+  "desk.greeting": "Hola, bienvenido. Soy la recepcion de la sucursal University. En que te puedo ayudar hoy?"
 }

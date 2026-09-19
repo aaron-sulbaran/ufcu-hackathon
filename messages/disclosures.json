@@ -73,7 +73,7 @@
     },
     "membership_agreement": {
       "title": "Acuerdo de Membresía y Cuenta",
-      "summary": "Este es el acuerdo principal que te convierte en miembro y titular de cuenta de UFCU. Cubre la propiedad de la cuenta (individual, o conjunta con o sin derecho de supervivencia), te permite nombrar un beneficiario por causa de muerte, y te pide certificar tu número de identificación fiscal. También le da a UFCU un gravamen sobre tus depósitos: UFCU puede aplicar ese dinero a deudas que le debas, como pagos de préstamos o tarifas, sin pasar primero por un proceso judicial.",
+      "summary": "Este es el acuerdo que te convierte en miembro y titular de cuenta de UFCU. Cubre la propiedad de la cuenta (individual, o conjunta con o sin derecho de supervivencia), te permite nombrar un beneficiario por causa de muerte, y te pide certificar tu número de identificación fiscal. También da a UFCU un gravamen sobre tus depósitos: puede aplicarlos a deudas que le debas, como préstamos o tarifas, sin proceso judicial.",
       "bullets": [
         "Aceptas los Estatutos de UFCU y el Acuerdo de Membresía completo, no solo esta solicitud",
         "Eliges cómo se posee la cuenta: individual, o conjunta con o sin derecho de supervivencia",
@@ -108,7 +108,7 @@
     },
     "why_we_ask_cip": {
       "title": "Por qué lo pedimos",
-      "summary": "Las reglas federales, el Programa de Identificación de Clientes bajo la Ley PATRIOT, exigen que todo banco y cooperativa de crédito recopile tu nombre, fecha de nacimiento, dirección y un número de identificación antes de abrir tu cuenta. Para personas estadounidenses, ese número suele ser un Número de Seguro Social; para personas no estadounidenses, puede ser un número de pasaporte u otra identificación gubernamental. No es una decisión de UFCU, es la ley, y lo pedimos solo porque debemos hacerlo antes de que tu cuenta pueda existir.",
+      "summary": "Las reglas federales, el Programa de Identificación de Clientes de la Ley PATRIOT, exigen que todo banco recopile tu nombre, fecha de nacimiento, dirección y un número de identificación antes de abrir tu cuenta. Para personas estadounidenses, ese número suele ser un Número de Seguro Social; para personas no estadounidenses, puede ser un número de pasaporte u otra identificación gubernamental. No es una decisión de UFCU, es la ley, y lo pedimos porque debemos hacerlo antes de que tu cuenta exista.",
       "bullets": [
         "La ley exige cuatro cosas antes de abrir cualquier cuenta: nombre, fecha de nacimiento, dirección y un número de identificación",
         "Para personas estadounidenses, el número de identificación suele ser un Número de Seguro Social",
@@ -191,7 +191,7 @@
     },
     "membership_agreement": {
       "title": "Acordo de Associação e Conta",
-      "summary": "Este é o contrato principal que torna você um associado e titular de conta da UFCU. Ele define a forma de propriedade da conta (individual, ou conjunta com ou sem direito de sobrevivência), permite indicar um beneficiário para pagamento em caso de falecimento, e exige que você certifique seu número de identificação fiscal para fins de retenção. Ele também concede à UFCU um direito de garantia sobre seus próprios depósitos, o que significa que a UFCU pode usar o dinheiro das suas contas para quitar dívidas que você tenha com ela, como parcelas de empréstimo ou taxas, sem precisar de um processo judicial.",
+      "summary": "Este é o contrato que torna você um associado e titular de conta da UFCU. Ele define a forma de propriedade da conta (individual, ou conjunta com ou sem direito de sobrevivência), permite indicar um beneficiário para pagamento em caso de falecimento, e exige que você certifique seu número de identificação fiscal. Também dá à UFCU um direito de garantia sobre seus depósitos: pode usá-los para quitar dívidas que você tenha com ela, como parcelas ou taxas, sem processo judicial.",
       "bullets": [
         "Você concorda com o Estatuto da UFCU e com o Acordo de Associação completo, não só com esta solicitação",
         "Você escolhe como a conta será possuída: individual, ou conjunta com ou sem direito de sobrevivência",
@@ -203,7 +203,7 @@
     },
     "w8ben": {
       "title": "Certificado de Condição de Estrangeiro (W-8BEN)",
-      "summary": "O Formulário W-8BEN é um formulário padrão do IRS, não algo criado pela UFCU. Ele certifica que você não é uma pessoa dos Estados Unidos para fins fiscais. Pessoas que não são dos EUA o assinam ao abrir uma conta, no lugar da certificação usual de SSN e retenção. Ele não substitui totalmente um SSN: você ainda pode precisar de um número de identificação fiscal estrangeiro ou, em alguns casos, de um ITIN. Assine este formulário se você não é cidadão dos EUA e ainda não tem um SSN para certificar.",
+      "summary": "O Formulário W-8BEN é um formulário padrão do IRS, não algo criado pela UFCU. Ele certifica que você não é uma pessoa dos Estados Unidos para fins fiscais. Pessoas que não são dos EUA o assinam ao abrir uma conta, no lugar da certificação usual de SSN. Ele não substitui totalmente um SSN: pode ainda ser necessário um número de identificação fiscal estrangeiro ou um ITIN. Assine se não é cidadão dos EUA e não tem um SSN.",
       "bullets": [
         "É o Formulário W-8BEN do IRS, usado só por pessoas físicas (não empresas), não um formulário próprio da UFCU",
         "Você assina para certificar que não é uma pessoa dos Estados Unidos para fins fiscais",
@@ -215,7 +215,7 @@
     },
     "courtesy_pay": {
       "title": "Courtesy Pay (cobertura opcional de cheque especial)",
-      "summary": "Courtesy Pay é uma cobertura opcional que permite à UFCU pagar uma transação mesmo sem saldo suficiente na conta, em vez de recusá-la. Cada item coberto custa $35, conforme a tabela de tarifas da UFCU. Os limites de cobertura variam por tipo de conta, e não está disponível na conta Simply U. Você opta por participar; não é automático. (Não verificado: se a taxa de $35 e a exigência de adesão se aplicam da mesma forma a todo tipo de transação não está detalhado em nossa pesquisa e deve ser confirmado com a UFCU.)",
+      "summary": "Courtesy Pay é uma cobertura opcional que permite à UFCU pagar uma transação mesmo sem saldo suficiente, em vez de recusá-la. Cada item coberto custa $35, conforme a tabela de tarifas da UFCU. Os limites variam por tipo de conta e não está disponível na conta Simply U. Você opta por participar; não é automático. (Não verificado: se a taxa se aplica igual a todo tipo de transação não está detalhado em nossa pesquisa.)",
       "bullets": [
         "Cada item do Courtesy Pay custa $35, conforme a tabela de tarifas da UFCU",
         "Não está disponível de forma alguma na conta Simply U",
@@ -226,7 +226,7 @@
     },
     "why_we_ask_cip": {
       "title": "Por que pedimos isso",
-      "summary": "Regras federais, o Programa de Identificação de Clientes previsto na Lei PATRIOT dos EUA, exigem que todo banco e cooperativa de crédito colete nome, data de nascimento, endereço e um número de identificação antes de abrir sua conta. Para pessoas dos Estados Unidos, esse número costuma ser o número de Seguro Social; para quem não é dos EUA, pode ser um número de passaporte ou outro documento de identificação governamental. Isso não é uma escolha de política da UFCU, é a lei, e só pedimos porque somos obrigados a isso antes que sua conta possa existir.",
+      "summary": "Regras federais, o Programa de Identificação de Clientes da Lei PATRIOT, exigem que todo banco colete nome, data de nascimento, endereço e um número de identificação antes de abrir sua conta. Para pessoas dos Estados Unidos, esse número costuma ser o número de Seguro Social; para quem não é dos EUA, pode ser um número de passaporte ou outro documento governamental. Não é uma escolha da UFCU, é a lei, e só pedimos porque somos obrigados.",
       "bullets": [
         "A lei exige quatro itens antes de qualquer conta ser aberta: nome, data de nascimento, endereço e um número de identificação",
         "Para pessoas dos Estados Unidos, o número de identificação costuma ser o número de Seguro Social",
@@ -239,7 +239,7 @@
   "fr": {
     "esign": {
       "title": "Consentement à la signature électronique",
-      "summary": "En acceptant ceci, vous autorisez l'UFCU à vous envoyer vos documents de compte, avis et accords par voie électronique, par e-mail ou via l'application, plutôt que par courrier postal. Vous aurez besoin d'une adresse e-mail valide et d'un appareil capable d'afficher et d'enregistrer des fichiers PDF. Il s'agit d'une pratique courante en vertu de la loi fédérale sur la signature électronique. (Non vérifié : la procédure exacte de l'UFCU pour retirer ce consentement, d'éventuels frais pour une copie papier et la durée de conservation ne sont pas détaillés dans notre recherche et doivent être confirmés auprès de l'UFCU.)",
+      "summary": "En acceptant ceci, vous autorisez l'UFCU à vous envoyer vos documents, avis et accords de compte par e-mail ou via l'application, plutôt que par courrier postal. Vous aurez besoin d'une adresse e-mail valide et d'un appareil capable d'ouvrir des fichiers PDF. Il s'agit d'une pratique courante en vertu de la loi fédérale sur la signature électronique. (Non vérifié : la procédure de l'UFCU pour retirer ce consentement et d'éventuels frais de copie papier ne sont pas détaillés dans notre recherche.)",
       "bullets": [
         "Vous acceptez de recevoir vos documents de compte par e-mail ou via l'application, plutôt que par courrier",
         "Vous avez besoin d'une adresse e-mail active et d'un moyen d'ouvrir et d'enregistrer des fichiers PDF",
@@ -250,7 +250,7 @@
     },
     "membership_agreement": {
       "title": "Contrat d'adhésion et de compte",
-      "summary": "Il s'agit du contrat principal qui fait de vous un membre et un titulaire de compte de l'UFCU. Il définit la forme de propriété du compte (individuelle, ou conjointe avec ou sans droit de survie), vous permet de désigner un bénéficiaire payable au décès, et vous demande de certifier votre numéro d'identification fiscale pour la retenue à la source. Il accorde aussi à l'UFCU un privilège sur vos propres dépôts, ce qui signifie que l'UFCU peut appliquer les fonds de vos comptes à des dettes que vous lui devez, comme des mensualités de prêt ou des frais, sans passer par une procédure judiciaire.",
+      "summary": "Il s'agit du contrat qui fait de vous un membre et un titulaire de compte de l'UFCU. Il définit la forme de propriété du compte (individuelle, ou conjointe avec ou sans droit de survie), permet de désigner un bénéficiaire payable au décès, et demande de certifier votre numéro d'identification fiscale. Il accorde aussi à l'UFCU un privilège sur vos dépôts : elle peut les appliquer à des dettes que vous lui devez, sans procédure judiciaire.",
       "bullets": [
         "Vous acceptez les statuts de l'UFCU et l'intégralité du contrat d'adhésion, pas seulement cette demande",
         "Vous choisissez la forme de propriété du compte : individuelle, ou conjointe avec ou sans droit de survie",
@@ -262,7 +262,7 @@
     },
     "w8ben": {
       "title": "Certificat de statut étranger (W-8BEN)",
-      "summary": "Le formulaire W-8BEN est un formulaire standard de l'IRS, pas un document créé par l'UFCU. Il certifie que vous n'êtes pas une personne américaine à des fins fiscales. Les personnes non américaines le signent à l'ouverture d'un compte, à la place de la certification habituelle du numéro de sécurité sociale et de la retenue à la source. Il ne remplace pas totalement un numéro de sécurité sociale : un numéro d'identification fiscale étranger, ou dans certains cas un ITIN, peut encore être nécessaire. Signez ce formulaire si vous n'êtes pas citoyen américain et n'avez pas de numéro de sécurité sociale à certifier.",
+      "summary": "Le formulaire W-8BEN est un formulaire standard de l'IRS, pas un document créé par l'UFCU. Il certifie que vous n'êtes pas une personne américaine à des fins fiscales. Les personnes non américaines le signent à l'ouverture d'un compte, à la place de la certification habituelle du numéro de sécurité sociale. Il ne le remplace pas totalement : un numéro fiscal étranger ou un ITIN peut encore être nécessaire. Signez-le si vous n'êtes pas citoyen américain et n'avez pas ce numéro.",
       "bullets": [
         "C'est le formulaire W-8BEN de l'IRS, réservé aux particuliers (pas aux entreprises), pas un formulaire propre à l'UFCU",
         "Vous le signez pour certifier que vous n'êtes pas une personne américaine à des fins fiscales",
@@ -274,7 +274,7 @@
     },
     "courtesy_pay": {
       "title": "Courtesy Pay (couverture de découvert optionnelle)",
-      "summary": "Courtesy Pay est une couverture optionnelle qui permet à l'UFCU de payer une transaction même si votre solde est insuffisant, plutôt que de la refuser. Chaque transaction couverte coûte 35 $, selon le barème de frais de l'UFCU. Les plafonds de couverture varient selon le compte : cette option n'est pas du tout proposée sur le compte Simply U. Vous devez y adhérer volontairement, ce n'est pas automatique. (Non vérifié : le fait que les frais de 35 $ et l'exigence d'adhésion s'appliquent de la même façon à tous les types de transactions n'est pas détaillé dans notre recherche et doit être confirmé auprès de l'UFCU.)",
+      "summary": "Courtesy Pay est une couverture optionnelle qui permet à l'UFCU de payer une transaction même si votre solde est insuffisant, plutôt que de la refuser. Chaque transaction couverte coûte 35 $, selon le barème de frais de l'UFCU. Les plafonds varient selon le compte et cette option n'est pas proposée sur Simply U. Vous devez y adhérer, ce n'est pas automatique. (Non vérifié : si ces frais s'appliquent pareil à tous les types de transactions n'est pas détaillé dans notre recherche.)",
       "bullets": [
         "Chaque transaction couverte par Courtesy Pay coûte 35 $, selon le barème de frais de l'UFCU",
         "Cette option n'est pas du tout proposée sur le compte Simply U",
@@ -285,7 +285,7 @@
     },
     "why_we_ask_cip": {
       "title": "Pourquoi nous le demandons",
-      "summary": "La réglementation fédérale, le programme d'identification des clients prévu par le USA PATRIOT Act, exige que chaque banque et coopérative de crédit recueille votre nom, votre date de naissance, votre adresse et un numéro d'identification avant l'ouverture de votre compte. Pour une personne américaine, ce numéro est généralement un numéro de sécurité sociale ; pour une personne non américaine, un numéro de passeport ou une autre pièce d'identité délivrée par un gouvernement peut convenir. Ce n'est pas un choix de politique de l'UFCU, c'est la loi, et nous le demandons uniquement parce que nous y sommes tenus avant que votre compte puisse exister.",
+      "summary": "La réglementation fédérale, le programme d'identification des clients du USA PATRIOT Act, exige que chaque banque recueille votre nom, date de naissance, adresse et un numéro d'identification avant l'ouverture de votre compte. Pour une personne américaine, ce numéro est généralement un numéro de sécurité sociale ; pour une personne non américaine, un numéro de passeport ou une autre pièce d'identité gouvernementale peut convenir. Ce n'est pas un choix de l'UFCU, c'est la loi.",
       "bullets": [
         "La loi exige quatre éléments avant l'ouverture de tout compte : nom, date de naissance, adresse et un numéro d'identification",
         "Pour une personne américaine, le numéro d'identification est généralement un numéro de sécurité sociale",

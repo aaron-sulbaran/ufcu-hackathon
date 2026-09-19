@@ -31,15 +31,26 @@ export function Conversation() {
     [context, sendMessage],
   );
 
+  // Persona auto-start: queue the first turn, then send it once the chat is live. Sending directly
+  // inside the mount effect is dropped under React strict mode (the first Chat instance is discarded).
   const started = useRef(false);
+  const [pending, setPending] = useState<{ text: string; ctx: PersonaContext } | null>(null);
   useEffect(() => {
     if (started.current) return;
     const persona = getPersona(urlPersona);
     if (!persona) return;
     started.current = true;
     setContext(persona.context);
-    send(persona.turns[0].user, persona.context);
-  }, [urlPersona, setContext, send]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPending({ text: persona.turns[0].user, ctx: persona.context });
+  }, [urlPersona, setContext]);
+  useEffect(() => {
+    if (!pending || status !== "ready") return;
+    const next = pending;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPending(null);
+    send(next.text, next.ctx);
+  }, [pending, status, send]);
 
   const bottom = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -51,7 +62,7 @@ export function Conversation() {
       <div className="flex-1 space-y-6 pb-4">
         {messages.length === 0 && (
           <p className="max-w-prose rounded-2xl rounded-tl-sm bg-ufcu-secondary-subtle px-4 py-3 leading-relaxed text-ufcu-primary">
-            {t("landing.sub")}
+            {t("desk.greeting")}
           </p>
         )}
 
