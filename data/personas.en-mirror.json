@@ -1,0 +1,50 @@
+{
+  "note": "English copies of the non-English persona scripts in data/personas.json. Reference only; nothing imports this file.",
+  "joon": {
+    "turns": [
+      {
+        "user": "I just arrived from Korea and I do not have a Social Security Number. Can I open an account?",
+        "assistant": "Yes, you can. You do not need a Social Security Number, and here are the documents you will need."
+      },
+      {
+        "user": "Can I use Zelle to pay my roommate?",
+        "assistant": "Zelle enrollment requires a Social Security Number. That comes from UFCU branch staff; the website does not say it. Here is what to use instead."
+      },
+      {
+        "user": "Great. I want to open the account.",
+        "assistant": "Bring your passport and I-20. I will prefill the rest of the application for you."
+      },
+      {
+        "note": "Card reasons, in order: savings, free-checking, simply-u",
+        "reasons": [
+          "The account that creates your membership. It opens with $1, and every other account attaches to it.",
+          "No monthly fee, no minimum balance, and a debit card issued on the spot.",
+          "No overdraft fees at all, which makes it a safe first account in the US."
+        ]
+      }
+    ]
+  },
+  "daniela": {
+    "turns": [
+      {
+        "user": "I'm starting a food truck LLC and I need a business account.",
+        "assistant": "Membership starts with a personal savings account, and the business account attaches to it. Two steps, same day."
+      },
+      {
+        "user": "What documents do I need for the LLC?",
+        "assistant": "For a Texas LLC it is four things, plus an ID for every person who signs."
+      },
+      {
+        "user": "Perfect, let's start.",
+        "assistant": "I am leaving the application ready with the personal membership first; the business documents come in the next step."
+      },
+      {
+        "note": "Card reasons, in order: savings, business-checking",
+        "reasons": [
+          "Opens your membership with $1 and is the account the business account attaches to.",
+          "For your LLC: a business debit card and digital banking, with no monthly fee on the basic tier."
+        ]
+      }
+    ]
+  }
+}

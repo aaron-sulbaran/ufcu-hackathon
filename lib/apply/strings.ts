@@ -1,35 +1,13 @@
-{
-  "app.name": "Front Desk",
-  "app.tagline": "The UFCU front desk, online.",
-  "nav.lang": "Language",
-  "nav.apply": "Start application",
-  "landing.headline": "Tell us what you need. We'll tell you what fits.",
-  "landing.sub": "No account numbers, no Social Security number, no forms yet. Just a conversation, like walking up to the desk at the University Branch.",
-  "landing.iam": "I am",
-  "landing.iwant": "and I want",
-  "landing.start": "Talk to the front desk",
-  "landing.try": "Or try it as",
-  "audience.student": "a student",
-  "audience.international_student": "an international student",
-  "audience.new_to_austin": "new to Austin",
-  "audience.switching_banks": "switching from another bank",
-  "audience.business": "starting a business",
-  "audience.retiree": "retired or retiring",
-  "audience.other": "just looking",
-  "goal.checking": "a checking account",
-  "goal.savings": "to start saving",
-  "goal.build_credit": "to build credit",
-  "goal.credit_card": "a credit card",
-  "goal.loan": "a loan",
-  "goal.unsure": "not sure yet",
-  "desk.placeholder": "Ask anything, in any language",
-  "desk.send": "Send",
-  "desk.source": "Source on ufcu.org",
-  "desk.continue": "Continue to secure application",
-  "desk.continue.sub": "Nothing sensitive goes in until you get there.",
-  "desk.offline": "Scripted mode",
+"use client";
+// Lane B owns these strings until the captain merges them into messages/en.json.
+// useApplyT() asks the shared dictionary first and falls back to the table below,
+// so the Secure Zone keeps working before and after the merge.
+import { useT } from "@/lib/i18n";
+
+export const APPLY_STRINGS: Record<string, string> = {
   "apply.title": "Secure application",
   "apply.noai": "No AI reads this page.",
+  "apply.noai.field": "This page is not read by any AI.",
   "apply.step": "Step {n} of {total}",
   "apply.elapsed": "{m}:{s} elapsed",
   "apply.why": "Why we ask",
@@ -37,25 +15,10 @@
   "apply.next": "Continue",
   "apply.submit": "Submit application",
   "apply.simulated": "Simulated",
-  "common.call": "Call (512) 467-8080",
-  "common.branch": "University Branch, 2244 Guadalupe St",
-  "common.ncua": "Insured by NCUA. Equal Housing Lender.",
-  "chip.maya.name": "Maya",
-  "chip.maya.blurb": "UT sophomore opening her first account and building credit.",
-  "chip.joon.name": "Joon",
-  "chip.joon.blurb": "Grad student on F-1, no SSN yet, just arrived from Korea.",
-  "chip.daniela.name": "Daniela",
-  "chip.daniela.blurb": "Opening a food truck LLC and moving from Wells Fargo.",
-  "chip.robert.name": "Robert",
-  "chip.robert.blurb": "Moving to Austin for a new job, switching from Chase.",
-  "trust.noSsn": "No Social Security number needed to start",
-  "trust.sourced": "Every answer links to ufcu.org",
-  "trust.secure": "Your application is a separate secure page, no AI reads it",
-  "a11y.largerText": "Larger text",
-  "apply.noai.field": "This page is not read by any AI.",
   "apply.saved": "Saved",
   "apply.optional": "Optional",
   "apply.prefilled": "From your conversation",
+
   "apply.step1.title": "Your path",
   "apply.step2.title": "About you",
   "apply.step3.title": "Verify you",
@@ -63,6 +26,7 @@
   "apply.step4.title": "Your accounts",
   "apply.step5.title": "Review and submit",
   "apply.cip": "Federal rules require your name, date of birth, address, and an identification number before an account opens. We ask once, here, with the reason next to each field.",
+
   "apply.path.ssn": "I have a Social Security number",
   "apply.path.ssn.sub": "The usual path for U.S. citizens and permanent residents.",
   "apply.path.itin": "I have an ITIN",
@@ -75,6 +39,7 @@
   "apply.path.branch_assist.sub": "We hold your place and a banker finishes it with you.",
   "apply.checklist.title": "What you will need",
   "apply.notes.title": "Good to know",
+
   "apply.f.firstName": "First name",
   "apply.f.lastName": "Last name",
   "apply.f.dob": "Date of birth",
@@ -93,6 +58,7 @@
   "apply.f.w8ben": "I am not a U.S. person and will complete a W-8BEN",
   "apply.show": "Show",
   "apply.hide": "Hide",
+
   "apply.why.name": "Your legal name is one of the four items federal rules require before an account opens.",
   "apply.why.dob": "Date of birth is required to confirm you are the person on the ID.",
   "apply.why.email": "We send your account documents and disclosures here, not paper.",
@@ -105,6 +71,7 @@
   "apply.why.passport": "For a non-U.S. person the identification number can be a passport number.",
   "apply.why.country": "The issuing country tells us which document standard to check the passport against.",
   "apply.why.w8ben": "The IRS asks non-U.S. persons to certify foreign status on a W-8BEN instead of a W-9.",
+
   "apply.verify.id": "Government ID",
   "apply.verify.selfie": "Selfie",
   "apply.verify.enrollment": "Enrollment document (I-20 or DS-2019)",
@@ -130,6 +97,7 @@
   "apply.detail.consistency.new": "Your address is only a few weeks old, so a banker will confirm it.",
   "apply.detail.watchlist.ok": "No match on the sanctions and watchlist files.",
   "apply.detail.minor": "Under 18, a parent or guardian signs with you in person.",
+
   "apply.route.instant.title": "Verified. Your accounts can open now.",
   "apply.route.instant.body": "Nothing else is needed from you for identity.",
   "apply.route.video.title": "A five-minute video call with a banker",
@@ -139,6 +107,7 @@
   "apply.route.branch.title": "Finish at the University Branch",
   "apply.route.branch.body": "This path is signed in person. Bring your documents and your parent or guardian.",
   "apply.branch.hours": "Weekdays 10am to 4pm",
+
   "apply.accounts.sub": "Verified once, applied to every account in this bundle.",
   "apply.accounts.membership": "Membership account. Always included.",
   "apply.accounts.add": "Add",
@@ -154,6 +123,7 @@
   "apply.disclosure.w8ben": "Certification of foreign status (W-8BEN)",
   "apply.disclosure.w8ben.sub": "You certify you are not a U.S. person for tax purposes and will complete the IRS form.",
   "apply.disclosure.read": "Read the full document",
+
   "apply.review.edit": "Edit",
   "apply.review.path": "Your path",
   "apply.review.about": "About you",
@@ -170,6 +140,7 @@
   "apply.next.title": "Next steps",
   "apply.next.open": "Open on ufcu.org",
   "apply.done.elapsed": "Start to finish: {m}:{s}",
+
   "apply.next.deposit.title": "Move your paycheck here",
   "apply.next.deposit.detail": "Give your employer routing number 314977405 and your new account number. UT campus jobs change it in Workday.",
   "apply.next.digital.title": "Enroll in digital banking",
@@ -188,6 +159,7 @@
   "apply.next.switch.keep.detail": "It catches anything you forgot to move before you close it.",
   "apply.next.switch.close.title": "Then close the old account",
   "apply.next.switch.close.detail": "Ask for the balance by check or transfer, and get the closure in writing.",
+
   "apply.err.path": "Pick the path that matches your documents.",
   "apply.err.firstName": "Enter your first name.",
   "apply.err.lastName": "Enter your last name.",
@@ -210,5 +182,22 @@
   "apply.err.slot": "Pick a time for the video call.",
   "apply.err.products": "Savings is the membership account and stays in the bundle.",
   "apply.err.esign": "Agree to receive your documents by email.",
-  "apply.err.agreement": "Agree to the Membership and Account Agreement."
+  "apply.err.agreement": "Agree to the Membership and Account Agreement.",
+};
+
+function fill(text: string, vars?: Record<string, string | number>): string {
+  if (!vars) return text;
+  let out = text;
+  for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, String(v));
+  return out;
+}
+
+export function useApplyT() {
+  const t = useT();
+  return (key: string, vars?: Record<string, string | number>) => {
+    const shared = t(key, vars);
+    if (shared !== key) return shared;
+    const local = APPLY_STRINGS[key];
+    return local ? fill(local, vars) : fill(key, vars);
+  };
 }

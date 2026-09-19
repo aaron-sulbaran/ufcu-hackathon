@@ -1,0 +1,130 @@
+{
+  "paths": {
+    "ssn": {
+      "label": "Standard path, using your Social Security Number",
+      "documents": [
+        "Texas driver license or state ID",
+        "Social Security Number",
+        "An email address and a phone number"
+      ],
+      "notes": [
+        "You must be 18 or older to open online.",
+        "Savings opens with $1 and is the account that carries your membership.",
+        "Checking accounts open with $0."
+      ],
+      "sourceUrls": [
+        "https://ufcu.org/open-account",
+        "https://ufcu.org/personal/savings/overview"
+      ]
+    },
+    "itin": {
+      "label": "ITIN path, for members with a taxpayer number instead of a Social Security Number",
+      "documents": [
+        "Government-issued photo ID",
+        "Individual Taxpayer Identification Number (ITIN)",
+        "Proof of your Austin address"
+      ],
+      "notes": [
+        "The account opening page accepts a Social Security Number or an ITIN.",
+        "You can add a Social Security Number later if you get one.",
+        "Zelle enrollment requires a Social Security Number, per UFCU branch staff."
+      ],
+      "sourceUrls": [
+        "https://ufcu.org/open-account",
+        "https://ufcu.org/resources/member-services/banking/zelle"
+      ]
+    },
+    "foreign_status": {
+      "label": "Foreign status path, for international students and others without a US taxpayer number",
+      "documents": [
+        "Passport",
+        "I-20 or DS-2019",
+        "W-8BEN acknowledgment (certificate of foreign status)",
+        "Proof of your Austin address, such as a lease or utility bill"
+      ],
+      "notes": [
+        "No SSN needed to open; add an SSN or ITIN later",
+        "Zelle requires an SSN, per UFCU branch staff; use a transfer to a non-UFCU member, or a wire, instead",
+        "A banker at the University Branch completes this path in person or by video."
+      ],
+      "sourceUrls": [
+        "https://ufcu.org/open-account",
+        "https://ufcu.org/resources/member-services/banking/zelle",
+        "https://ufcu.org/locations/details/university"
+      ]
+    },
+    "minor": {
+      "label": "Under 18, opened with a parent or guardian",
+      "documents": [
+        "Your photo ID or school ID",
+        "Social Security Number",
+        "A parent, guardian, or other adult as joint owner, with their ID"
+      ],
+      "notes": [
+        "Teen Checking serves ages 13 to 17 and converts to Free Checking at 18.",
+        "A parent or guardian must be a joint owner on the account.",
+        "Only an SSN and a guardian are needed to open Teen Checking at a branch."
+      ],
+      "sourceUrls": [
+        "https://ufcu.org/personal/checking/overview",
+        "https://ufcu.org/open-account"
+      ]
+    },
+    "branch_assist": {
+      "label": "A banker finishes this one with you",
+      "documents": [
+        "Any government-issued photo ID you have",
+        "Anything showing your Austin address",
+        "Your taxpayer number if you have one"
+      ],
+      "notes": [
+        "UFCU asks people whose documents the online form cannot take to book a branch appointment.",
+        "The University Branch at 2244 Guadalupe St handles these every day.",
+        "Call (512) 467-8080 or book at appointments.ufcu.org."
+      ],
+      "sourceUrls": [
+        "https://ufcu.org/open-account",
+        "https://ufcu.org/locations/details/university"
+      ]
+    }
+  },
+  "business": {
+    "documents": [
+      "Certificate of Formation filed with the Texas Secretary of State (LLC, PLLC, corporation, LP)",
+      "EIN letter, or an SSN for a single-member LLC or sole proprietorship",
+      "Assumed Name Certificate (DBA) if the business name is not the owner's name",
+      "Government-issued photo ID for every signer and every 25% owner"
+    ],
+    "notes": [
+      "Membership opens with a personal Savings account first; the business account attaches to it.",
+      "The Beneficial Ownership Rule applies to entities filed with a Secretary of State, not to sole proprietorships.",
+      "Business accounts do not get Zelle, per UFCU branch staff."
+    ],
+    "sourceUrls": [
+      "https://ufcu.org/business/business-requirements",
+      "https://ufcu.org/business/checking/checking"
+    ]
+  },
+  "affiliations": [
+    "Ascension/Seton",
+    "Austin Community College",
+    "Concordia University Texas",
+    "Foundation Communities",
+    "Galveston College",
+    "Goodwill",
+    "Huston-Tillotson University",
+    "Indeed",
+    "St. Edward's University",
+    "Southwestern University",
+    "Temple College",
+    "Texas A&M at Galveston",
+    "University of Texas at Austin",
+    "University of Texas Medical Branch",
+    "UTHealth-Houston",
+    "YMCA"
+  ],
+  "accRoute": {
+    "note": "No affiliation? Anyone can join UFCU through the American Consumer Council for free, handled during enrollment.",
+    "sourceUrl": "https://ufcu.org/open-account"
+  }
+}

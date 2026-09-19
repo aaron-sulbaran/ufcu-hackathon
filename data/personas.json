@@ -1,0 +1,1092 @@
+[
+  {
+    "id": "maya",
+    "chipLabel": "Try as Maya",
+    "blurb": "19, UT sophomore, first bank account, wants to build credit.",
+    "context": {
+      "audience": "student",
+      "goal": "build_credit",
+      "lang": "en",
+      "personaId": "maya"
+    },
+    "prefill": {
+      "context": {
+        "audience": "student",
+        "goal": "build_credit",
+        "lang": "en",
+        "personaId": "maya"
+      },
+      "path": "ssn",
+      "products": [
+        "savings",
+        "simply-u"
+      ],
+      "firstName": "Maya",
+      "schoolAffiliation": "University of Texas at Austin",
+      "notes": [
+        "First bank account",
+        "Wants to build credit",
+        "Campus job paid through UT Workday"
+      ]
+    },
+    "turns": [
+      {
+        "user": "I've never had a bank account and I want to start building credit.",
+        "assistant": {
+          "text": "Good place to start, and nothing here needs credit you do not have yet. Two accounts do the work.",
+          "tools": [
+            {
+              "name": "recommendProducts",
+              "result": [
+                {
+                  "id": "savings",
+                  "kind": "savings",
+                  "name": "Savings (Membership Account)",
+                  "tagline": "Your membership share account; every UFCU relationship starts here",
+                  "minToOpen": "$1",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "Opens your membership",
+                    "Earns dividends",
+                    "Required alongside any other account"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/savings/overview",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "switching_banks",
+                    "business",
+                    "retiree",
+                    "other"
+                  ],
+                  "goals": [
+                    "savings",
+                    "checking",
+                    "build_credit",
+                    "credit_card",
+                    "loan",
+                    "unsure"
+                  ],
+                  "reason": "Your membership account. Every UFCU relationship opens with it, for $1."
+                },
+                {
+                  "id": "simply-u",
+                  "kind": "checking",
+                  "name": "Simply U Checking",
+                  "tagline": "Built for first accounts and students",
+                  "minToOpen": "$0",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "No monthly fee",
+                    "No minimum balance",
+                    "No overdraft fees (no courtesy pay)",
+                    "Contactless Visa debit card, instant issue",
+                    "Mobile deposits and account alerts"
+                  ],
+                  "sourceUrl": "https://ufcu.org/resources/faqs/simply-u/detail",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "other"
+                  ],
+                  "goals": [
+                    "checking",
+                    "build_credit",
+                    "unsure"
+                  ],
+                  "reason": "$0 to open, no monthly fee, and no overdraft fees, so a first account cannot cost you money."
+                },
+                {
+                  "id": "credit-builder",
+                  "kind": "loan",
+                  "name": "Credit Builder Loan",
+                  "tagline": "Start a credit history from zero",
+                  "minToOpen": "$500 deposit held in savings",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "Fixed monthly payments reported to the credit bureaus",
+                    "Deposit returned at payoff",
+                    "Designed for first-time borrowers"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/loans/credit-builder",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "other"
+                  ],
+                  "goals": [
+                    "build_credit",
+                    "credit_card"
+                  ],
+                  "reason": "Payments are reported to all three credit bureaus, and the deposit comes back to you at payoff."
+                }
+              ]
+            },
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "Credit Builder Loan",
+                  "summary": "The Credit Builder Loan is for members with little credit, no credit, or poor credit.",
+                  "sourceUrl": "https://ufcu.org/personal/loans/credit-builder",
+                  "tags": [
+                    "credit-builder",
+                    "build-credit",
+                    "loan"
+                  ]
+                },
+                {
+                  "title": "Simply U Checking",
+                  "summary": "Simply U is UFCU's entry-level checking account, built on a spend-what-you-deposit model so overdrafts cannot happen.",
+                  "sourceUrl": "https://ufcu.org/personal/checking/simply-u",
+                  "tags": [
+                    "checking",
+                    "simply-u",
+                    "no-fees"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "How much do I need to open it?",
+        "assistant": {
+          "text": "Simply U opens with $0 and Savings opens with $1, which is the account that carries your membership. That is the whole deposit.",
+          "tools": [
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "What you need to open a UFCU account",
+                  "summary": "UFCU describes opening an account online as a three to five minute process.",
+                  "sourceUrl": "https://ufcu.org/open-account",
+                  "tags": [
+                    "open-account",
+                    "requirements",
+                    "id"
+                  ]
+                },
+                {
+                  "title": "Savings, Money Market, Certificates, and IRAs",
+                  "summary": "The Savings account is where a UFCU relationship starts.",
+                  "sourceUrl": "https://ufcu.org/personal/savings/overview",
+                  "tags": [
+                    "savings",
+                    "membership-account",
+                    "money-market"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "Okay, that sounds like what I want.",
+        "assistant": {
+          "text": "Then here is exactly what to bring, and I can carry all of this into the secure application for you.",
+          "tools": [
+            {
+              "name": "checkEligibility",
+              "result": {
+                "path": "ssn",
+                "documents": [
+                  "Texas driver license or state ID",
+                  "Social Security Number",
+                  "An email address and a phone number"
+                ],
+                "notes": [
+                  "You must be 18 or older to open online.",
+                  "Savings opens with $1 and is the account that carries your membership.",
+                  "Checking accounts open with $0.",
+                  "You qualify for membership through University of Texas at Austin."
+                ],
+                "sourceUrls": [
+                  "https://ufcu.org/open-account",
+                  "https://ufcu.org/personal/savings/overview"
+                ]
+              }
+            },
+            {
+              "name": "startApplication",
+              "result": {
+                "context": {
+                  "audience": "student",
+                  "goal": "build_credit",
+                  "lang": "en",
+                  "personaId": "maya"
+                },
+                "path": "ssn",
+                "products": [
+                  "savings",
+                  "simply-u"
+                ],
+                "firstName": "Maya",
+                "schoolAffiliation": "University of Texas at Austin",
+                "notes": [
+                  "First bank account",
+                  "Wants to build credit",
+                  "Campus job paid through UT Workday"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "trust": {
+      "checks": [
+        {
+          "id": "document",
+          "status": "pass",
+          "detail": "Texas driver license read clean, no tampering detected."
+        },
+        {
+          "id": "face",
+          "status": "pass",
+          "detail": "Selfie matches the photo on the ID."
+        },
+        {
+          "id": "consistency",
+          "status": "pass",
+          "detail": "Name, date of birth, and address agree across every document."
+        },
+        {
+          "id": "watchlist",
+          "status": "pass",
+          "detail": "No sanctions or watchlist match."
+        }
+      ],
+      "confidence": 96,
+      "route": "instant",
+      "simulated": true
+    },
+    "decision": {
+      "kind": "approved"
+    },
+    "nextSteps": [
+      {
+        "title": "Set up direct deposit for your campus job",
+        "detail": "UT pays through Workday self-service. Add your UFCU routing and account numbers there; no paper form.",
+        "sourceUrl": "https://ufcu.org/resources/tools/forms"
+      },
+      {
+        "title": "Enroll in digital banking",
+        "detail": "One password covers the app and online banking. Turn on account alerts while you are in there.",
+        "sourceUrl": "https://ufcu.org/resources/member-services/banking/mobile"
+      },
+      {
+        "title": "Start the Credit Builder Loan",
+        "detail": "$500 to $2,500 at a flat 3.00% APR, 6 to 24 months, $30 minimum payment, reported to all three bureaus.",
+        "sourceUrl": "https://ufcu.org/personal/loans/credit-builder"
+      },
+      {
+        "title": "Use the campus ATMs",
+        "detail": "More than 25 fee-free ATMs on and around campus. Gregory Gym, the PCL, and the Student Services Building take deposits.",
+        "sourceUrl": "https://ufcu.org/locations/fee-free-atms"
+      }
+    ]
+  },
+  {
+    "id": "joon",
+    "chipLabel": "Try as Joon",
+    "blurb": "23, first-year MS student on F-1, no SSN yet, prefers Korean.",
+    "context": {
+      "audience": "international_student",
+      "goal": "checking",
+      "lang": "ko",
+      "personaId": "joon"
+    },
+    "prefill": {
+      "context": {
+        "audience": "international_student",
+        "goal": "checking",
+        "lang": "ko",
+        "personaId": "joon"
+      },
+      "path": "foreign_status",
+      "products": [
+        "savings",
+        "free-checking"
+      ],
+      "firstName": "Joon",
+      "schoolAffiliation": "University of Texas at Austin",
+      "notes": [
+        "No SSN yet",
+        "F-1 student, arrived three weeks ago",
+        "Has passport, I-20, and a West Campus lease"
+      ]
+    },
+    "turns": [
+      {
+        "user": "한국에서 막 왔는데 소셜 시큐리티 번호가 없어요. 계좌를 열 수 있나요?",
+        "assistant": {
+          "text": "네, 열 수 있습니다. 소셜 시큐리티 번호 없이도 가능하고, 필요한 서류는 아래와 같습니다.",
+          "tools": [
+            {
+              "name": "checkEligibility",
+              "result": {
+                "path": "foreign_status",
+                "documents": [
+                  "Passport",
+                  "I-20 or DS-2019",
+                  "W-8BEN acknowledgment (certificate of foreign status)",
+                  "Proof of your Austin address, such as a lease or utility bill"
+                ],
+                "notes": [
+                  "No SSN needed to open; add an SSN or ITIN later",
+                  "Zelle requires an SSN, per UFCU branch staff; use a transfer to a non-UFCU member, or a wire, instead",
+                  "A banker at the University Branch completes this path in person or by video.",
+                  "You qualify for membership through University of Texas at Austin."
+                ],
+                "sourceUrls": [
+                  "https://ufcu.org/open-account",
+                  "https://ufcu.org/resources/member-services/banking/zelle",
+                  "https://ufcu.org/locations/details/university"
+                ]
+              }
+            },
+            {
+              "name": "recommendProducts",
+              "result": [
+                {
+                  "id": "savings",
+                  "kind": "savings",
+                  "name": "Savings (Membership Account)",
+                  "tagline": "Your membership share account; every UFCU relationship starts here",
+                  "minToOpen": "$1",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "Opens your membership",
+                    "Earns dividends",
+                    "Required alongside any other account"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/savings/overview",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "switching_banks",
+                    "business",
+                    "retiree",
+                    "other"
+                  ],
+                  "goals": [
+                    "savings",
+                    "checking",
+                    "build_credit",
+                    "credit_card",
+                    "loan",
+                    "unsure"
+                  ],
+                  "reason": "회원 자격을 만드는 계좌입니다. $1로 열리고, 다른 모든 계좌가 여기에 연결됩니다."
+                },
+                {
+                  "id": "free-checking",
+                  "kind": "checking",
+                  "name": "Free Checking",
+                  "tagline": "Everyday checking with a safety net",
+                  "minToOpen": "$0",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "No monthly fee",
+                    "Courtesy pay up to $400",
+                    "Optional checks",
+                    "Contactless Visa debit card"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/checking/overview",
+                  "audiences": [
+                    "international_student",
+                    "new_to_austin",
+                    "switching_banks",
+                    "business",
+                    "retiree",
+                    "other"
+                  ],
+                  "goals": [
+                    "checking",
+                    "unsure"
+                  ],
+                  "reason": "월 수수료가 없고 최소 잔액도 없으며, 데빗 카드가 바로 발급됩니다."
+                },
+                {
+                  "id": "simply-u",
+                  "kind": "checking",
+                  "name": "Simply U Checking",
+                  "tagline": "Built for first accounts and students",
+                  "minToOpen": "$0",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "No monthly fee",
+                    "No minimum balance",
+                    "No overdraft fees (no courtesy pay)",
+                    "Contactless Visa debit card, instant issue",
+                    "Mobile deposits and account alerts"
+                  ],
+                  "sourceUrl": "https://ufcu.org/resources/faqs/simply-u/detail",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "other"
+                  ],
+                  "goals": [
+                    "checking",
+                    "build_credit",
+                    "unsure"
+                  ],
+                  "reason": "초과 인출 수수료가 아예 없어서, 미국에서 처음 쓰는 계좌로 안전합니다."
+                }
+              ]
+            },
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "What you need to open a UFCU account",
+                  "summary": "UFCU describes opening an account online as a three to five minute process.",
+                  "sourceUrl": "https://ufcu.org/open-account",
+                  "tags": [
+                    "open-account",
+                    "requirements",
+                    "id"
+                  ]
+                },
+                {
+                  "title": "Wires into UFCU, and alternatives for sending money abroad",
+                  "summary": "Incoming wires to UFCU are free and an outgoing domestic wire costs $20.00.",
+                  "sourceUrl": "https://ufcu.org/resources/member-services/banking",
+                  "tags": [
+                    "wire",
+                    "international",
+                    "swift"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "룸메이트한테 돈을 보낼 때 Zelle을 쓸 수 있나요?",
+        "assistant": {
+          "text": "Zelle 등록에는 소셜 시큐리티 번호가 필요합니다. UFCU 지점 직원이 알려준 내용이고, 웹사이트에는 나와 있지 않습니다. 대신 쓸 수 있는 방법을 정리했습니다.",
+          "tools": [
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "Zelle at UFCU, and who cannot use it",
+                  "summary": "UFCU partners with Zelle for person-to-person payments, and Zelle appears alongside PayPal and the digital wallets in UFCU's payment services.",
+                  "sourceUrl": "https://ufcu.org/resources/member-services/banking/zelle",
+                  "tags": [
+                    "zelle",
+                    "p2p",
+                    "payments"
+                  ]
+                },
+                {
+                  "title": "Wires into UFCU, and alternatives for sending money abroad",
+                  "summary": "Incoming wires to UFCU are free and an outgoing domestic wire costs $20.00.",
+                  "sourceUrl": "https://ufcu.org/resources/member-services/banking",
+                  "tags": [
+                    "wire",
+                    "international",
+                    "swift"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "좋아요. 계좌를 열고 싶어요.",
+        "assistant": {
+          "text": "여권과 I-20를 준비해 주세요. 나머지는 제가 신청서에 미리 채워 두겠습니다.",
+          "tools": [
+            {
+              "name": "startApplication",
+              "result": {
+                "context": {
+                  "audience": "international_student",
+                  "goal": "checking",
+                  "lang": "ko",
+                  "personaId": "joon"
+                },
+                "path": "foreign_status",
+                "products": [
+                  "savings",
+                  "free-checking"
+                ],
+                "firstName": "Joon",
+                "schoolAffiliation": "University of Texas at Austin",
+                "notes": [
+                  "No SSN yet",
+                  "F-1 student, arrived three weeks ago",
+                  "Has passport, I-20, and a West Campus lease"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "trust": {
+      "checks": [
+        {
+          "id": "document",
+          "status": "pass",
+          "detail": "Passport read clean; machine-readable zone checks out."
+        },
+        {
+          "id": "face",
+          "status": "pass",
+          "detail": "Selfie matches the passport photo."
+        },
+        {
+          "id": "consistency",
+          "status": "review",
+          "detail": "Address is three weeks old and does not appear in third-party records yet."
+        },
+        {
+          "id": "watchlist",
+          "status": "pass",
+          "detail": "No sanctions or watchlist match."
+        }
+      ],
+      "confidence": 82,
+      "route": "video",
+      "simulated": true
+    },
+    "decision": {
+      "kind": "needs_item",
+      "item": "A five-minute video call with a banker to confirm your passport",
+      "how": [
+        "Book a slot at the University Branch, 2244 Guadalupe St; the next opening is today.",
+        "Or walk in Monday to Friday, 9 AM to 5 PM, and bring your passport and I-20."
+      ]
+    },
+    "nextSteps": [
+      {
+        "title": "Campus ATMs, no fee",
+        "detail": "More than 25 fee-free ATMs on and around campus. Gregory Gym, the PCL, and the Student Services Building take deposits.",
+        "sourceUrl": "https://ufcu.org/locations/fee-free-atms"
+      },
+      {
+        "title": "Receiving money from home",
+        "detail": "Incoming wires are free. The sending bank abroad must route through its US correspondent; UFCU cannot receive foreign currency.",
+        "sourceUrl": "https://ufcu.org/resources/member-services/banking"
+      },
+      {
+        "title": "Zelle needs an SSN",
+        "detail": "Per UFCU branch staff. Use Transfer to a Non-UFCU Member, which has no UFCU fee, until you have one.",
+        "sourceUrl": "https://ufcu.org/resources/member-services/banking/zelle"
+      },
+      {
+        "title": "Add your SSN later",
+        "detail": "When your SSN or ITIN arrives, bring it to the branch and it gets added to the account you already have.",
+        "sourceUrl": "https://ufcu.org/open-account"
+      }
+    ]
+  },
+  {
+    "id": "daniela",
+    "chipLabel": "Try as Daniela",
+    "blurb": "34, opening a food-truck LLC, moving her personal banking over too.",
+    "context": {
+      "audience": "business",
+      "goal": "checking",
+      "lang": "es",
+      "personaId": "daniela"
+    },
+    "prefill": {
+      "context": {
+        "audience": "business",
+        "goal": "checking",
+        "lang": "es",
+        "personaId": "daniela"
+      },
+      "path": "ssn",
+      "products": [
+        "savings",
+        "business-checking"
+      ],
+      "firstName": "Daniela",
+      "notes": [
+        "Food truck LLC in Austin, has EIN and formation documents",
+        "Business documents step follows the personal membership",
+        "Moving personal banking from Wells Fargo"
+      ]
+    },
+    "turns": [
+      {
+        "user": "Estoy abriendo un food truck como LLC y necesito una cuenta de negocio.",
+        "assistant": {
+          "text": "La membresia empieza con una cuenta de ahorros personal, y la cuenta de negocio se conecta a ella. Son dos pasos, el mismo dia.",
+          "tools": [
+            {
+              "name": "recommendProducts",
+              "result": [
+                {
+                  "id": "savings",
+                  "kind": "savings",
+                  "name": "Savings (Membership Account)",
+                  "tagline": "Your membership share account; every UFCU relationship starts here",
+                  "minToOpen": "$1",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "Opens your membership",
+                    "Earns dividends",
+                    "Required alongside any other account"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/savings/overview",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "switching_banks",
+                    "business",
+                    "retiree",
+                    "other"
+                  ],
+                  "goals": [
+                    "savings",
+                    "checking",
+                    "build_credit",
+                    "credit_card",
+                    "loan",
+                    "unsure"
+                  ],
+                  "reason": "Abre su membresia con $1 y es la cuenta a la que se conecta la cuenta de negocio."
+                },
+                {
+                  "id": "business-checking",
+                  "kind": "business",
+                  "name": "Business Checking",
+                  "tagline": "For your LLC, sole proprietorship, or organization",
+                  "minToOpen": "See business rates and fees",
+                  "monthlyFee": "See business rates and fees",
+                  "highlights": [
+                    "Opens after your personal membership",
+                    "Documents depend on entity type",
+                    "Business debit card and digital banking"
+                  ],
+                  "sourceUrl": "https://ufcu.org/business/checking/checking",
+                  "audiences": [
+                    "business"
+                  ],
+                  "goals": [
+                    "checking",
+                    "unsure"
+                  ],
+                  "reason": "Para su LLC: tarjeta de debito de negocio y banca digital, sin cuota mensual en el nivel basico."
+                }
+              ]
+            },
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "Documents to open a UFCU business account",
+                  "summary": "A business account attaches to a personal membership, so the personal Savings account comes first.",
+                  "sourceUrl": "https://ufcu.org/business/business-requirements",
+                  "tags": [
+                    "business",
+                    "llc",
+                    "sole-proprietor"
+                  ]
+                },
+                {
+                  "title": "Who can become a UFCU member",
+                  "summary": "Membership at UFCU runs through affiliation.",
+                  "sourceUrl": "https://ufcu.org/about",
+                  "tags": [
+                    "membership",
+                    "eligibility",
+                    "affiliation"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "Que documentos necesito para la LLC?",
+        "assistant": {
+          "text": "Para una LLC en Texas son cuatro cosas, y una identificacion por cada persona que firme.",
+          "tools": [
+            {
+              "name": "checkEligibility",
+              "result": {
+                "path": "ssn",
+                "documents": [
+                  "Texas driver license or state ID",
+                  "Social Security Number",
+                  "An email address and a phone number",
+                  "Certificate of Formation filed with the Texas Secretary of State (LLC, PLLC, corporation, LP)",
+                  "EIN letter, or an SSN for a single-member LLC or sole proprietorship",
+                  "Assumed Name Certificate (DBA) if the business name is not the owner's name",
+                  "Government-issued photo ID for every signer and every 25% owner"
+                ],
+                "notes": [
+                  "You must be 18 or older to open online.",
+                  "Savings opens with $1 and is the account that carries your membership.",
+                  "Checking accounts open with $0.",
+                  "No affiliation? Anyone can join UFCU through the American Consumer Council for free, handled during enrollment.",
+                  "Membership opens with a personal Savings account first; the business account attaches to it.",
+                  "The Beneficial Ownership Rule applies to entities filed with a Secretary of State, not to sole proprietorships.",
+                  "Business accounts do not get Zelle, per UFCU branch staff."
+                ],
+                "sourceUrls": [
+                  "https://ufcu.org/open-account",
+                  "https://ufcu.org/personal/savings/overview",
+                  "https://ufcu.org/business/business-requirements",
+                  "https://ufcu.org/business/checking/checking"
+                ]
+              }
+            },
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "Documents to open a UFCU business account",
+                  "summary": "A business account attaches to a personal membership, so the personal Savings account comes first.",
+                  "sourceUrl": "https://ufcu.org/business/business-requirements",
+                  "tags": [
+                    "business",
+                    "llc",
+                    "sole-proprietor"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "Perfecto, empecemos.",
+        "assistant": {
+          "text": "Le dejo la solicitud lista con la membresia personal primero; los documentos del negocio van en el paso siguiente.",
+          "tools": [
+            {
+              "name": "startApplication",
+              "result": {
+                "context": {
+                  "audience": "business",
+                  "goal": "checking",
+                  "lang": "es",
+                  "personaId": "daniela"
+                },
+                "path": "ssn",
+                "products": [
+                  "savings",
+                  "business-checking"
+                ],
+                "firstName": "Daniela",
+                "notes": [
+                  "Food truck LLC in Austin, has EIN and formation documents",
+                  "Business documents step follows the personal membership",
+                  "Moving personal banking from Wells Fargo"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "trust": {
+      "checks": [
+        {
+          "id": "document",
+          "status": "pass",
+          "detail": "Texas driver license read clean, no tampering detected."
+        },
+        {
+          "id": "face",
+          "status": "pass",
+          "detail": "Selfie matches the photo on the ID."
+        },
+        {
+          "id": "consistency",
+          "status": "pass",
+          "detail": "Name and address agree across every document."
+        },
+        {
+          "id": "watchlist",
+          "status": "pass",
+          "detail": "No sanctions or watchlist match for the member or the listed owners."
+        }
+      ],
+      "confidence": 94,
+      "route": "instant",
+      "simulated": true
+    },
+    "decision": {
+      "kind": "approved"
+    },
+    "nextSteps": [
+      {
+        "title": "Upload your business documents",
+        "detail": "Certificate of Formation, EIN letter, assumed-name certificate if the truck name is not yours, and an ID for every signer.",
+        "sourceUrl": "https://ufcu.org/business/business-requirements"
+      },
+      {
+        "title": "Business rates and fees",
+        "detail": "The basic Business Checking tier has no monthly service fee and 50 free account events a month.",
+        "sourceUrl": "https://ufcu.org/resources/tools/rates-fees"
+      },
+      {
+        "title": "Enroll in digital banking",
+        "detail": "One password covers the app and online banking, with alerts on both accounts.",
+        "sourceUrl": "https://ufcu.org/resources/member-services/banking/mobile"
+      },
+      {
+        "title": "Switch Kit: move your direct deposit",
+        "detail": "Point your paycheck at UFCU first, then re-point autopays, keep Wells Fargo open one statement cycle, then close it.",
+        "sourceUrl": "https://ufcu.org/resources/tools/forms"
+      }
+    ]
+  },
+  {
+    "id": "robert",
+    "chipLabel": "Try as Robert",
+    "blurb": "62, moving to Austin for a Seton job, wants to talk to a person.",
+    "context": {
+      "audience": "switching_banks",
+      "goal": "unsure",
+      "lang": "en",
+      "personaId": "robert"
+    },
+    "prefill": {
+      "context": {
+        "audience": "switching_banks",
+        "goal": "unsure",
+        "lang": "en",
+        "personaId": "robert"
+      },
+      "path": "ssn",
+      "products": [
+        "savings",
+        "plus-checking"
+      ],
+      "firstName": "Robert",
+      "schoolAffiliation": "Ascension/Seton",
+      "notes": [
+        "Moving from Ohio, starting at Ascension Seton next month",
+        "Currently banks with Chase",
+        "Prefers large type and a phone number"
+      ]
+    },
+    "turns": [
+      {
+        "user": "I'm moving to Austin for a job at Seton. I don't know what I need.",
+        "assistant": {
+          "text": "Seton makes you eligible on day one. If this is your paycheck and your bills, two accounts cover it.",
+          "tools": [
+            {
+              "name": "recommendProducts",
+              "result": [
+                {
+                  "id": "savings",
+                  "kind": "savings",
+                  "name": "Savings (Membership Account)",
+                  "tagline": "Your membership share account; every UFCU relationship starts here",
+                  "minToOpen": "$1",
+                  "monthlyFee": "$0",
+                  "highlights": [
+                    "Opens your membership",
+                    "Earns dividends",
+                    "Required alongside any other account"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/savings/overview",
+                  "audiences": [
+                    "student",
+                    "international_student",
+                    "new_to_austin",
+                    "switching_banks",
+                    "business",
+                    "retiree",
+                    "other"
+                  ],
+                  "goals": [
+                    "savings",
+                    "checking",
+                    "build_credit",
+                    "credit_card",
+                    "loan",
+                    "unsure"
+                  ],
+                  "reason": "Your membership account. It opens with $1 and everything else attaches to it."
+                },
+                {
+                  "id": "plus-checking",
+                  "kind": "checking",
+                  "name": "Plus Checking",
+                  "tagline": "Earns dividends; fee waived with direct deposit",
+                  "minToOpen": "$0",
+                  "monthlyFee": "$10, waived with $10,000 combined balance or $4,000 monthly deposits",
+                  "highlights": [
+                    "Earns dividends up to 2.25% APY",
+                    "Courtesy pay up to $1,000",
+                    "Free checks",
+                    "Reimbursed international transaction fees",
+                    "Auto loan rate discount"
+                  ],
+                  "sourceUrl": "https://ufcu.org/personal/checking/overview",
+                  "audiences": [
+                    "switching_banks",
+                    "retiree",
+                    "new_to_austin"
+                  ],
+                  "goals": [
+                    "checking",
+                    "savings"
+                  ],
+                  "reason": "Earns dividends up to 2.25% APY, and the $10 monthly fee is waived once your Seton paycheck lands here."
+                }
+              ]
+            },
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "Who can become a UFCU member",
+                  "summary": "Membership at UFCU runs through affiliation.",
+                  "sourceUrl": "https://ufcu.org/about",
+                  "tags": [
+                    "membership",
+                    "eligibility",
+                    "affiliation"
+                  ]
+                },
+                {
+                  "title": "University Branch on Guadalupe Street",
+                  "summary": "The University Branch sits at 2244 Guadalupe Street, Austin, TX 78705, on the Drag next to the UT campus, about a five minute walk from most of West Campus.",
+                  "sourceUrl": "https://ufcu.org/locations/details/university",
+                  "tags": [
+                    "branch",
+                    "locations",
+                    "university-branch"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "Can I just call someone?",
+        "assistant": {
+          "text": "Yes. Member Services is (512) 467-8080, Monday to Friday 8 AM to 5:30 PM and Saturday 10 AM to 2 PM, and the University Branch at 2244 Guadalupe St takes walk-ins. I can keep going here too, whichever you prefer.",
+          "tools": [
+            {
+              "name": "showResources",
+              "result": [
+                {
+                  "title": "University Branch on Guadalupe Street",
+                  "summary": "The University Branch sits at 2244 Guadalupe Street, Austin, TX 78705, on the Drag next to the UT campus, about a five minute walk from most of West Campus.",
+                  "sourceUrl": "https://ufcu.org/locations/details/university",
+                  "tags": [
+                    "branch",
+                    "locations",
+                    "university-branch"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "user": "Go ahead and get it started.",
+        "assistant": {
+          "text": "Here it is, prefilled. Nothing sensitive was typed here; that all happens on the secure page.",
+          "tools": [
+            {
+              "name": "startApplication",
+              "result": {
+                "context": {
+                  "audience": "switching_banks",
+                  "goal": "unsure",
+                  "lang": "en",
+                  "personaId": "robert"
+                },
+                "path": "ssn",
+                "products": [
+                  "savings",
+                  "plus-checking"
+                ],
+                "firstName": "Robert",
+                "schoolAffiliation": "Ascension/Seton",
+                "notes": [
+                  "Moving from Ohio, starting at Ascension Seton next month",
+                  "Currently banks with Chase",
+                  "Prefers large type and a phone number"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "trust": {
+      "checks": [
+        {
+          "id": "document",
+          "status": "pass",
+          "detail": "Ohio driver license read clean, no tampering detected."
+        },
+        {
+          "id": "face",
+          "status": "pass",
+          "detail": "Selfie matches the photo on the ID."
+        },
+        {
+          "id": "consistency",
+          "status": "pass",
+          "detail": "Name, date of birth, and address agree across every document."
+        },
+        {
+          "id": "watchlist",
+          "status": "pass",
+          "detail": "No sanctions or watchlist match."
+        }
+      ],
+      "confidence": 97,
+      "route": "instant",
+      "simulated": true
+    },
+    "decision": {
+      "kind": "approved"
+    },
+    "nextSteps": [
+      {
+        "title": "Move your direct deposit",
+        "detail": "Seton has its own direct deposit form on the UFCU forms page. That is the first thing to move.",
+        "sourceUrl": "https://ufcu.org/resources/tools/forms"
+      },
+      {
+        "title": "Re-point your autopays",
+        "detail": "List what leaves Chase every month, move each one, then keep Chase open for one statement cycle before closing it.",
+        "sourceUrl": "https://ufcu.org/personal/checking/overview"
+      },
+      {
+        "title": "Enroll in digital banking",
+        "detail": "One password for the app and online banking. Sessions time out after 10 minutes, which is on purpose.",
+        "sourceUrl": "https://ufcu.org/resources/member-services/banking/mobile"
+      },
+      {
+        "title": "What a credit union is",
+        "detail": "Member-owned, not shareholder-owned, and federally insured by the NCUA to $250,000. That is what changes.",
+        "sourceUrl": "https://ufcu.org/resources/articles/detail/articles/2026/08/19/what-is-a-credit-union"
+      }
+    ]
+  }
+]

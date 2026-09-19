@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front Desk, Judge Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#23335D; --navy-darker:#020442; --navy-darkest:#020332; --navy-subtle:#CDCDE0;
+    --orange:#EF6820; --orange-darker:#D14D10; --orange-subtle:#FCE1D2;
+    --ink:#23335D; --paper:#FFFFFF; --muted:#4B5573;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;background:#111;font-family:'Inter',system-ui,sans-serif;}
+  h1,h2,h3{font-family:'Source Serif 4',serif; margin:0;}
+  .stage{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+  .deck{position:relative; width:min(100vw, 177.78vh); height:min(100vh, 56.25vw); aspect-ratio:16/9; background:var(--paper); box-shadow:0 0 60px rgba(0,0,0,.5); overflow:hidden; cursor:pointer;}
+  .slide{position:absolute; inset:0; display:none; flex-direction:column; padding:5.5% 6%; color:var(--ink);}
+  .slide.active{display:flex;}
+  .slide.dark{background:var(--navy); color:#fff;}
+  .accent-line{width:64px; height:5px; background:var(--orange); border-radius:3px; margin:14px 0;}
+  .counter{position:absolute; bottom:18px; right:24px; font-size:.85rem; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums;}
+  .slide.dark .counter{color:var(--navy-subtle);}
+  .eyebrow{text-transform:uppercase; letter-spacing:.14em; font-size:.78rem; font-weight:600; color:var(--orange-darker);}
+  .slide.dark .eyebrow{color:var(--orange);}
+
+  /* Slide 1: title */
+  #s1{align-items:center; justify-content:center; text-align:center;}
+  #s1 h1{font-size:clamp(3rem,9vw,6.2rem); font-weight:700;}
+  #s1 .subtitle{font-size:clamp(1.1rem,2.2vw,1.6rem); margin-top:.6rem; color:var(--navy-subtle);}
+  #s1 .meta{margin-top:2.4rem; font-size:1rem; display:flex; gap:1.6rem; opacity:.9;}
+
+  /* Slide 2: the gate */
+  .gate-grid{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:1.1rem; flex:1; margin-top:1rem; min-height:0;}
+  .gate-cell{position:relative; border:1px solid var(--navy-subtle); border-radius:10px; overflow:hidden; background:#F4F5F9; display:flex; align-items:center; justify-content:center;}
+  .gate-cell img{width:100%; height:100%; object-fit:cover; object-position:top center; display:block;}
+  .gate-cell .label{position:absolute; bottom:0; left:0; right:0; background:rgba(35,51,93,.88); color:#fff; font-size:.72rem; padding:.3rem .6rem; letter-spacing:.02em;}
+  .gate-cell .circle{position:absolute; width:15%; aspect-ratio:1; border:3px solid var(--orange); border-radius:50%; box-shadow:0 0 0 2px rgba(239,104,32,.25);}
+  .placeholder-box{display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem; font-weight:600; color:var(--navy); background:repeating-linear-gradient(135deg, var(--navy-subtle) 0 10px, #E7E8F2 10px 20px);}
+  .caption-row{margin-top:.9rem; display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem;}
+  .caption{font-size:clamp(1rem,1.6vw,1.3rem); font-weight:600; max-width:56%;}
+  .quote{font-style:italic; font-size:.9rem; color:var(--muted); max-width:40%; border-left:3px solid var(--orange); padding-left:.7rem;}
+
+  /* Slide 3: personas */
+  .persona-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1.4rem; flex:1;}
+  .persona-card{background:var(--navy-subtle); border-radius:12px; padding:1.1rem; display:flex; flex-direction:column; gap:.5rem;}
+  .persona-card h3{font-size:1.15rem;}
+  .persona-card p{font-size:.88rem; line-height:1.35; margin:0; color:#33395C;}
+  .path-tag{align-self:flex-start; margin-top:auto; font-size:.72rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase; background:var(--orange-subtle); color:var(--orange-darker); padding:.25rem .55rem; border-radius:20px;}
+
+  /* Slide 4: live demo */
+  #s4{align-items:flex-start; justify-content:center;}
+  #s4 h1{font-size:clamp(3.2rem,8vw,5.5rem);}
+  #s4 .beats{margin-top:2rem; display:flex; flex-direction:column; gap:.55rem; font-size:1.05rem;}
+  #s4 .beats li::marker{color:var(--orange);}
+
+  /* Slide 5: trust */
+  .trust-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; margin-top:1.2rem;}
+  .trust-col h3{font-size:1rem; text-transform:uppercase; letter-spacing:.04em; color:var(--orange-darker); margin-bottom:.5rem;}
+  .trust-col ul{margin:0; padding-left:1.1rem; font-size:.9rem; line-height:1.5;}
+  .cip-line{margin-top:1.1rem; font-size:.92rem; background:var(--orange-subtle); border-radius:8px; padding:.7rem .9rem; color:var(--navy);}
+  .sim-line{margin-top:.6rem; font-size:.85rem; font-weight:600; color:var(--muted);}
+
+  /* Slide 6: architecture */
+  .arch{display:flex; flex-direction:column; gap:.55rem; margin-top:1rem; flex:1;}
+  .arch-row{display:flex; gap:.55rem;}
+  .box{border:2px solid var(--navy); border-radius:8px; padding:.55rem .8rem; font-size:.85rem; flex:1; display:flex; flex-direction:column; justify-content:center;}
+  .box b{display:block; font-size:.82rem;}
+  .box.routes{display:flex; flex-direction:row; gap:.5rem; align-items:center; justify-content:space-around;}
+  .box.routes span{background:var(--navy-subtle); border-radius:6px; padding:.2rem .5rem; font-size:.76rem;}
+  .arrow{align-self:center; font-size:1.1rem; color:var(--orange-darker);}
+  .swap-row{margin-top:.4rem; background:var(--navy); color:#fff; border-radius:8px; padding:.55rem .9rem; font-size:.85rem; display:flex; gap:1rem; align-items:center;}
+  .swap-row b{color:var(--orange);}
+
+  /* Slide 7: non-goals */
+  .nongoal-grid{display:grid; grid-template-columns:1fr 1fr; gap:.5rem 1.6rem; margin-top:1.2rem; font-size:.95rem;}
+  .nongoal-grid div{padding:.4rem 0; border-bottom:1px solid var(--navy-subtle);}
+  .frame-line{margin-top:1.1rem; font-size:.95rem; font-style:italic; color:var(--muted);}
+
+  /* Slide 8: close */
+  #s8{align-items:center; justify-content:center; text-align:center;}
+  #s8 h1{font-size:clamp(2.2rem,6vw,4rem); font-weight:700;}
+  #s8 .line2{margin-top:1rem; font-size:1.1rem; color:var(--navy-subtle); max-width:70%;}
+  #s8 .thanks{margin-top:2.2rem; font-size:1.3rem; font-weight:600;}
+
+  .nav-hint{position:absolute; bottom:18px; left:24px; font-size:.75rem; color:var(--muted); opacity:.7;}
+  .slide.dark .nav-hint{color:var(--navy-subtle);}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <section class="slide dark active" id="s1">
+      <h1>Front Desk</h1>
+      <div class="subtitle">The UFCU front desk, online.</div>
+      <div class="accent-line" style="margin-left:auto;margin-right:auto;"></div>
+      <div class="meta"><span>Team LAN Party: Lisa, Aaron, Nick</span><span>Develop U 2026</span></div>
+      <div class="counter">1 / 8</div>
+    </section>
+
+    <section class="slide" id="s2">
+      <div class="eyebrow">The gate</div>
+      <div class="gate-grid">
+        <div class="gate-cell"><img src="../research/competitors/capital-one-online-access.webp" alt="Capital One online access screen"><div class="circle" style="top:48%;left:40%;"></div><div class="label">Capital One</div></div>
+        <div class="gate-cell"><img src="../research/competitors/chase-online-enrollment.png" alt="Chase online enrollment screen"><div class="circle" style="top:34%;left:38%;"></div><div class="label">Chase</div></div>
+        <div class="gate-cell"><img src="../research/competitors/wells-fargo-online-access.webp" alt="Wells Fargo online access screen"><div class="circle" style="top:48%;left:32%;"></div><div class="label">Wells Fargo</div></div>
+        <div class="gate-cell placeholder-box">UFCU today:<br>open.ufcu.org step 1<div class="circle" style="top:72%;left:46%;"></div></div>
+      </div>
+      <div class="caption-row">
+        <div class="caption">Every other first screen asks who you are. Ours asks what you need.</div>
+        <div class="quote">"The banker opens accounts for international students without an SSN every week, translates in five languages, and explains checking versus savings by hand." UFCU University Branch banker, Sep 18</div>
+      </div>
+      <div class="counter">2 / 8</div>
+    </section>
+
+    <section class="slide" id="s3">
+      <div class="eyebrow">Who we built for</div>
+      <h2 style="font-size:1.7rem;margin-top:.2rem;">Four people, four paths, one front desk</h2>
+      <div class="persona-grid">
+        <div class="persona-card"><h3>Maya</h3><p>First bank account ever; came to build credit from zero.</p><span class="path-tag">Path: SSN</span></div>
+        <div class="persona-card"><h3>Joon</h3><p>F-1 grad student, three weeks in Austin, no SSN yet, speaks Korean.</p><span class="path-tag">Path: Foreign status</span></div>
+        <div class="persona-card"><h3>Daniela</h3><p>Opening a food-truck LLC, moving personal and business banking off Wells Fargo.</p><span class="path-tag">Path: SSN + business docs</span></div>
+        <div class="persona-card"><h3>Robert</h3><p>Chase customer relocating from Ohio for a Seton job; wants a phone number.</p><span class="path-tag">Path: SSN</span></div>
+      </div>
+      <div class="counter">3 / 8</div>
+    </section>
+
+    <section class="slide dark" id="s4">
+      <div class="eyebrow">Now watch it work</div>
+      <h1>Live demo</h1>
+      <ul class="beats">
+        <li>Joon, in Korean: no SSN, opens an account anyway</li>
+        <li>Maya: recommended, prefilled, approved</li>
+        <li>The bundle and speed line: verified once, applied to savings, checking, and the credit builder loan</li>
+      </ul>
+      <div class="counter">4 / 8</div>
+    </section>
+
+    <section class="slide" id="s5">
+      <div class="eyebrow">Trust is layered</div>
+      <h2 style="font-size:1.6rem;margin-top:.2rem;">Not gated</h2>
+      <div class="trust-grid">
+        <div class="trust-col"><h3>Paths</h3><ul><li>SSN</li><li>ITIN</li><li>Foreign status (passport + W-8BEN)</li></ul></div>
+        <div class="trust-col"><h3>Four checks &rarr; confidence</h3><ul><li>Document authenticity</li><li>Face match</li><li>Data consistency</li><li>Watchlist</li></ul></div>
+        <div class="trust-col"><h3>Three routes</h3><ul><li>Instant</li><li>Video with a banker</li><li>Branch visit</li></ul></div>
+      </div>
+      <div class="cip-line">The CIP rule requires name, date of birth, address, and an ID number before an account opens; it governs what is collected, not the order a website asks for it. We collect it all, with the reason next to each field, after the person has decided.</div>
+      <div class="sim-line">Simulated today; maps to a KYC vendor and the core in production.</div>
+      <div class="counter">5 / 8</div>
+    </section>
+
+    <section class="slide" id="s6">
+      <div class="eyebrow">Architecture on one slide</div>
+      <div class="arch">
+        <div class="box"><b>Browser (Next.js App Router)</b>/  landing &middot; /desk  front desk conversation &middot; /apply  secure zone</div>
+        <div class="arrow">&darr;</div>
+        <div class="box"><b>One route handler</b>POST /api/chat: streamText with tools, stopped at a fixed step count</div>
+        <div class="arrow">&darr;</div>
+        <div class="arch-row">
+          <div class="box"><b>Claude</b>Four tools: recommendProducts, showResources, checkEligibility, startApplication</div>
+          <div class="box"><b>Static corpus</b>~18 ufcu.org pages, tag + keyword retrieval, no embeddings</div>
+        </div>
+        <div class="box" style="text-align:center;font-weight:600;">No database</div>
+        <div class="swap-row"><b>Swap points:</b> KYC vendor behind the trust readout &middot; core banking behind the decision &middot; CRM behind the persona context</div>
+      </div>
+      <div class="counter">6 / 8</div>
+    </section>
+
+    <section class="slide" id="s7">
+      <div class="eyebrow">What we did not build, and why</div>
+      <h2 style="font-size:1.5rem;margin-top:.2rem;">Honesty, for a CTO audience</h2>
+      <div class="nongoal-grid">
+        <div>Real KYC vendor integration</div>
+        <div>Real core banking</div>
+        <div>Real funding / money movement</div>
+        <div>Production authentication</div>
+        <div>A database</div>
+        <div>Mobile native app</div>
+        <div>Joint accounts and minors</div>
+        <div>Mortgages</div>
+        <div>Save-and-resume across devices</div>
+        <div>Anything that can't be explained in one slide</div>
+      </div>
+      <div class="frame-line">Every one of these is a known swap point, not a gap we hid. Two weeks gets you the real KYC vendor, save-and-resume, and translated disclosures next.</div>
+      <div class="counter">7 / 8</div>
+    </section>
+
+    <section class="slide dark" id="s8">
+      <h1>Switching costs a conversation, not a form.</h1>
+      <div class="line2">Front Desk stands on its own: a front-desk banker for any regulated onboarding flow, not just UFCU's.</div>
+      <div class="accent-line" style="margin-left:auto;margin-right:auto;"></div>
+      <div class="thanks">Thank you.</div>
+      <div class="counter">8 / 8</div>
+    </section>
+
+  </div>
+</div>
+<div class="nav-hint">&larr; &rarr; or click to navigate</div>
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = 0;
+  function show(i){
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function(s, n){ s.classList.toggle('active', n === idx); });
+  }
+  document.getElementById('deck').addEventListener('click', function(e){
+    var rect = this.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    if (x < rect.width * 0.25) { show(idx - 1); } else { show(idx + 1); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { show(idx + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(idx - 1); e.preventDefault(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>
