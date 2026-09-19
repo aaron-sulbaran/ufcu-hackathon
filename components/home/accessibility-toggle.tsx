@@ -36,7 +36,7 @@ export function AccessibilityToggle() {
       size="sm"
       onClick={toggle}
       aria-pressed={large}
-      className="text-white hover:bg-white/15 hover:text-white"
+      className="text-ufcu-primary hover:bg-ufcu-primary-subtle hover:text-ufcu-primary"
     >
       {t("a11y.largerText")}
     </Button>
