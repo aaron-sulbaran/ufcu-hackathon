@@ -26,3 +26,7 @@ Resources/UFCU-packet/
 # logs
 *.log
 pnpm-debug.log*
+
+# next
+next-env.d.ts
+.vercel
