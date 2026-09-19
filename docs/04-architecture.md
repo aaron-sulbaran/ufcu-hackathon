@@ -33,7 +33,7 @@ switch to `claude-sonnet-5` for the demo if latency is acceptable on the venue w
 
 ## Shared types (lib/types.ts, Aaron owns; propose changes in chat)
 ```ts
-export type Audience = 'student' | 'international_student' | 'new_to_austin' | 'business' | 'retiree' | 'other';
+export type Audience = 'student' | 'international_student' | 'new_to_austin' | 'switching_banks' | 'business' | 'retiree' | 'other';
 export type Goal = 'checking' | 'savings' | 'build_credit' | 'credit_card' | 'loan' | 'unsure';
 export type Lang = 'en' | 'es' | 'ko' | 'pt' | 'fr';
 export type IdentityPath = 'ssn' | 'itin' | 'foreign_status' | 'minor' | 'branch_assist';

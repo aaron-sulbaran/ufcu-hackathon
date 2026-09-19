@@ -11,8 +11,10 @@ leadership. They know the current flow; they do not need it explained, they need
 Everyone speaks. Rotate who answers Q&A by topic: product (C), identity and trust (B), technical (A).
 
 ## Script
-**0:00 Opener.** One slide: the video's first screen with the sidebar text circled: "your social
-security number/ITIN ... otherwise schedule an appointment at your local branch." Say: "Yesterday we
+**0:00 Opener.** One slide: Capital One, a second bank, Wells Fargo, and UFCU's own first screens side
+by side, the SSN field circled on each (docs/research/competitors/). "Every other first screen asks
+who you are. Ours asks what you need." Then the UFCU sidebar text: "your social security
+number/ITIN ... otherwise schedule an appointment at your local branch." Say: "Yesterday we
 sat with the front-desk banker at the University Branch on Guadalupe. She opens accounts for
 international students without an SSN every week, translates for members in five languages, and
 explains checking versus savings by hand. The website turns all of those people away on screen one.
@@ -37,8 +39,10 @@ Workday, enroll in digital banking, credit builder loan card.
 
 **3:00 Bundle and speed beat.** On Maya's review screen point at the step counter and the line "verified once, applied to savings, checking, and the credit builder loan", then the elapsed time. That is the before-and-after in one frame.
 
-**3:15 One line on Daniela.** Slide or ten seconds live: the business persona gets a document
-checklist by entity type before she ever fills a form.
+**3:15 Daniela, the switch.** Ten seconds live or one slide: she banks at Wells Fargo, she is opening a
+food-truck LLC, she gets a document checklist by entity type before she fills a form, and her
+approval ends with the Switch Kit: move direct deposit, re-point autopays, keep the old account one
+cycle, close it. "Switching costs a conversation, not a form."
 
 **3:45 Trust slide (Owner B).** Paths, four checks, confidence, three routes. "Trust is layered, not
 gated. Every check is simulated today and labeled that way; in production each maps to a KYC vendor
@@ -53,11 +57,12 @@ banker's translation of printed disclosures, joint and teen accounts, and the sa
 the mobile app after onboarding.
 
 **4:45 Close (Owner C).** "Simple, in your language, honest about what it needs from you, and it ends
-with what to do next. That is the front desk. Thank you."
+with what to do next. Switching costs a conversation, not a form. That is the front desk. Thank you."
 
 ## Deck outline (8 slides max, docs/deck/)
 1. Title: Front Desk, LAN Party.
-2. The gate: screenshot of screen one with the SSN sentence circled, banker quote.
+2. The gate: four first screens (Capital One, second bank, Wells Fargo, UFCU) with SSN fields circled,
+   banker quote. "Every other first screen asks who you are. Ours asks what you need."
 3. Who we built for: the four personas in one row.
 4. Live demo (placeholder slide, switch to browser).
 5. Trust is layered: paths, checks, confidence, routes.
@@ -82,6 +87,10 @@ with what to do next. That is the front desk. Thank you."
 - "Cost to run?" One Haiku-class call per turn, cached system prompt, static corpus. Cents per applicant.
 - "What would you do with two more weeks?" Real KYC vendor, save-and-resume, joint and teen paths,
   translated disclosures, analytics on drop-off per step.
+- "How is this easier than switching to Chase or Wells?" Their first screen asks for an SSN before
+  anything else (show the slide). Ours asks what you need, recommends, prefills, and ends with a Switch
+  Kit that moves direct deposit and autopays. The person types their identity number once, late, with
+  the reason next to the field.
 - "Why not just fix the existing Narmi flow?" We did not replace it; we put a front desk in front of
   it and prefilled it. The Secure Zone could be Narmi tomorrow.
 

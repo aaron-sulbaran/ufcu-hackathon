@@ -16,10 +16,15 @@ application in under five minutes, in their language, understanding what they op
 without typing sensitive data into an AI.
 
 ## Users (demo personas, detail in docs/07-personas.md)
+Switching from a big bank is a first-class use case (docs/10-competitor-switch.md): every competitor's
+first screen asks for an SSN; Front Desk asks what you need first and ends with a Switch Kit.
+
 1. Maya, 19, UT sophomore, first account, wants to build credit, knows nothing about banking.
 2. Joon, 23, Korean graduate student on F-1, no SSN yet, passport and I-20 in hand, prefers Korean.
-3. Daniela, 34, starting a food-truck LLC in Austin, needs a business account, Spanish-comfortable.
-4. (Stretch) Robert, 62, moving to Austin for an Ascension Seton job, wants big text and a phone number.
+3. Daniela, 34, starting a food-truck LLC in Austin, moving personal banking from Wells Fargo and
+   opening the business account at UFCU, Spanish-comfortable. The switching demo.
+4. (Stretch) Robert, 62, Chase customer moving to Austin for an Ascension Seton job, wants big text
+   and a phone number.
 
 ## Non-negotiables (from the team Google Doc)
 - Languages: English, Spanish, Korean in the MVP; Portuguese and French as stretch; Mandarin only if free.
@@ -35,7 +40,7 @@ without typing sensitive data into an AI.
 
 ### M1. Persona entry (Owner C)
 Landing page in UFCU brand. Headline plus a two-dropdown sentence: "I am a [student / international
-student / new to Austin / starting a business / retired or retiring / other] and I want [a checking
+student / new to Austin / switching from another bank / starting a business / retired or retiring / other] and I want [a checking
 account / to start saving / to build credit / a credit card / a loan / I am not sure]". Submitting
 opens the Front Desk conversation with that context. Four persona chips ("Try as Maya") preload the
 demo paths. Language switch in the header (EN / ES / KO).
@@ -92,7 +97,8 @@ Decision screen with three variants: Approved, Needs one more thing (lists the i
 or branch), Not yet (explains why in plain language and offers the alternative, e.g. secured card or
 credit builder loan). Below it a personalized checklist: set up direct deposit (UT Workday link for
 students), enroll in digital banking, the Zelle caveat for no-SSN members, nearest campus ATMs,
-the credit builder loan card for credit-building goals. Every item links to ufcu.org.
+the credit builder loan card for credit-building goals, and for switchers the Switch Kit (move direct
+deposit, re-point autopays, keep the old account one cycle, then close it). Every item links to ufcu.org.
 
 Acceptance: each persona reaches a different decision variant or checklist, and every link resolves.
 

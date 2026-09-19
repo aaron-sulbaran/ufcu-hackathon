@@ -23,7 +23,8 @@ Planning complete, build day pending. No application code exists yet by design; 
 8. [docs/07-personas.md](docs/07-personas.md): the hard-coded demo personas and their scripted paths.
 9. [docs/08-brand.md](docs/08-brand.md): UFCU palette, contrast rules, CSS variables.
 10. [docs/09-rubric-map.md](docs/09-rubric-map.md): the official scorecard mapped to what we build and demo.
-11. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
+11. [docs/10-competitor-switch.md](docs/10-competitor-switch.md): competitor first screens and the switching story.
+12. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
 
 Coding agents: read [AGENTS.md](AGENTS.md) first.
 

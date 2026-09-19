@@ -47,7 +47,8 @@ and the research docs; if a fact is not there, do not put it in a turn.
 
 ## 3. Daniela Ruiz (chip: "Try as Daniela", language es or en)
 - Context: `business`, `checking`, `es`. 34, opening a food-truck LLC in Austin, has an EIN and
-  formation documents, personal account elsewhere, parents are Spanish-first.
+  formation documents, banks personally at Wells Fargo and is moving everything to UFCU, parents are
+  Spanish-first. She is the switching demo.
 - Identity path: `ssn` for the personal membership, then the business checklist.
 - Scripted turns:
   1. User: "I'm starting a food truck LLC and need a business account."
@@ -61,11 +62,12 @@ and the research docs; if a fact is not there, do not put it in a turn.
      business documents step follows the personal membership.
 - Trust readout: all pass, confidence 94, route `instant`.
 - Decision: `approved` for membership, next steps: "Upload business documents" card, business
-  rates and fees page, digital banking enrollment.
+  rates and fees page, digital banking enrollment, then the Switch Kit (move direct deposit, re-point
+  autopays, keep Wells Fargo open one statement cycle, close it).
 
 ## 4. Robert Hayes (chip: "Try as Robert", stretch)
-- Context: `new_to_austin`, `unsure`, `en`. 62, starting at Ascension Seton next month, moving from
-  Ohio, wants to talk to a person, reads with glasses.
+- Context: `switching_banks`, `unsure`, `en`. 62, Chase customer starting at Ascension Seton next
+  month, moving from Ohio, wants to talk to a person, reads with glasses.
 - Identity path: `ssn`. Accessibility mode on: large type, high contrast, phone number pinned.
 - Scripted turns:
   1. User: "I'm moving to Austin for a job at Seton. I don't know what I need."

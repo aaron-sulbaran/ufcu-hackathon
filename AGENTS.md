@@ -7,6 +7,8 @@ except at the check-ins listed in docs/05-build-plan.md. Applies to every AI cod
 ## What this is
 Team LAN Party's entry for UFCU's Develop U Hackathon (Sat 2026-09-19, 9:25 AM to 2:30 PM build window).
 Challenge: reimagine UFCU's new-member onboarding. Working title: **Front Desk**. See docs/03-prd.md.
+Order of operations is the product: information first, identification only after the person decides.
+Switching from another bank is a first-class audience (docs/10-competitor-switch.md).
 
 ## Stack (fixed; do not add frameworks)
 - Next.js (App Router) + TypeScript strict + Tailwind + shadcn/ui, pnpm
