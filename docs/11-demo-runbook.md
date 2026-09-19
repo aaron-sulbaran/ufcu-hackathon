@@ -20,9 +20,9 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 2. Desk turn 1 arrives in Korean with the eligibility card (passport, I-20, W-8BEN, address) and
    two account cards. Point at "Source on ufcu.org".
 3. Tap the first quick reply (the Zelle question). Desk explains Zelle needs an SSN, with source.
-4. Tap the first quick reply again ("I'd like to open"). The Continue card appears and the left
-   panel "Your visit so far" shows name, path, accounts. Say: "Nothing sensitive was typed here."
-5. Click "Continue to secure application". Point at the chrome change and "No AI reads this page."
+4. Click "Open a Free Checking account" on the card (or the panel's "Continue to secure
+   application", which is visible at any scroll position). Say: "Nothing sensitive was typed here."
+5. Point at the chrome change on the application: navy band, "No AI reads this page."
 6. Step 1: foreign-status path preselected, checklist visible. Continue.
 7. Step 2: click "Use sample data" (labeled Simulated). Point at "Why we ask" and the W-8BEN
    acknowledgment. Continue.
@@ -39,8 +39,8 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 
 ## Beat 2: Maya (English, first account, credit) about 60 seconds
 1. Header: Start over. Landing: "See a sample visit", then "Try it" on Maya (or /desk?persona=maya).
-2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Tap the lead
-   quick reply twice. Continue card appears.
+2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Click "Open a
+   Simply U Checking account" on the card; it goes straight to the application.
 3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Step 3 checks her details
    and clears her in two seconds: no upload, document and face marked "Not needed", confidence 96.
    Say: "Verified from what she typed. No document, no branch." Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
