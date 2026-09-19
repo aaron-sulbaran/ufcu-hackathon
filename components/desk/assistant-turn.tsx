@@ -61,9 +61,11 @@ function Resources({ resources }: { resources: Resource[] }) {
             type="button"
             onClick={() => setOpen((prev) => !prev)}
             aria-expanded={open}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ufcu-link no-underline hover:underline"
+            className="panel-gray flex w-full items-center justify-between gap-3 text-left font-semibold text-ufcu-navy transition-colors hover:bg-ufcu-gray-line focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ufcu-navy"
+            style={{ minHeight: "48px", padding: "0 1rem", borderRadius: "12px", fontSize: "0.9375rem" }}
+            data-testid="more-information"
           >
-            {t("desk.more", { n: rest.length })}
+            <span>{open ? t("desk.less") : t("desk.more", { n: rest.length })}</span>
             <Chevron open={open} />
           </button>
           {open && (
@@ -79,14 +81,28 @@ function Resources({ resources }: { resources: Resource[] }) {
   );
 }
 
+// A resource that points at a page a product card already links to is the same answer twice.
+// The card wins: it carries the fee, the minimum, and its own "Learn more" button.
+function withoutProductPages(resources: Resource[], products: Product[]): Resource[] {
+  if (products.length === 0) return resources;
+  const urls = new Set(products.map((p) => p.sourceUrl));
+  const names = products.map((p) => p.name.toLowerCase()).filter((n) => n.length > 0);
+  return resources.filter(
+    (resource) =>
+      !urls.has(resource.sourceUrl) && !names.some((name) => resource.title.toLowerCase().includes(name)),
+  );
+}
+
 export function AssistantTurn({
   parts,
-  selected,
-  onToggleProduct,
+  shownProducts,
+  onOpenProduct,
 }: {
   parts: { type: string }[];
-  selected?: ReadonlySet<string>;
-  onToggleProduct?: (product: Product) => void;
+  // Every product card this visit has shown, so a page one of them already links to is not
+  // repeated as a resource card several turns later.
+  shownProducts?: Product[];
+  onOpenProduct?: (product: Product) => void;
 }) {
   const t = useDeskT();
   const scripted = parts.some(isScriptedMarker);
@@ -96,14 +112,15 @@ export function AssistantTurn({
   // the single source card sits closest to the follow-ups. Order inside the list is the tool's
   // order, which is relevance descending, so index 0 is the primary.
   const seen = new Set<string>();
-  const resources: Resource[] = [];
+  const collected: Resource[] = [];
   for (const part of parts) {
     for (const resource of toolOutput<Resource[]>(part, "showResources") ?? []) {
       if (seen.has(resource.sourceUrl)) continue;
       seen.add(resource.sourceUrl);
-      resources.push(resource);
+      collected.push(resource);
     }
   }
+  const resources = withoutProductPages(collected, shownProducts ?? []);
 
   return (
     <div className="space-y-4">
@@ -122,11 +139,7 @@ export function AssistantTurn({
             <div key={`products-${i}`} className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible">
               {products.map((product) => (
                 <div key={product.id} className="w-64 shrink-0 snap-start sm:w-auto">
-                  <ProductCard
-                    product={product}
-                    selected={selected?.has(product.id) ?? false}
-                    onToggle={onToggleProduct}
-                  />
+                  <ProductCard product={product} onOpen={onOpenProduct} />
                 </div>
               ))}
             </div>
@@ -137,7 +150,7 @@ export function AssistantTurn({
         if (eligibility) return <EligibilityCard key={`eligibility-${i}`} result={eligibility} />;
 
         const prefill = toolOutput<ApplicationPrefill>(part, "startApplication");
-        if (prefill) return <ContinueCard key={`prefill-${i}`} prefill={prefill} />;
+        if (prefill) return <ContinueCard key={`prefill-${i}`} />;
 
         return null;
       })}

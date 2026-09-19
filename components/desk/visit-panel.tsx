@@ -1,11 +1,11 @@
 "use client";
 // "Your Visit So Far": the left panel that fills in as the conversation goes. It is the
 // persistent place to continue, so the conversation itself never has to repeat the offer.
-// Gray side panel per DESIGN.md, with the handoff as the site's teal promo card.
+// Short and sticky: the way in sits at the top and stays on screen at any scroll position,
+// and the visit notes under it stay to names only. The checklist lives on the eligibility card.
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
-import { pathLabel } from "@/lib/ai/eligibility";
 import { localizeProduct, productById } from "@/lib/products";
 import { useDeskT } from "@/components/desk/strings";
 
@@ -39,14 +39,17 @@ export function VisitPanel({
       ? t("desk.sentence.unsure", { audience: t(`audience.${context.audience}`) })
       : t("desk.sentence", { audience: t(`audience.${context.audience}`), goal: t(`goal.${context.goal}`) });
   const lang = context.lang;
-  const names = (prefill?.products ?? []).map((id) => {
-    const product = productById(id);
-    return product ? localizeProduct(product, lang).name : id;
-  });
+  const names =
+    products && products.length > 0
+      ? products.map((p) => localizeProduct(p, lang).name)
+      : (prefill?.products ?? []).map((id) => {
+          const product = productById(id);
+          return product ? localizeProduct(product, lang).name : id;
+        });
   const empty = !products && !eligibility && !prefill;
 
   return (
-    <aside className="md:sticky md:top-4 md:w-80 md:shrink-0">
+    <aside className="md:sticky md:top-4 md:max-h-[calc(100vh-2rem)] md:w-80 md:shrink-0 md:self-start md:overflow-auto">
       <div className="flex flex-wrap items-center gap-2 md:hidden">
         <button
           type="button"
@@ -68,91 +71,60 @@ export function VisitPanel({
       </div>
 
       <div className={`${open ? "mt-3 block" : "hidden"} panel-gray space-y-5 text-ufcu-ink md:mt-0 md:block`}>
-        <h3 className="hidden md:block" style={{ fontSize: "1.25rem", lineHeight: 1.4 }}>
-          {t("desk.visit.title")}
-        </h3>
-
-        <section className="space-y-1">
-          <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who")}</p>
-          <p className="text-sm leading-snug" suppressHydrationWarning>{mounted ? who : ""}</p>
-          {prefill?.firstName && <p className="text-sm font-semibold">{prefill.firstName}</p>}
-        </section>
-
-        {empty && <p className="text-sm text-ufcu-muted">{t("desk.visit.empty")}</p>}
-
-        {products && products.length > 0 && (
-          <section className="space-y-1.5">
-            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bundle")}</p>
-            <ul className="space-y-2">
-              {products.map((p) => (
-                <li key={p.id} className="text-sm leading-snug">
-                  <span className="font-semibold">{localizeProduct(p, lang).name}</span>
-                  {p.reason && <span className="block text-ufcu-muted">{t(p.reason)}</span>}
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {eligibility && (
-          <section className="space-y-1.5">
-            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bring")}</p>
-            <p className="text-sm font-semibold leading-snug">{pathLabel(eligibility.path, lang)}</p>
-            <ul className="space-y-1 text-sm leading-snug">
-              {eligibility.documents.map((doc) => (
-                <li key={doc} className="flex items-start gap-2">
-                  <CheckIcon />
-                  <span>{doc}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {prefill && (
-          <section className="promo-teal space-y-3" style={{ padding: "1.25rem" }}>
-            <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700, color: "#fff" }}>
-              {t("desk.promo.title")}
-            </h3>
-            <p className="text-sm leading-snug text-white">{t("desk.secure.note")}</p>
-            <dl className="flex flex-col text-sm text-white" style={{ gap: "0.75rem" }}>
-              {prefill.firstName && <Row label={t("desk.receipt.name")} value={prefill.firstName} />}
-              <Row label={t("desk.receipt.path")} value={pathLabel(prefill.path, lang)} />
-              <Row label={t("desk.receipt.products")} value={names.join(", ")} />
-            </dl>
+        <section className="promo-teal space-y-3" style={{ padding: "1.25rem" }}>
+          <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700, color: "#fff" }}>
+            {t("desk.ready")}
+          </h3>
+          {onBecome ? (
+            <button
+              type="button"
+              onClick={onBecome}
+              className="btn btn-white w-full justify-center text-center"
+              style={{ color: "var(--ufcu-cta)" }}
+              data-testid="panel-continue"
+            >
+              <LockIcon />
+              <span className="min-w-0">{t("desk.continue")}</span>
+            </button>
+          ) : (
             <Link
               href="/apply"
               className="btn btn-white w-full justify-center text-center"
               style={{ color: "var(--ufcu-cta)" }}
+              data-testid="panel-continue"
             >
               <LockIcon />
               <span className="min-w-0">{t("desk.continue")}</span>
             </Link>
+          )}
+        </section>
+
+        <div className="space-y-4">
+          <p className="text-base font-semibold text-ufcu-navy">{t("desk.visit")}</p>
+
+          <section className="space-y-1">
+            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who")}</p>
+            <p className="text-sm leading-snug" suppressHydrationWarning>{mounted ? who : ""}</p>
+            {prefill?.firstName && <p className="text-sm font-semibold">{prefill.firstName}</p>}
           </section>
-        )}
+
+          {empty && <p className="text-sm text-ufcu-muted">{t("desk.visit.empty")}</p>}
+
+          {names.length > 0 && (
+            <section className="space-y-1.5">
+              <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bundle")}</p>
+              <ul className="space-y-1">
+                {names.map((name) => (
+                  <li key={name} className="text-sm leading-snug">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       </div>
     </aside>
-  );
-}
-
-// Stacked, not side by side: a long account list wrapped under a hanging indent read like a
-// nested menu. Label on its own line, value beneath it, wrapping to the panel's own left edge.
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="font-semibold" style={{ fontSize: "0.8125rem", lineHeight: 1.4 }}>
-        {label}
-      </dt>
-      <dd className="ml-0 leading-snug">{value}</dd>
-    </div>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 16 16" className="mt-0.5 size-4 shrink-0 fill-ufcu-navy">
-      <path d="M6.3 12.2 2.4 8.3l1.2-1.2 2.7 2.7 6.1-6.1 1.2 1.2-7.3 7.3Z" />
-    </svg>
   );
 }
 

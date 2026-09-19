@@ -27,11 +27,13 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.receipt.products": "Accounts",
 
   "desk.promo.title": "Ready to open your accounts?",
+  "desk.ready": "Ready to become a member?",
   "desk.become": "Become a member",
   "desk.quick.open": "I want to open an account",
 
   // One source card is shown up front; the rest of the turn's pages sit behind this.
   "desk.more": "More information ({n})",
+  "desk.less": "Less information",
 
   "desk.error": "That did not go through.",
   "desk.retry": "Try again",
@@ -41,6 +43,13 @@ export const DESK_STRINGS: Record<string, string> = {
   "card.path": "Your path",
   "card.bring": "What to bring",
   "card.open": "Open this account",
+  // Every account card names the account on its own button, so a screen of cards reads as a
+  // row of distinct choices rather than the same sentence three times.
+  "card.open.named": "Open a {name} account",
+  "card.open.business.named": "Open a {name}",
+  "card.start.named": "Start the {name}",
+  "card.apply.named": "Apply for the {name}",
+  "card.learn": "Learn more about {name}",
   "card.open.checking": "Open a checking account",
   "card.open.savings": "Open a savings account",
   "card.open.credit_card": "Apply for this card",
@@ -49,7 +58,6 @@ export const DESK_STRINGS: Record<string, string> = {
   "card.open.money_market": "Open a money market account",
   "card.open.certificate": "Open a certificate",
   "card.included": "Included with membership",
-  "card.added": "Added",
 };
 
 function fill(text: string, vars?: Record<string, string | number>): string {

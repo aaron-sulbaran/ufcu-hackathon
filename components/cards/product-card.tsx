@@ -1,11 +1,11 @@
 "use client";
 // Product card. Lane B imports this for the account-selection step; keep the props simple.
 // White site card: Montserrat title, Inter tagline, the reason on a quiet gray block.
-// On the desk the card carries its own action, so joining is one click from the first
-// recommendation. Pass onToggle to turn the action on; without it the card is read-only.
+// On the desk the card carries its own action, so the secure application is one click from the
+// first recommendation. Pass onOpen to turn that action on; without it the card is read-only
+// and keeps only its "Learn more" link out to ufcu.org.
 import type { ProductCard as Product } from "@/lib/types";
 import { CardCheck } from "@/components/cards/card-check";
-import { SourceLink } from "@/components/cards/source-link";
 import { useDeskT } from "@/components/desk/strings";
 import { usePersona } from "@/lib/context";
 import { localizeProduct } from "@/lib/products";
@@ -13,27 +13,32 @@ import { localizeProduct } from "@/lib/products";
 export function ProductCard({
   product: rawProduct,
   reason,
-  selected,
-  onToggle,
+  onOpen,
 }: {
   product: Product;
   reason?: string;
-  selected?: boolean;
-  onToggle?: (product: Product) => void;
+  onOpen?: (product: Product) => void;
 }) {
   const t = useDeskT();
   const { context } = usePersona();
   const product = localizeProduct(rawProduct, context.lang);
   // A reason may be a dictionary key (the savings line); t() passes plain text straight through.
   const why = reason ?? product.reason;
-  const kindKey = `card.open.${rawProduct.kind}`;
-  const kindLabel = t(kindKey);
-  const openLabel = kindLabel === kindKey ? t("card.open") : kindLabel;
+  // The button says the account's own name: you open an account, start a loan, apply for a card.
+  const name = product.name;
+  const openLabel =
+    rawProduct.kind === "loan"
+      ? t("card.start.named", { name })
+      : rawProduct.kind === "credit_card"
+        ? t("card.apply.named", { name })
+        : rawProduct.kind === "business"
+          ? t("card.open.business.named", { name })
+          : t("card.open.named", { name });
 
   return (
     <article
       className="card-ufcu flex h-full min-w-[15rem] flex-col gap-3 text-ufcu-ink"
-      style={{ padding: "1.25rem", ...(selected ? { border: "2px solid var(--ufcu-navy)" } : null) }}
+      style={{ padding: "1.25rem" }}
     >
       <header className="space-y-1">
         <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700 }}>{product.name}</h3>
@@ -62,32 +67,38 @@ export function ProductCard({
         ))}
       </ul>
 
-      <div className="mt-auto space-y-3 pt-1">
-        {onToggle && rawProduct.id === "savings" && (
-          <p className="text-sm font-semibold text-ufcu-navy" data-product-id="savings">
-            <AddedCheck />
+      <div className="mt-auto space-y-2 pt-1">
+        {onOpen && rawProduct.id === "savings" && (
+          <p className="flex items-center gap-1.5 text-sm font-semibold text-ufcu-navy" data-product-id="savings">
+            <IncludedCheck />
             {t("card.included")}
           </p>
         )}
-        {onToggle && rawProduct.id !== "savings" && (
+        {onOpen && rawProduct.id !== "savings" && (
           <button
             type="button"
-            aria-pressed={selected ?? false}
-            onClick={() => onToggle(rawProduct)}
-            className={`btn w-full ${selected ? "btn-outline" : "btn-cta"}`}
+            onClick={() => onOpen(rawProduct)}
+            className="btn btn-cta w-full"
             data-product-id={rawProduct.id}
           >
-            {selected && <AddedCheck />}
-            {selected ? t("card.added") : openLabel}
+            {openLabel}
           </button>
         )}
-        <SourceLink href={product.sourceUrl} />
+        <a
+          href={product.sourceUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-outline w-full"
+          data-learn-id={rawProduct.id}
+        >
+          {t("card.learn", { name })}
+        </a>
       </div>
     </article>
   );
 }
 
-function AddedCheck() {
+function IncludedCheck() {
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 shrink-0 fill-current">
       <path d="M6.3 12.2 2.4 8.3l1.2-1.2 2.7 2.7 6.1-6.1 1.2 1.2-7.3 7.3Z" />

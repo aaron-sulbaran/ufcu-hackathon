@@ -66,22 +66,6 @@ export function Conversation() {
   const userCount = messages.filter((m) => m.role === "user").length;
   const scriptLead = scriptedLine(context.personaId, userCount, context.lang);
 
-  // Accounts the person has clicked "Open" on. Client-side only: no model call is needed to
-  // know what someone tapped, and the Continue moment must not wait for a tool call.
-  const [selected, setSelected] = useState<ReadonlySet<string>>(() => new Set<string>());
-  const toggleProduct = useCallback(
-    (product: ProductCard) => {
-      setSelected((prev) => {
-        const next = new Set(prev);
-        if (next.has(product.id)) next.delete(product.id);
-        else next.add(product.id);
-        return next;
-      });
-      if (!selected.has(product.id)) setGoal(goalForProduct(product));
-    },
-    [selected, setGoal],
-  );
-
   const send = useCallback(
     (text: string, override?: PersonaContext) => {
       const ctx = override ?? context;
@@ -165,8 +149,7 @@ export function Conversation() {
   const askedPath = visit.eligibility?.path;
   const prefill = useMemo<ApplicationPrefill | null>(() => {
     if (recommended.length === 0) return served ?? null;
-    const picked = selected.size > 0 ? recommended.filter((p) => selected.has(p.id)) : recommended;
-    const ids = ["savings", ...picked.map((p) => p.id).filter((id) => id !== "savings")];
+    const ids = ["savings", ...recommended.map((p) => p.id).filter((id) => id !== "savings")];
     const products = served ? [...ids, ...served.products.filter((id) => !ids.includes(id))] : ids;
     const productReasons: Record<string, string> = {};
     for (const product of recommended) {
@@ -183,16 +166,22 @@ export function Conversation() {
       notes: served?.notes ?? [],
       productReasons: { ...productReasons, ...served?.productReasons },
     };
-  }, [recommended, selected, served, askedPath, context]);
+  }, [recommended, served, askedPath, context]);
+
+  // Once a handoff has been written the desk stops rewriting it: the click said which account,
+  // and a re-render on the way to /apply must not widen it back to the whole recommendation.
+  const handedOff = useRef(false);
 
   // Written on every change so the Secure Zone always reads the accounts now on screen.
   const prefillKey = prefill ? JSON.stringify(prefill) : null;
   useEffect(() => {
+    if (handedOff.current) return;
     if (prefillKey) savePrefill(JSON.parse(prefillKey) as ApplicationPrefill);
   }, [prefillKey]);
 
   // "Become a member" before anything has been recommended: save the starting bundle, then go.
   const becomeMember = useCallback(() => {
+    handedOff.current = true;
     savePrefill(
       prefill ?? {
         context,
@@ -205,36 +194,61 @@ export function Conversation() {
     router.push("/apply");
   }, [prefill, context, router]);
 
+  // "Open" on a card goes straight to the secure application with that one account plus the
+  // savings that carries membership. No bundle to curate, no second screen to agree with.
+  const openProduct = useCallback(
+    (product: ProductCard) => {
+      const goal = goalForProduct(product);
+      handedOff.current = true;
+      savePrefill({
+        context: { ...context, goal },
+        path: served?.path ?? askedPath ?? defaultPathFor(context.audience),
+        products: product.id === "savings" ? ["savings"] : ["savings", product.id],
+        firstName: served?.firstName,
+        preferredName: served?.preferredName,
+        email: served?.email,
+        schoolAffiliation: served?.schoolAffiliation,
+        notes: served?.notes ?? [],
+        productReasons: product.reason ? { [product.id]: product.reason } : {},
+      });
+      setGoal(goal);
+      router.push("/apply");
+    },
+    [context, served, askedPath, router, setGoal],
+  );
+
   return (
     <div className="flex flex-col gap-6 pb-4 md:flex-row md:items-start md:gap-8">
       <VisitPanel context={context} visit={{ ...visit, prefill }} onBecome={becomeMember} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="mb-5 flex justify-end">
-          <button type="button" onClick={becomeMember} className="btn btn-cta" data-testid="become-member">
-            {t("desk.become")}
-          </button>
-        </div>
-
         <div className="flex-1 space-y-8 pb-4">
           {messages.length === 0 && !pending && <DeskNote text={t("desk.greeting")} />}
 
           {shown.map((message, index) =>
             message.role === "user" ? (
-              <p key={message.id} className="max-w-prose pl-4 text-right leading-relaxed text-ufcu-ink/90 sm:ml-auto">
-                {localizeUserText(
-                  message.parts.map((part) => (part.type === "text" ? part.text : "")).join(""),
-                  context.personaId,
-                  shown.slice(0, index).filter((m) => m.role === "user").length,
-                  lang,
-                )}
-              </p>
+              // What the person said sits in its own bordered box on the right, so the column
+              // reads as a conversation with two sides even though the desk keeps no bubble.
+              <div key={message.id} className="flex justify-end">
+                <div
+                  className="max-w-prose bg-white leading-relaxed text-ufcu-ink"
+                  style={{ border: "1px solid var(--ufcu-navy)", borderRadius: "12px", padding: "12px 16px" }}
+                  data-testid="user-message"
+                >
+                  {localizeUserText(
+                    message.parts.map((part) => (part.type === "text" ? part.text : "")).join(""),
+                    context.personaId,
+                    shown.slice(0, index).filter((m) => m.role === "user").length,
+                    lang,
+                  )}
+                </div>
+              </div>
             ) : (
               <AssistantTurn
                 key={message.id}
                 parts={message.parts}
-                selected={selected}
-                onToggleProduct={toggleProduct}
+                shownProducts={recommended}
+                onOpenProduct={openProduct}
               />
             ),
           )}
