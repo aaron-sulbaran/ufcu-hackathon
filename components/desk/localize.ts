@@ -2,8 +2,9 @@
 // it came from, so the page redraws it in the current language: a persona turn from the script,
 // a generic line from its dictionary key. Live model turns stay as written.
 import { getPersona, isScriptedLine, localizePersona, scriptedLine } from "@/lib/ai/personas";
-import { t } from "@/lib/i18n-core";
-import type { Lang } from "@/lib/types";
+import { LANG_CODES, t } from "@/lib/i18n-core";
+import { translateQuickReply } from "@/components/desk/quick-replies";
+import type { Audience, Goal, Lang } from "@/lib/types";
 
 interface LoosePart {
   type: string;
@@ -44,8 +45,28 @@ export function localizeParts<P extends { type: string }>(parts: P[], lang: Lang
   });
 }
 
-// A person's message that was a persona's scripted line reads in the current language too.
+const AUDIENCES: Audience[] = ["student", "international_student", "new_to_austin", "switching_banks", "business", "retiree", "other"];
+const GOALS: Goal[] = ["checking", "savings", "build_credit", "credit_card", "loan"];
+
+// The landing sentence ("I'm a student and I want a checking account.") as sent in any language,
+// rebuilt in the current one.
+function landingSentence(text: string, lang: Lang): string | undefined {
+  const say = (l: Lang, a: Audience, g?: Goal) =>
+    g
+      ? t(l, "desk.sentence", { audience: t(l, `audience.${a}`), goal: t(l, `goal.${g}`) })
+      : t(l, "desk.sentence.unsure", { audience: t(l, `audience.${a}`) });
+  for (const from of LANG_CODES) {
+    for (const a of AUDIENCES) {
+      if (say(from, a) === text) return say(lang, a);
+      for (const g of GOALS) if (say(from, a, g) === text) return say(lang, a, g);
+    }
+  }
+  return undefined;
+}
+
+// A person's message that the page wrote for them (a persona's scripted line, the landing
+// sentence, a starter question) reads in the current language too. Typed text stays as typed.
 export function localizeUserText(text: string, personaId: string | undefined, userIndex: number, lang: Lang): string {
-  if (!isScriptedLine(personaId, userIndex, text)) return text;
-  return scriptedLine(personaId, userIndex, lang) ?? text;
+  if (isScriptedLine(personaId, userIndex, text)) return scriptedLine(personaId, userIndex, lang) ?? text;
+  return landingSentence(text, lang) ?? translateQuickReply(text, lang) ?? text;
 }

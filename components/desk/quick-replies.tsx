@@ -61,6 +61,17 @@ function setFor(lang: Lang, audience: Audience): Set3 {
   return (SETS[lang] ?? EN)[audience];
 }
 
+// A starter question tapped in one language, read in another: same audience, same slot.
+export function translateQuickReply(text: string, lang: Lang): string | undefined {
+  for (const sets of Object.values(SETS)) {
+    for (const [audience, set] of Object.entries(sets) as [Audience, Set3][]) {
+      const i = set.indexOf(text);
+      if (i >= 0) return setFor(lang, audience)[i];
+    }
+  }
+  return undefined;
+}
+
 export function QuickReplies({
   lang,
   audience,
