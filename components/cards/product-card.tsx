@@ -3,9 +3,13 @@
 import type { ProductCard as Product } from "@/lib/types";
 import { SourceLink } from "@/components/cards/source-link";
 import { useDeskT } from "@/components/desk/strings";
+import { usePersona } from "@/lib/context";
+import { localizeProduct } from "@/lib/products";
 
-export function ProductCard({ product, reason }: { product: Product; reason?: string }) {
+export function ProductCard({ product: rawProduct, reason }: { product: Product; reason?: string }) {
   const t = useDeskT();
+  const { context } = usePersona();
+  const product = localizeProduct(rawProduct, context.lang);
   const why = reason ?? product.reason;
   return (
     <article className="flex h-full min-w-[15rem] flex-col gap-3 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary shadow-sm">

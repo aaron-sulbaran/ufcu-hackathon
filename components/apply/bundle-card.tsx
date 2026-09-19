@@ -4,10 +4,12 @@ import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard as LaneAProductCard } from "@/components/cards/product-card";
 import { useApplyT } from "@/lib/apply/strings";
+import { usePersona } from "@/lib/context";
+import { localizeProduct } from "@/lib/products";
 import type { ProductCard } from "@/lib/types";
 
 export function BundleCard({
-  product,
+  product: rawProduct,
   reason,
   locked = false,
   included,
@@ -20,6 +22,8 @@ export function BundleCard({
   onToggle: () => void;
 }) {
   const t = useApplyT();
+  const { context } = usePersona();
+  const product = localizeProduct(rawProduct, context.lang);
   return (
     <div
       className={`flex flex-col gap-3 rounded-2xl border p-3 transition-colors ${
