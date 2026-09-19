@@ -3,7 +3,7 @@
 // persistent place to continue, so the conversation itself never has to repeat the offer.
 // Gray side panel per DESIGN.md, with the handoff as the site's teal promo card.
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
 import { pathLabel } from "@/lib/ai/eligibility";
 import { localizeProduct, productById } from "@/lib/products";
@@ -26,6 +26,11 @@ export function VisitPanel({
 }) {
   const t = useDeskT();
   const [open, setOpen] = useState(false);
+  // The sentence comes from localStorage-hydrated context; render it only after mount so the
+  // server markup (defaults) and the first client paint agree.
+  const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setMounted(true); }, []);
   const { products, eligibility, prefill } = visit;
   // The conversation owns the prefill now and writes it as it changes, so the panel only reads.
 
@@ -69,7 +74,7 @@ export function VisitPanel({
 
         <section className="space-y-1">
           <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who")}</p>
-          <p className="text-sm leading-snug">{who}</p>
+          <p className="text-sm leading-snug" suppressHydrationWarning>{mounted ? who : ""}</p>
           {prefill?.firstName && <p className="text-sm font-semibold">{prefill.firstName}</p>}
         </section>
 
