@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Header } from "@/components/shared/header";
+import { PageHeader } from "@/components/shared/page-header";
 import { Conversation } from "@/components/desk/conversation";
 import { DeskTitle } from "@/components/desk/desk-title";
 import { SiteFooter } from "@/components/home/site-footer";
@@ -13,6 +14,7 @@ export default function DeskPage() {
   return (
     <>
       <Header secure={false} />
+      <PageHeader title="app.name" breadcrumb="desk.band.breadcrumb" />
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4">
         <DeskTitle />
         <Suspense fallback={<p className="py-8 text-muted-foreground">...</p>}>

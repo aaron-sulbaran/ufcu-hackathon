@@ -1,12 +1,12 @@
 "use client";
 // "Larger text" toggles a document-level class and remembers the choice per browser.
+// Styled as plain navy text so it reads like the site's other header utilities.
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { useT } from "@/lib/i18n";
 
 const KEY = "frontdesk.largeText";
 
-export function AccessibilityToggle() {
+export function AccessibilityToggle({ className = "" }: { className?: string }) {
   const t = useT();
   const [large, setLarge] = useState(false);
 
@@ -30,15 +30,13 @@ export function AccessibilityToggle() {
   };
 
   return (
-    <Button
+    <button
       type="button"
-      variant="ghost"
-      size="sm"
       onClick={toggle}
       aria-pressed={large}
-      className="text-ufcu-primary hover:bg-ufcu-primary-subtle hover:text-ufcu-primary"
+      className={`inline-flex items-center whitespace-nowrap font-sans text-sm font-semibold text-ufcu-navy hover:text-ufcu-cta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ufcu-navy ${className}`}
     >
       {t("a11y.largerText")}
-    </Button>
+    </button>
   );
 }
