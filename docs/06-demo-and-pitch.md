@@ -28,16 +28,16 @@ Click "Continue to secure application". Point out the chrome change: dark header
 this page." Step 1 shows the Foreign status path with the checklist: passport, I-20, W-8BEN, campus
 address. Step 3 checks his details on its own and cannot match a taxpayer number. Today's flow stops
 here and sends him to a branch. Ours steps up: government ID and a quick selfie online, labeled as
-the place a third-party verification vendor runs. Sample ID, sample selfie, Verify. Trust readout:
-document pass, face pass, consistency review, watchlist pass, confidence 82, route: video
-verification with a banker, mock scheduler shows the University Branch. Decision: "Almost there: verify by video at 3:15 today" with the next-steps list
+the place a third-party verification vendor runs. Sample ID, sample selfie, Verify. The member sees one
+plain card: "Almost there. A banker will finish this with you," with video slots and the branch
+option. No score, no table; the four-check view lives behind a demo disclosure for judges. Decision: "Almost there: verify by video at 3:15 today" with the next-steps list
 including the Zelle caveat and campus ATMs.
 
 **2:15 Demo, Maya.** English. Chip "Try as Maya". "I want to build credit and I have never had a bank
 account." Cards: Simply U plus Credit Builder Loan with the reason ("$500 deposit held in savings,
 six monthly payments, deposit returned, reported to bureaus") and the source link. Continue. SSN path,
-prefilled name and school. Step 3 clears her from her details in two seconds, no upload, document
-and face marked "Not needed". Instant route, Approved, next steps: direct deposit from UT
+prefilled name and school. Step 3 clears her from her details in two seconds, no upload: "You're
+verified." Approved, next steps: direct deposit from UT
 Workday, enroll in digital banking, credit builder loan card. 
 
 **3:00 Bundle and speed beat.** On Maya's review screen point at the step counter and the line "verified once, applied to savings, checking, and the credit builder loan", then the elapsed time. That is the before-and-after in one frame.
@@ -87,6 +87,9 @@ with what to do next. Switching costs a conversation, not a form. That is the fr
 - "Why should we trust an LLM with onboarding?" It never touches sensitive data; the application is a
   separate zone with no model calls. The model does recommendation and explanation, which is what
   the banker does verbally today.
+- "Why don't you show the member the confidence score?" Because a member who is themselves and gets
+  told "we're 70% sure" walks away. The member sees the decision and the options in plain words; the
+  four checks and the score are an employee view, and they are one click away in the demo disclosure.
 - "What about fraud and synthetic identity?" Two stages. Details are checked first against the
   records a credit union must check; if they do not match, the flow steps up to a government ID and
   a selfie through a third-party verification vendor (simulated here) instead of sending the person

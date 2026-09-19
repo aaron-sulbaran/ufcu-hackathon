@@ -28,10 +28,10 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
    acknowledgment. Continue.
 8. Step 3 runs "Checking your information" on its own. For Joon it cannot match a taxpayer number, so
    the step-up appears: "Today's flow stops here and sends you to a branch. Instead we ask for a
-   government ID and a quick selfie online." Say that line. "Use sample" on the panels, Verify. Trust
-   readout: document pass, face pass, consistency "review", confidence 82, route: video call with a
-   banker. Point at the "placeholder for a third-party identity verification service" note. Pick
-   10:30 AM. Continue.
+   government ID and a quick selfie online." Say that line. "Use sample" on the panels, Verify. The
+   member sees one card: "Almost there. A banker will finish this with you," with the video slots
+   and the branch option. No score, no table. If a judge asks how it decided, open the gray
+   "Demo: how the system decided" disclosure at the bottom of the step. Pick 10:30 AM. Continue.
 9. Step 4: bundle with Savings locked and "Verified once, applied to Savings and Free Checking".
    Tick the three disclosures (ESIGN, Membership Agreement, W-8BEN). Continue.
 10. Step 5: Submit. Decision: "One more thing", booked slot echoed, elapsed time, next steps
@@ -42,8 +42,8 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
 2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Click "Open a
    Simply U Checking account" on the card; it goes straight to the application.
 3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Step 3 checks her details
-   and clears her in two seconds: no upload, document and face marked "Not needed", confidence 96.
-   Say: "Verified from what she typed. No document, no branch." Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
+   and shows "You're verified." in two seconds: no upload, no score. Say: "Verified from what she
+   typed. No document, no branch." Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
    Credit Builder Loan". Tick. Continue. Submit.
 4. Decision: approved, "Start to finish 0:3x" next to "The same opening today takes two hosts, a
    branch appointment, and a callback." Next steps: UT Workday direct deposit, digital banking,
