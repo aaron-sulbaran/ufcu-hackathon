@@ -12,19 +12,19 @@ function StepList({ steps, offset }: { steps: NextStep[]; offset: number }) {
   return (
     <ol className="flex flex-col gap-2">
       {steps.map((step, index) => (
-        <li key={`${step.title}-${index}`} className="flex gap-3 rounded-xl border border-border bg-card p-4">
-          <span className="font-mono text-xs text-ufcu-primary-lighter">
+        <li key={`${step.title}-${index}`} className="card-ufcu flex gap-3 p-4">
+          <span className="font-heading text-sm font-bold text-ufcu-navy tabular-nums">
             {String(offset + index + 1).padStart(2, "0")}
           </span>
           <span className="flex flex-col gap-1">
-            <span className="font-medium">{t(step.title)}</span>
-            <span className="text-sm text-muted-foreground">{t(step.detail)}</span>
+            <span className="font-heading text-base font-semibold text-ufcu-navy">{t(step.title)}</span>
+            <span className="text-sm text-ufcu-ink">{t(step.detail)}</span>
             {step.sourceUrl && (
               <a
                 href={step.sourceUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit items-center gap-1 text-sm font-medium text-ufcu-secondary-darker underline-offset-2 hover:underline"
+                className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-ufcu-link underline-offset-2 hover:underline"
               >
                 {t("apply.next.open")}
                 <ExternalLink className="size-3.5" aria-hidden />
@@ -45,12 +45,12 @@ export function NextSteps({ steps }: { steps: NextStep[] }) {
   const base = kitAt === -1 ? steps : steps.slice(0, kitAt);
   const kit = kitAt === -1 ? [] : steps.slice(kitAt);
   return (
-    <section className="flex flex-col gap-3">
-      <h2 className="font-heading text-xl text-ufcu-primary-darkest">{t("apply.next.title")}</h2>
+    <section className="flex flex-col gap-4">
+      <h2>{t("apply.next.title")}</h2>
       <StepList steps={base} offset={0} />
       {kit.length > 0 && (
         <>
-          <h3 className="font-heading text-xl text-ufcu-primary-darkest">{t("apply.next.switchkit")}</h3>
+          <h3 className="font-heading text-xl font-semibold text-ufcu-navy">{t("apply.next.switchkit")}</h3>
           <StepList steps={kit} offset={base.length} />
         </>
       )}

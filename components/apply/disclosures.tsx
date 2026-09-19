@@ -3,8 +3,6 @@
 // The summaries, bullets, and per-document links come from messages/disclosures.json, by language
 // with an English fallback, so the Secure Zone and the research notes never drift apart.
 import { ExternalLink } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { useApplyT } from "@/lib/apply/strings";
 import { usePersona } from "@/lib/context";
 import { DISCLOSURES_URL, needsW8Ben, offersCourtesyPay } from "@/lib/apply/rules";
@@ -29,9 +27,9 @@ export function useDisclosureDoc(id: string): DisclosureDoc | null {
 function Body({ doc, summary }: { doc: DisclosureDoc | null; summary: string }) {
   return (
     <>
-      <p className="text-sm text-muted-foreground">{doc?.summary ?? summary}</p>
+      <p className="text-sm text-ufcu-ink">{doc?.summary ?? summary}</p>
       {doc?.bullets?.length ? (
-        <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
+        <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-ufcu-ink">
           {doc.bullets.map((b) => <li key={b}>{b}</li>)}
         </ul>
       ) : null}
@@ -46,7 +44,7 @@ function ReadLink({ href }: { href: string }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex w-fit items-center gap-1 text-sm font-medium text-ufcu-secondary-darker underline-offset-2 hover:underline"
+      className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-ufcu-link underline-offset-2 hover:underline"
     >
       {t("apply.disclosure.read")}
       <ExternalLink className="size-3.5" aria-hidden />
@@ -59,8 +57,8 @@ export function DisclosureNote({ id, titleKey, subKey }: { id: string; titleKey:
   const t = useApplyT();
   const doc = useDisclosureDoc(id);
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-4">
-      <h2 className="text-sm font-medium">{doc?.title ?? t(titleKey)}</h2>
+    <div className="card-ufcu flex flex-col gap-2 p-4">
+      <h4 className="font-heading text-base font-semibold text-ufcu-navy">{doc?.title ?? t(titleKey)}</h4>
       <Body doc={doc} summary={t(subKey)} />
       <ReadLink href={doc?.fullUrl ?? DISCLOSURES_URL} />
     </div>
@@ -85,15 +83,21 @@ function Item({
   const t = useApplyT();
   const doc = useDisclosureDoc(id);
   return (
-    <div className="flex flex-col gap-1 rounded-xl border border-border bg-card p-4">
-      <Label className="items-start gap-3 text-sm font-medium">
-        <Checkbox checked={checked} onCheckedChange={(v) => onChange(v === true)} aria-invalid={Boolean(error)} className="mt-0.5" />
-        <span>{doc?.title ?? t(titleKey)}</span>
-      </Label>
-      <div className="flex flex-col gap-2 pl-7">
+    <div className="card-ufcu flex flex-col gap-2 p-4">
+      <label className="flex cursor-pointer items-start gap-3">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          aria-invalid={Boolean(error)}
+          className="mt-0.5 shrink-0"
+        />
+        <span className="font-heading text-base font-semibold text-ufcu-navy">{doc?.title ?? t(titleKey)}</span>
+      </label>
+      <div className="flex flex-col gap-2 pl-8">
         <Body doc={doc} summary={t(subKey)} />
         <ReadLink href={doc?.fullUrl ?? DISCLOSURES_URL} />
-        {error && <p className="text-xs text-destructive">{t(error)}</p>}
+        {error && <p className="text-sm text-destructive">{t(error)}</p>}
       </div>
     </div>
   );
@@ -114,7 +118,7 @@ export function Disclosures({
   const courtesyPay = useDisclosureDoc("courtesy_pay");
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="font-mono text-xs tracking-widest uppercase">{t("apply.disclosures.title")}</h2>
+      <h3>{t("apply.disclosures.title")}</h3>
       <Item
         id="esign"
         titleKey="apply.disclosure.esign" subKey="apply.disclosure.esign.sub"
@@ -133,8 +137,8 @@ export function Disclosures({
         />
       )}
       {offersCourtesyPay(values.products) && courtesyPay && (
-        <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-4">
-          <h3 className="text-sm font-medium">{courtesyPay.title}</h3>
+        <div className="card-ufcu flex flex-col gap-2 p-4">
+          <h4 className="font-heading text-base font-semibold text-ufcu-navy">{courtesyPay.title}</h4>
           <Body doc={courtesyPay} summary="" />
           <ReadLink href={courtesyPay.fullUrl ?? DISCLOSURES_URL} />
         </div>

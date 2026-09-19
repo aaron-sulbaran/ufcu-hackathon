@@ -1,8 +1,6 @@
 "use client";
 // The identification number block of step 2. Which field appears depends on the path picked in step 1.
-import { ShieldOff } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Lock } from "lucide-react";
 import { Field, WhyToggle } from "@/components/apply/field";
 import { useApplyT } from "@/lib/apply/strings";
 import type { AboutValues, FieldErrors } from "@/lib/apply/schemas";
@@ -21,9 +19,9 @@ export function IdFields({
 }) {
   const t = useApplyT();
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-ufcu-primary-subtle bg-ufcu-primary-subtle/25 p-4">
-      <p className="flex items-center gap-2 font-mono text-xs tracking-tight text-ufcu-primary uppercase">
-        <ShieldOff className="size-4" aria-hidden />
+    <div className="card-ufcu flex flex-col gap-4 p-4">
+      <p className="flex items-center gap-2 text-sm text-ufcu-muted">
+        <Lock className="size-4 shrink-0" aria-hidden />
         {t("apply.noai.field")}
       </p>
 
@@ -70,23 +68,24 @@ export function IdFields({
             onChange={(v) => setAbout({ passportCountry: v })}
           />
           <div className="flex flex-col gap-1.5">
-            <Label className="items-start gap-3 text-sm font-normal">
-              <Checkbox
+            <label className="flex cursor-pointer items-start gap-3 text-sm text-ufcu-ink">
+              <input
+                type="checkbox"
                 checked={about.w8ben}
-                onCheckedChange={(checked) => setAbout({ w8ben: checked === true })}
+                onChange={(e) => setAbout({ w8ben: e.target.checked })}
                 aria-invalid={Boolean(errors.w8ben)}
-                className="mt-0.5"
+                className="mt-0.5 shrink-0"
               />
               <span>{t("apply.f.w8ben")}</span>
-            </Label>
+            </label>
             <WhyToggle field="w8ben" />
-            {errors.w8ben && <p className="text-xs text-destructive">{t(errors.w8ben)}</p>}
+            {errors.w8ben && <p className="text-sm text-destructive">{t(errors.w8ben)}</p>}
           </div>
         </>
       )}
 
       {path === "branch_assist" && (
-        <p className="text-sm text-muted-foreground">{t("apply.path.branch_assist.sub")}</p>
+        <p className="text-sm text-ufcu-ink">{t("apply.path.branch_assist.sub")}</p>
       )}
     </div>
   );

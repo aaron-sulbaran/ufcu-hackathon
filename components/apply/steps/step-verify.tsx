@@ -2,7 +2,6 @@
 // Step 3: simulated capture, then the trust readout. Verified once here and reused for every account
 // in the bundle, which is the point we make on the review step.
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { StepNav, StepShell } from "@/components/apply/step-shell";
 import { VerifyPanel } from "@/components/apply/verify-panel";
@@ -47,7 +46,7 @@ export function StepVerify() {
           onSample={() => setVerify({ idDoc: true })}
         />
         <VerifyPanel
-          titleKey="apply.verify.selfie" loaded={verify.selfie} tone="accent"
+          titleKey="apply.verify.selfie" loaded={verify.selfie}
           onSample={() => setVerify({ selfie: true })}
         />
         {needsEnrollment && (
@@ -59,15 +58,12 @@ export function StepVerify() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Button
-          type="button" onClick={run} disabled={running}
-          className="bg-ufcu-primary text-white hover:bg-ufcu-primary-darker"
-        >
-          {running && <Loader2 className="animate-spin" aria-hidden />}
+        <button type="button" onClick={run} disabled={running} className="btn btn-cta">
+          {running && <Loader2 className="size-4 animate-spin" aria-hidden />}
           {running ? t("apply.verify.running") : t(state.trust ? "apply.verify.again" : "apply.verify.run")}
-        </Button>
+        </button>
         <SimulatedBadge />
-        {errors.readout && <p className="text-xs text-destructive">{t(errors.readout)}</p>}
+        {errors.readout && <p className="text-sm text-destructive">{t(errors.readout)}</p>}
       </div>
 
       {state.trust && (

@@ -36,7 +36,9 @@ export function StepAccounts() {
   };
 
   return (
-    <StepShell step={4} titleKey="apply.step4.title" subKey="apply.accounts.sub">
+    <StepShell step={4} titleKey="apply.step4.title">
+      <p className="text-sm font-semibold text-ufcu-navy">{t("apply.accounts.sub")}</p>
+
       <div className="flex flex-col gap-3">
         {offered.map((id) => {
           const product = productById(id);
@@ -52,7 +54,7 @@ export function StepAccounts() {
             />
           );
         })}
-        {errors.products && <p className="text-xs text-destructive">{t(errors.products)}</p>}
+        {errors.products && <p className="text-sm text-destructive">{t(errors.products)}</p>}
       </div>
 
       <Disclosures path={state.path} values={accounts} errors={errors} onChange={setAccounts} />

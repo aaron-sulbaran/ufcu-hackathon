@@ -46,6 +46,7 @@ export const APPLY_STRINGS: Record<string, string> = {
   "apply.path.branch_assist": "I would rather do this with a banker",
   "apply.path.branch_assist.sub": "We hold your place and a banker finishes it with you.",
   "apply.checklist.title": "What you will need",
+  "apply.checklist.heading": "What You'll Need",
   "apply.notes.title": "Good to know",
 
   "apply.doc.gov_id": "A government photo ID: driver license, state ID, military ID, U.S. passport, or permanent resident card",
@@ -114,6 +115,7 @@ export const APPLY_STRINGS: Record<string, string> = {
   "apply.verify.running": "Verifying",
   "apply.verify.again": "Run again",
   "apply.trust.title": "Identity readout",
+  "apply.trust.heading": "Identity Check",
   "apply.trust.document": "Document authenticity",
   "apply.trust.face": "Face match",
   "apply.trust.consistency": "Data consistency",
@@ -122,6 +124,7 @@ export const APPLY_STRINGS: Record<string, string> = {
   "apply.trust.review": "Review",
   "apply.trust.fail": "Fail",
   "apply.trust.confidence": "Confidence {n} of 100",
+  "apply.trust.confidenceLabel": "Confidence out of 100",
   "apply.trust.note": "In production these checks map to a KYC vendor and the core; today they are simulated.",
   "apply.detail.doc.ok": "The sample ID scanned clean and the security features matched.",
   "apply.detail.face.ok": "Your selfie matched the photo on the ID.",
@@ -142,6 +145,7 @@ export const APPLY_STRINGS: Record<string, string> = {
 
   "apply.accounts.sub": "Verified once, applied to every account in this bundle.",
   "apply.accounts.membership": "Membership account. Always included.",
+  "apply.accounts.memberPill": "Membership account",
   "apply.accounts.add": "Add",
   "apply.accounts.remove": "Remove",
   "apply.accounts.included": "Included",

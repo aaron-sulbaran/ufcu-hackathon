@@ -1,7 +1,6 @@
 "use client";
 // MOCK: the four identity checks and the confidence score are simulated (lib/apply/mock-verify.ts).
 // In production they map to a KYC vendor and the core; the panel says so on screen.
-import { Card, CardContent } from "@/components/ui/card";
 import { SimulatedBadge } from "@/components/apply/simulated-badge";
 import { RouteCard } from "@/components/apply/route-card";
 import { useApplyT } from "@/lib/apply/strings";
@@ -14,10 +13,11 @@ const CHECK_LABELS: Record<TrustCheck["id"], string> = {
   watchlist: "apply.trust.watchlist",
 };
 
+// Pass is navy on the site's gray panel, review is ink on the soft orange, fail is the destructive red.
 const PILL: Record<TrustCheck["status"], string> = {
-  pass: "bg-ufcu-primary-subtle text-ufcu-primary",
-  review: "bg-ufcu-accent-subtle text-ufcu-primary",
-  fail: "bg-destructive/10 text-destructive",
+  pass: "bg-ufcu-gray-panel text-ufcu-navy",
+  review: "bg-ufcu-secondary-subtle text-ufcu-ink",
+  fail: "bg-destructive text-white",
 };
 
 const STATUS_LABEL: Record<TrustCheck["status"], string> = {
@@ -39,35 +39,39 @@ export function TrustReadout({
 }) {
   const t = useApplyT();
   return (
-    <Card className="border-ufcu-primary-subtle">
-      <CardContent className="flex flex-col gap-4 p-5">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="font-heading text-xl text-ufcu-primary-darkest">{t("apply.trust.title")}</h2>
-          <SimulatedBadge />
-        </div>
+    <div className="card-ufcu flex flex-col gap-5 p-5">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="font-heading text-xl font-semibold text-ufcu-navy">{t("apply.trust.heading")}</h3>
+        <SimulatedBadge />
+      </div>
 
-        <ul className="flex flex-col gap-2">
-          {readout.checks.map((check) => (
-            <li key={check.id} className="flex items-start justify-between gap-3 rounded-lg border border-border p-3">
-              <span className="flex flex-col gap-0.5">
-                <span className="text-sm font-medium">{t(CHECK_LABELS[check.id])}</span>
-                <span className="text-xs text-muted-foreground">{t(check.detail)}</span>
-              </span>
-              <span className={`shrink-0 rounded-full px-2.5 py-0.5 font-mono text-xs ${PILL[check.status]}`}>
-                {t(STATUS_LABEL[check.status])}
-              </span>
-            </li>
-          ))}
-        </ul>
+      <ul className="flex flex-col gap-2">
+        {readout.checks.map((check) => (
+          <li
+            key={check.id}
+            className="flex items-start justify-between gap-3 border-b border-ufcu-gray-line pb-2 last:border-b-0 last:pb-0"
+          >
+            <span className="flex flex-col gap-0.5">
+              <span className="text-sm font-semibold text-ufcu-navy">{t(CHECK_LABELS[check.id])}</span>
+              <span className="text-sm text-ufcu-muted">{t(check.detail)}</span>
+            </span>
+            <span
+              className={`shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold ${PILL[check.status]}`}
+            >
+              {t(STATUS_LABEL[check.status])}
+            </span>
+          </li>
+        ))}
+      </ul>
 
-        <p className="font-mono text-sm tracking-tight text-ufcu-primary">
-          {t("apply.trust.confidence", { n: readout.confidence })}
-        </p>
+      <div className="flex items-baseline gap-3">
+        <span className="font-heading text-4xl font-bold text-ufcu-navy">{readout.confidence}</span>
+        <span className="text-sm text-ufcu-muted">{t("apply.trust.confidenceLabel")}</span>
+      </div>
 
-        <RouteCard route={readout.route} slot={slot} onSlot={onSlot} error={slotError} />
+      <RouteCard route={readout.route} slot={slot} onSlot={onSlot} error={slotError} />
 
-        <p className="text-xs text-muted-foreground">{t("apply.trust.note")}</p>
-      </CardContent>
-    </Card>
+      <p className="disclaimer text-ufcu-muted">{t("apply.trust.note")}</p>
+    </div>
   );
 }

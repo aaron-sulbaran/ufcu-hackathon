@@ -43,14 +43,12 @@ export function StepReview() {
     const seconds = Math.max(0, Math.floor(((state.finishedAt ?? state.startedAt) - state.startedAt) / 1000));
     const elapsed = { m: Math.floor(seconds / 60), s: String(seconds % 60).padStart(2, "0") };
     return (
-      <section className="flex flex-col gap-5 py-6">
+      <section className="flex flex-col gap-6 py-8">
         <Decision decision={state.decision} />
         {state.finishedAt && (
-          <div className="flex flex-col gap-1">
-            <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-              {t("apply.done.elapsed", elapsed)}
-            </p>
-            <p className="text-sm text-muted-foreground">{t("apply.done.compare")}</p>
+          <div className="panel-gray flex flex-col gap-1">
+            <p className="font-heading text-2xl font-bold text-ufcu-cta">{t("apply.done.elapsed", elapsed)}</p>
+            <p className="text-sm text-ufcu-ink">{t("apply.done.compare")}</p>
           </div>
         )}
         <NextSteps steps={state.nextSteps ?? []} />

@@ -1,8 +1,7 @@
 "use client";
 // Step 1: which documents you have. Everything below follows from this choice.
 import { useState } from "react";
-import { FileCheck, Info } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Check } from "lucide-react";
 import { StepNav, StepShell } from "@/components/apply/step-shell";
 import { DisclosureNote } from "@/components/apply/disclosures";
 import { useApplication } from "@/lib/apply/state";
@@ -15,39 +14,51 @@ function PathOption({
   path,
   selected,
   onSelect,
-  compact = false,
 }: {
   path: IdentityPath;
   selected: boolean;
   onSelect: (p: IdentityPath) => void;
-  compact?: boolean;
 }) {
   const t = useApplyT();
   const rule = PATH_RULES[path];
   return (
     <label
-      className={`flex cursor-pointer items-start gap-3 rounded-xl border bg-card p-4 transition-colors ${
-        selected ? "border-ufcu-primary ring-2 ring-ufcu-primary-lighter" : "border-border hover:border-ufcu-primary-lighter"
-      } ${compact ? "py-3" : ""}`}
+      className={`card-ufcu flex cursor-pointer items-start gap-3 border-2 p-4 transition-colors ${
+        selected ? "border-ufcu-navy" : "border-ufcu-gray-line hover:border-ufcu-navy"
+      }`}
     >
       <input
         type="radio"
         name="identity-path"
-        className="mt-1 size-4 accent-[var(--ufcu-primary)]"
+        className="mt-1"
         checked={selected}
         onChange={() => onSelect(path)}
       />
       <span className="flex flex-col gap-1">
-        <span className={compact ? "text-sm font-medium" : "font-heading text-lg leading-snug"}>{t(rule.labelKey)}</span>
-        <span className="text-sm text-muted-foreground">{t(rule.subKey)}</span>
+        <span className="font-heading text-base font-semibold text-ufcu-navy">{t(rule.labelKey)}</span>
+        <span className="text-sm text-ufcu-ink">{t(rule.subKey)}</span>
       </span>
     </label>
   );
 }
 
-export function StepPath() {
+function CheckList({ items, muted = false }: { items: string[]; muted?: boolean }) {
   const t = useApplyT();
+  return (
+    <ul className="flex flex-col gap-2">
+      {items.map((item) => (
+        <li key={item} className="flex items-start gap-2">
+          <Check className="mt-1 size-4 shrink-0 text-ufcu-navy" aria-hidden />
+          <span className={`text-sm ${muted ? "text-ufcu-muted" : "text-ufcu-ink"}`}>{t(item)}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function StepPath() {
   const { state, update, goTo } = useApplication();
+  const t = useApplyT();
   const [formError, setFormError] = useState<string | undefined>();
   const rule = pathRule(state.path);
 
@@ -63,36 +74,19 @@ export function StepPath() {
         {SELECTABLE_PATHS.map((p) => (
           <PathOption key={p} path={p} selected={state.path === p} onSelect={(next) => update({ path: next })} />
         ))}
-        <PathOption
-          path="minor"
-          compact
-          selected={state.path === "minor"}
-          onSelect={(next) => update({ path: next })}
-        />
+        <PathOption path="minor" selected={state.path === "minor"} onSelect={(next) => update({ path: next })} />
       </div>
 
-      <Card className="border-ufcu-primary-subtle bg-ufcu-primary-subtle/30">
-        <CardContent className="flex flex-col gap-4 p-5">
-          <div className="flex flex-col gap-2">
-            <h2 className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase">
-              <FileCheck className="size-4" aria-hidden />
-              {t("apply.checklist.title")}
-            </h2>
-            <ul className="flex list-disc flex-col gap-1 pl-5 text-sm">
-              {rule.documents.map((d) => <li key={d}>{t(d)}</li>)}
-            </ul>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h2 className="flex items-center gap-2 font-mono text-xs tracking-widest uppercase">
-              <Info className="size-4" aria-hidden />
-              {t("apply.notes.title")}
-            </h2>
-            <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-              {rule.notes.map((n) => <li key={n}>{t(n)}</li>)}
-            </ul>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="panel-gray flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
+          <h3>{t("apply.checklist.heading")}</h3>
+          <CheckList items={rule.documents} />
+        </div>
+        <div className="flex flex-col gap-3">
+          <h3>{t("apply.notes.title")}</h3>
+          <CheckList items={rule.notes} muted />
+        </div>
+      </div>
 
       <DisclosureNote id="why_we_ask_cip" titleKey="apply.cip.title" subKey="apply.cip" />
 

@@ -7,7 +7,6 @@ import { Field } from "@/components/apply/field";
 import { IdFields } from "@/components/apply/steps/id-fields";
 import { DisclosureNote } from "@/components/apply/disclosures";
 import { SimulatedBadge } from "@/components/apply/simulated-badge";
-import { Button } from "@/components/ui/button";
 import { sampleAbout } from "@/lib/apply/sample";
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
@@ -29,12 +28,12 @@ export function StepAbout() {
 
   return (
     <StepShell step={2} titleKey="apply.step2.title" subKey="apply.cip">
-      <div className="flex flex-wrap items-center gap-2">
-        <Button type="button" variant="outline" size="sm" onClick={() => setAbout(sampleAbout(state.path, prefill))}>
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="button" className="btn btn-outline" onClick={() => setAbout(sampleAbout(state.path, prefill))}>
           {t("apply.sample.fill")}
-        </Button>
+        </button>
         <SimulatedBadge />
-        <span className="text-xs text-muted-foreground">{t("apply.sample.note")}</span>
+        <span className="text-sm text-ufcu-muted">{t("apply.sample.note")}</span>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">

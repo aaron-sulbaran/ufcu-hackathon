@@ -1,9 +1,7 @@
 "use client";
 // One labelled input with a "Why we ask" disclosure and a friendly inline error.
 import { useState } from "react";
-import { Eye, EyeOff, HelpCircle } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Info } from "lucide-react";
 import { useApplyT } from "@/lib/apply/strings";
 import { whyKey } from "@/lib/apply/why";
 
@@ -18,12 +16,12 @@ export function WhyToggle({ field }: { field: string }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="inline-flex items-center gap-1 text-xs font-medium text-ufcu-secondary-darker underline-offset-2 hover:underline"
+        className="inline-flex items-center gap-1 text-sm font-semibold text-ufcu-link underline-offset-2 hover:underline"
       >
-        <HelpCircle className="size-3.5" aria-hidden />
+        <Info className="size-3.5" aria-hidden />
         {t("apply.why")}
       </button>
-      {open && <span className="mt-1 block max-w-prose text-xs text-muted-foreground">{t(key)}</span>}
+      {open && <span className="mt-1 block max-w-prose text-sm text-ufcu-muted">{t(key)}</span>}
     </span>
   );
 }
@@ -50,19 +48,19 @@ export function Field(props: FieldProps) {
   const hidden = Boolean(secret) && !revealed;
   return (
     <div className={`flex flex-col gap-1.5 ${props.className ?? ""}`}>
-      <div className="flex items-baseline justify-between gap-3">
-        <Label htmlFor={name} className="font-mono text-xs tracking-tight uppercase">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <label htmlFor={name} className="text-sm font-semibold text-ufcu-navy">
           {t(labelKey)}
           {prefilled && (
-            <span className="ml-2 rounded bg-ufcu-primary-subtle px-1.5 py-0.5 text-[10px] normal-case">
+            <span className="ml-2 rounded-full border border-ufcu-navy px-2 py-0.5 text-xs font-semibold text-ufcu-navy">
               {t("apply.prefilled")}
             </span>
           )}
-        </Label>
+        </label>
         <WhyToggle field={name} />
       </div>
       <div className="relative">
-        <Input
+        <input
           id={name}
           name={name}
           type={hidden ? "password" : (props.type ?? "text")}
@@ -72,20 +70,20 @@ export function Field(props: FieldProps) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={Boolean(error)}
-          className={`h-10 bg-card ${secret ? "pr-16" : ""}`}
+          className={`input-ufcu ${secret ? "pr-20" : ""} ${error ? "border-destructive" : ""}`}
         />
         {secret && (
           <button
             type="button"
             onClick={() => setRevealed((v) => !v)}
-            className="absolute inset-y-0 right-2 inline-flex items-center gap-1 text-xs font-medium text-ufcu-secondary-darker"
+            className="absolute inset-y-0 right-3 inline-flex items-center gap-1 text-sm font-semibold text-ufcu-link"
           >
             {revealed ? <EyeOff className="size-3.5" aria-hidden /> : <Eye className="size-3.5" aria-hidden />}
             {revealed ? t("apply.hide") : t("apply.show")}
           </button>
         )}
       </div>
-      {error && <p className="text-xs text-destructive">{t(error)}</p>}
+      {error && <p className="text-sm text-destructive">{t(error)}</p>}
     </div>
   );
 }

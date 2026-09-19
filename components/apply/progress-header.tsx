@@ -1,21 +1,13 @@
 "use client";
-// The Secure Zone chrome under the shared header: lock line, step progress, elapsed time (rubric B).
+// The Secure Zone chrome under the page band: a thin navy progress bar, the elapsed timer, and a
+// way back to the start. The lock line and the clock line live in the page band above this.
 import { useEffect, useState } from "react";
-import { Lock } from "lucide-react";
-import { Progress, ProgressLabel } from "@/components/ui/progress";
 import { useApplication, TOTAL_STEPS } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
 
+// Kept as a no-op so app/apply/page.tsx keeps compiling while the page band replaces this bar.
 export function SecureBar() {
-  const t = useApplyT();
-  return (
-    <div className="bg-ufcu-primary-darker text-white/90">
-      <div className="mx-auto flex max-w-3xl items-center gap-2 px-4 py-2 text-sm">
-        <Lock className="size-4 shrink-0" aria-hidden />
-        <span>{t("apply.noai")}</span>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 export function useElapsed(startedAt: number, running: boolean) {
@@ -35,27 +27,33 @@ export function ProgressHeader() {
   const { state, ready, reset } = useApplication();
   const { m, s } = useElapsed(state.startedAt, ready && !state.decision);
   const pct = Math.round((state.step / TOTAL_STEPS) * 100);
+  const label = t("apply.step", { n: state.step, total: TOTAL_STEPS });
   return (
-    <div className="border-b border-border bg-card">
-      <div className="mx-auto max-w-3xl px-4 py-3">
-        <Progress
-          value={pct}
-          className="gap-2 [&_[data-slot=progress-indicator]]:bg-ufcu-accent"
-        >
-          <ProgressLabel className="font-mono text-xs tracking-widest text-ufcu-primary uppercase">
-            {t("apply.step", { n: state.step, total: TOTAL_STEPS })}
-          </ProgressLabel>
-          <span className="ml-auto font-mono text-xs text-muted-foreground tabular-nums">
+    <div className="border-b border-ufcu-gray-line bg-white">
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-4 py-3">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span className="text-sm font-semibold text-ufcu-navy">{label}</span>
+          <span className="ml-auto text-sm text-ufcu-muted tabular-nums">
             {ready ? t("apply.elapsed", { m, s }) : ""}
           </span>
           <button
             type="button"
             onClick={reset}
-            className="font-mono text-xs text-ufcu-secondary-darker underline-offset-2 uppercase hover:underline"
+            className="text-sm font-semibold text-ufcu-link underline-offset-2 hover:underline"
           >
             {t("apply.startover")}
           </button>
-        </Progress>
+        </div>
+        <div
+          role="progressbar"
+          aria-label={label}
+          aria-valuenow={pct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          className="h-1 w-full overflow-hidden rounded-full bg-ufcu-gray-line"
+        >
+          <div className="h-full bg-ufcu-navy transition-[width] duration-200" style={{ width: `${pct}%` }} />
+        </div>
       </div>
     </div>
   );
