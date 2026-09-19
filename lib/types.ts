@@ -10,9 +10,10 @@ export interface PersonaContext { audience: Audience; goal: Goal; lang: Lang; pe
 
 export interface ProductCard {
   id: string; name: string; tagline: string; minToOpen: string; monthlyFee: string;
+  // reason is plain text or an i18n key; cards render it through t().
   highlights: string[]; reason?: string; sourceUrl: string; audiences?: Audience[]; goals?: Goal[];
   kind: "checking" | "savings" | "money_market" | "certificate" | "loan" | "credit_card" | "business";
-  i18n?: Partial<Record<Lang, { name: string; tagline: string; highlights: string[] }>>;
+  i18n?: Partial<Record<Lang, { name: string; tagline: string; highlights: string[]; minToOpen?: string; monthlyFee?: string }>>;
 }
 
 export interface ResourceCard { title: string; summary: string; sourceUrl: string; tags: string[] }

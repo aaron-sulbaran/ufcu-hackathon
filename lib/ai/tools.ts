@@ -3,7 +3,6 @@ import { tool, type ToolSet } from "ai";
 import { z } from "zod";
 import { PRODUCTS, productById } from "@/lib/products";
 import { retrieve, firstSentence } from "@/lib/ai/retrieve";
-import { savingsReason } from "@/lib/ai/copy";
 import { checkEligibility as runEligibility } from "@/lib/ai/eligibility";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard, ResourceCard } from "@/lib/types";
 
@@ -19,29 +18,31 @@ export function recommendedProducts(
     const product = productById(pick.id);
     if (!product || seen.has(product.id)) continue;
     seen.add(product.id);
-    cards.push({ ...product, reason: pick.reason });
+    cards.push({ ...product, reason: pick.reason || undefined });
     if (cards.length === 3) break;
   }
   if (!seen.has("savings")) {
     const savings = productById("savings");
     if (savings) {
       if (cards.length === 3) cards.pop();
-      cards.unshift({ ...savings, reason: savingsReason(context.lang) });
+      // A dictionary key: the card resolves it in the current language.
+      cards.unshift({ ...savings, reason: "desk.reason.savings" });
     }
   }
   if (cards.length === 0) {
     const fallback = PRODUCTS.filter((p) => p.audiences?.includes(context.audience)).slice(0, 2);
-    return fallback.map((p) => ({ ...p, reason: p.tagline }));
+    return fallback.map((p) => ({ ...p }));
   }
   return cards.slice(0, 3);
 }
 
 // The scripted opening for someone who arrived through the landing sentence rather than a
 // persona chip: the catalog rows that match what they said, savings added by the helper.
+// Only savings carries a reason; the others already show their tagline.
 export function suggestedFor(context: PersonaContext): ProductCard[] {
   const picks = PRODUCTS.filter((p) => p.audiences?.includes(context.audience) && p.goals?.includes(context.goal))
     .slice(0, 3)
-    .map((p) => ({ id: p.id, reason: p.id === "savings" ? savingsReason(context.lang) : p.tagline }));
+    .map((p) => ({ id: p.id, reason: p.id === "savings" ? "desk.reason.savings" : "" }));
   return recommendedProducts(picks, context);
 }
 

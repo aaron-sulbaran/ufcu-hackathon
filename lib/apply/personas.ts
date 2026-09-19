@@ -1,6 +1,8 @@
 // Lane A owns data/personas.json. The loader tolerates a missing, empty, or malformed file so the
 // Secure Zone can always fall back to rule-based verification and decisions.
+// The readout, decision, and next steps come back as i18n keys, so they render in the current language.
 import personasJson from "@/data/personas.json";
+import { keyedPersona } from "@/lib/ai/personas";
 import type { IdentityPath, PersonaScript, Result } from "@/lib/types";
 
 let cache: PersonaScript[] | null = null;
@@ -9,7 +11,7 @@ export async function loadPersonas(): Promise<Result<PersonaScript[]>> {
   if (cache) return { data: cache };
   try {
     const raw: unknown = personasJson;
-    cache = Array.isArray(raw) ? (raw as unknown as PersonaScript[]) : [];
+    cache = Array.isArray(raw) ? (raw as unknown as PersonaScript[]).map(keyedPersona) : [];
     return { data: cache };
   } catch {
     cache = [];

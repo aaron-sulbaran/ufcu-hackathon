@@ -12,6 +12,7 @@ export function ProductCard({ product: rawProduct, reason }: { product: Product;
   const t = useDeskT();
   const { context } = usePersona();
   const product = localizeProduct(rawProduct, context.lang);
+  // A reason may be a dictionary key (the savings line); t() passes plain text straight through.
   const why = reason ?? product.reason;
   return (
     <article className="card-ufcu flex h-full min-w-[15rem] flex-col gap-3 text-ufcu-ink" style={{ padding: "1.25rem" }}>
@@ -20,7 +21,7 @@ export function ProductCard({ product: rawProduct, reason }: { product: Product;
         <p className="text-sm text-ufcu-muted">{product.tagline}</p>
       </header>
 
-      {why && <p className="rounded-lg bg-ufcu-gray-panel px-3 py-2 text-sm leading-snug">{why}</p>}
+      {why && <p className="rounded-lg bg-ufcu-gray-panel px-3 py-2 text-sm leading-snug">{t(why)}</p>}
 
       <dl className="grid grid-cols-2 gap-2 text-sm">
         <div>

@@ -15,18 +15,31 @@ interface Ctx {
 }
 const PersonaCtx = createContext<Ctx | null>(null);
 
+function readStored(): PersonaContext {
+  try { const raw = localStorage.getItem(KEY); if (raw) return { ...DEFAULT, ...JSON.parse(raw) }; } catch {}
+  return DEFAULT;
+}
+
+// `hydrated` rides in state so an update queued before hydration (a child effect runs before this
+// provider's) merges onto the stored context instead of being overwritten by it, or overwriting it.
+interface Stored { context: PersonaContext; hydrated: boolean }
+
 export function PersonaProvider({ children }: { children: ReactNode }) {
-  const [context, setRaw] = useState<PersonaContext>(DEFAULT);
+  const [state, setState] = useState<Stored>({ context: DEFAULT, hydrated: false });
   useEffect(() => {
     // Hydrate from localStorage once; the sync setState is intentional (external store, one-shot).
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    try { const raw = localStorage.getItem(KEY); if (raw) setRaw({ ...DEFAULT, ...JSON.parse(raw) }); } catch {}
+    setState((prev) => (prev.hydrated ? prev : { context: readStored(), hydrated: true }));
   }, []);
   const setContext = (next: Partial<PersonaContext>) =>
-    setRaw((prev) => { const merged = { ...prev, ...next }; try { localStorage.setItem(KEY, JSON.stringify(merged)); } catch {} return merged; });
+    setState((prev) => {
+      const merged = { ...(prev.hydrated ? prev.context : readStored()), ...next };
+      try { localStorage.setItem(KEY, JSON.stringify(merged)); } catch {}
+      return { context: merged, hydrated: true };
+    });
   return (
     <PersonaCtx.Provider value={{
-      context, setContext,
+      context: state.context, setContext,
       setLang: (lang) => setContext({ lang }),
       setAudience: (audience) => setContext({ audience }),
       setGoal: (goal) => setContext({ goal }),

@@ -1,10 +1,11 @@
 "use client";
-// Four demo personas. Each chip preloads a full context and jumps straight into the conversation.
+// Four demo personas. Each chip preloads who the person is and jumps straight into the conversation,
+// in whatever language is already selected.
 // White site cards, Montserrat name, Inter blurb, a teal "Try it" line at the foot.
 import { useRouter } from "next/navigation";
 import { usePersona } from "@/lib/context";
 import { useT } from "@/lib/i18n";
-import type { Audience, Goal, Lang } from "@/lib/types";
+import type { Audience, Goal } from "@/lib/types";
 
 interface Chip {
   id: string;
@@ -12,14 +13,13 @@ interface Chip {
   blurbKey: string;
   audience: Audience;
   goal: Goal;
-  lang: Lang;
 }
 
 const CHIPS: Chip[] = [
-  { id: "maya", nameKey: "chip.maya.name", blurbKey: "chip.maya.blurb", audience: "student", goal: "build_credit", lang: "en" },
-  { id: "joon", nameKey: "chip.joon.name", blurbKey: "chip.joon.blurb", audience: "international_student", goal: "checking", lang: "ko" },
-  { id: "daniela", nameKey: "chip.daniela.name", blurbKey: "chip.daniela.blurb", audience: "business", goal: "checking", lang: "es" },
-  { id: "robert", nameKey: "chip.robert.name", blurbKey: "chip.robert.blurb", audience: "switching_banks", goal: "unsure", lang: "en" },
+  { id: "maya", nameKey: "chip.maya.name", blurbKey: "chip.maya.blurb", audience: "student", goal: "build_credit" },
+  { id: "joon", nameKey: "chip.joon.name", blurbKey: "chip.joon.blurb", audience: "international_student", goal: "checking" },
+  { id: "daniela", nameKey: "chip.daniela.name", blurbKey: "chip.daniela.blurb", audience: "business", goal: "checking" },
+  { id: "robert", nameKey: "chip.robert.name", blurbKey: "chip.robert.blurb", audience: "switching_banks", goal: "unsure" },
 ];
 
 export function PersonaChips() {
@@ -28,7 +28,7 @@ export function PersonaChips() {
   const t = useT();
 
   const choose = (chip: Chip) => {
-    setContext({ audience: chip.audience, goal: chip.goal, lang: chip.lang, personaId: chip.id });
+    setContext({ audience: chip.audience, goal: chip.goal, personaId: chip.id });
     router.push(`/desk?persona=${chip.id}`);
   };
 

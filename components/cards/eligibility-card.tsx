@@ -6,14 +6,16 @@ import { pathLabel } from "@/lib/ai/eligibility";
 import { CardCheck } from "@/components/cards/card-check";
 import { SourceLink } from "@/components/cards/source-link";
 import { useDeskT } from "@/components/desk/strings";
+import { usePersona } from "@/lib/context";
 
 export function EligibilityCard({ result }: { result: EligibilityResult }) {
   const t = useDeskT();
+  const { context } = usePersona();
   return (
     <article className="card-ufcu flex flex-col gap-3 text-ufcu-ink" style={{ padding: "1.25rem" }}>
       <header className="space-y-1">
         <p className="text-sm font-semibold text-ufcu-navy">{t("card.path")}</p>
-        <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700 }}>{pathLabel(result.path)}</h3>
+        <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700 }}>{pathLabel(result.path, context.lang)}</h3>
       </header>
 
       <div>

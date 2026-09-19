@@ -14,13 +14,13 @@ import { AccessibilityToggle } from "@/components/home/accessibility-toggle";
 
 const ROUTING = "314977405";
 
-// The real site sections. Labels stay in English because they name ufcu.org's own nav.
+// The real site sections. Labels are dictionary keys so they follow the selected language.
 const NAV: { label: string; href: string; active?: boolean }[] = [
-  { label: "Personal", href: "https://ufcu.org/personal", active: true },
-  { label: "Business", href: "https://ufcu.org/business" },
-  { label: "Locations", href: "https://ufcu.org/locations" },
-  { label: "About", href: "https://ufcu.org/about" },
-  { label: "Resources", href: "https://ufcu.org/resources" },
+  { label: "nav.personal", href: "https://ufcu.org/personal", active: true },
+  { label: "nav.business", href: "https://ufcu.org/business" },
+  { label: "nav.locations", href: "https://ufcu.org/locations" },
+  { label: "nav.about", href: "https://ufcu.org/about" },
+  { label: "nav.resources", href: "https://ufcu.org/resources" },
 ];
 
 function LangSelect({ className = "" }: { className?: string }) {
@@ -96,7 +96,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
               }`}
             >
               {item.active && <span className="size-2 rounded-full bg-ufcu-cta" aria-hidden />}
-              {item.label}
+              {t(item.label)}
             </a>
           ))}
         </nav>
@@ -159,7 +159,7 @@ export function Header({ secure = false }: { secure?: boolean }) {
                 className="flex items-center gap-2 border-b border-ufcu-gray-line px-4 py-3 font-sans text-base font-semibold text-ufcu-navy"
               >
                 {item.active && <span className="size-2 rounded-full bg-ufcu-cta" aria-hidden />}
-                {item.label}
+                {t(item.label)}
               </a>
             ))}
           </nav>

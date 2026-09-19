@@ -3,7 +3,8 @@
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
 import { pathRule } from "@/lib/apply/rules";
-import { productById } from "@/lib/products";
+import { localizeProduct, productById } from "@/lib/products";
+import { usePersona } from "@/lib/context";
 
 // An SSN or ITIN keeps its familiar shape. Anything else (a passport number) shows its last three
 // characters behind a generic prefix, so the mask never implies a format the value does not have.
@@ -44,7 +45,12 @@ export function ReviewSummary() {
   const rule = pathRule(path);
   const idValue =
     path === "itin" ? about.itin : path === "foreign_status" ? about.passportNumber : about.ssn;
-  const names = accounts.products.map((id) => productById(id)?.name ?? id);
+  const { context } = usePersona();
+  const localized = (id: string) => {
+    const product = productById(id);
+    return product ? localizeProduct(product, context.lang) : undefined;
+  };
+  const names = accounts.products.map((id) => localized(id)?.name ?? id);
   const productNames =
     names.length > 1 ? `${names.slice(0, -1).join(", ")} ${t("apply.and")} ${names[names.length - 1]}` : names[0] ?? "";
 
@@ -96,7 +102,7 @@ export function ReviewSummary() {
       <Section titleKey="apply.review.accounts" step={4}>
         <ul className="flex list-disc flex-col gap-1 pl-5 text-sm">
           {accounts.products.map((id) => {
-            const product = productById(id);
+            const product = localized(id);
             if (!product) return <li key={id}>{id}</li>;
             return (
               <li key={id}>

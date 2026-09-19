@@ -13,9 +13,9 @@ import {
   type UIMessage,
 } from "ai";
 import { buildTools, resourcesFor, suggestedFor } from "@/lib/ai/tools";
-import { scriptedHelp, scriptedIntro } from "@/lib/ai/copy";
 import { systemPrompt } from "@/lib/ai/prompt";
-import { nextScriptedTurn } from "@/lib/ai/personas";
+import { isScriptedLine, nextScriptedTurn } from "@/lib/ai/personas";
+import { t } from "@/lib/i18n-core";
 import { scriptedChunks, scriptedStream, type ScriptedPayload } from "@/lib/ai/scripted-stream";
 import type { PersonaContext } from "@/lib/types";
 
@@ -56,11 +56,6 @@ function alreadyOffered(messages: UIMessage[]): boolean {
   );
 }
 
-function sameQuestion(a: string, b: string): boolean {
-  const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").replace(/[.,!?]/g, "").trim();
-  return norm(a) === norm(b);
-}
-
 // Scripted answers follow the script only while the person is on it. Off-script questions get a
 // short line plus the ufcu.org pages that match, so the demo never replays the last turn.
 function fallbackPayload(
@@ -70,13 +65,13 @@ function fallbackPayload(
 ): ScriptedPayload {
   const asked = lastUserText(messages);
   const turnIndex = Math.max(0, messages.filter((m) => m.role === "user").length - 1);
-  const turn = nextScriptedTurn(personaId, turnIndex);
+  const turn = nextScriptedTurn(personaId, turnIndex, context.lang);
 
-  if (turn && sameQuestion(turn.user, asked)) {
+  if (personaId && turn && isScriptedLine(personaId, turnIndex, asked)) {
     const tools = (turn.assistant.tools ?? []).filter(
       (call) => call.name !== "startApplication" || !alreadyOffered(messages),
     );
-    return { text: turn.assistant.text, tools };
+    return { text: turn.assistant.text, tools, source: { personaId, turn: turnIndex } };
   }
 
   const resources = resourcesFor(asked, context);
@@ -84,7 +79,8 @@ function fallbackPayload(
   // First turn with no script to follow: open with a bundle, the way a persona turn does.
   if (turnIndex === 0) {
     return {
-      text: scriptedIntro(context.lang),
+      text: t(context.lang, "desk.scripted.intro"),
+      source: { textKey: "desk.scripted.intro" },
       tools: [
         { name: "recommendProducts", result: suggestedFor(context) },
         { name: "showResources", result: resources },
@@ -93,9 +89,17 @@ function fallbackPayload(
   }
 
   if (resources.length > 0) {
-    return { text: scriptedHelp(context.lang), tools: [{ name: "showResources", result: resources }] };
+    return {
+      text: t(context.lang, "desk.scripted.help"),
+      source: { textKey: "desk.scripted.help" },
+      tools: [{ name: "showResources", result: resources }],
+    };
   }
-  return { text: scriptedIntro(context.lang), tools: [{ name: "recommendProducts", result: suggestedFor(context) }] };
+  return {
+    text: t(context.lang, "desk.scripted.intro"),
+    source: { textKey: "desk.scripted.intro" },
+    tools: [{ name: "recommendProducts", result: suggestedFor(context) }],
+  };
 }
 
 export async function POST(req: Request) {
@@ -122,8 +126,7 @@ export async function POST(req: Request) {
   // Persona chips follow the script even when the model is available, so the demo is repeatable
   // and instant. Anything typed off-script goes to the model.
   const userCount = messages.filter((m) => m.role === "user").length;
-  const scriptedTurn = nextScriptedTurn(personaId, Math.max(0, userCount - 1));
-  if (scriptedTurn && sameQuestion(scriptedTurn.user, lastUserText(messages))) {
+  if (isScriptedLine(personaId, Math.max(0, userCount - 1), lastUserText(messages))) {
     return createUIMessageStreamResponse({
       stream: scriptedStream(fallbackPayload(context, personaId, messages)),
       headers: { "x-frontdesk-mode": "scripted" },

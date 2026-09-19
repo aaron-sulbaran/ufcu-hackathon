@@ -1,31 +1,32 @@
 "use client";
 // Navy footer with three short link columns into the real site, then the required disclosures.
+// Headings and labels are dictionary keys.
 import { useT } from "@/lib/i18n";
 
 const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
-    heading: "Personal",
+    heading: "nav.personal",
     links: [
-      { label: "Checking", href: "https://ufcu.org/personal/checking" },
-      { label: "Savings", href: "https://ufcu.org/personal/savings" },
-      { label: "Credit Cards", href: "https://ufcu.org/personal/credit-cards" },
-      { label: "Loans", href: "https://ufcu.org/personal/loans" },
+      { label: "footer.checking", href: "https://ufcu.org/personal/checking" },
+      { label: "footer.savings", href: "https://ufcu.org/personal/savings" },
+      { label: "footer.cards", href: "https://ufcu.org/personal/credit-cards" },
+      { label: "footer.loans", href: "https://ufcu.org/personal/loans" },
     ],
   },
   {
-    heading: "Business",
+    heading: "nav.business",
     links: [
-      { label: "Business Checking", href: "https://ufcu.org/business/checking" },
-      { label: "Business Lending", href: "https://ufcu.org/business/lending" },
-      { label: "Locations", href: "https://ufcu.org/locations" },
+      { label: "footer.businessChecking", href: "https://ufcu.org/business/checking" },
+      { label: "footer.businessLending", href: "https://ufcu.org/business/lending" },
+      { label: "nav.locations", href: "https://ufcu.org/locations" },
     ],
   },
   {
-    heading: "Resources",
+    heading: "nav.resources",
     links: [
-      { label: "Rates", href: "https://ufcu.org/rates" },
-      { label: "Contact Us", href: "https://ufcu.org/about/contact-us" },
-      { label: "Help Center", href: "https://ufcu.org/resources" },
+      { label: "footer.rates", href: "https://ufcu.org/rates" },
+      { label: "footer.contact", href: "https://ufcu.org/about/contact-us" },
+      { label: "footer.help", href: "https://ufcu.org/resources" },
     ],
   },
 ];
@@ -38,12 +39,12 @@ export function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-3">
           {COLUMNS.map((col) => (
             <div key={col.heading}>
-              <p className="font-heading text-sm font-bold tracking-wide text-white">{col.heading}</p>
+              <p className="font-heading text-sm font-bold tracking-wide text-white">{t(col.heading)}</p>
               <ul className="mt-3 space-y-2 text-sm">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <a href={link.href} target="_blank" rel="noreferrer" className="text-white/90 hover:text-white">
-                      {link.label}
+                      {t(link.label)}
                     </a>
                   </li>
                 ))}

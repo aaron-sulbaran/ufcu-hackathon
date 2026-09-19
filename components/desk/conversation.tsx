@@ -2,17 +2,19 @@
 // The Front Desk. Left: what the visit has collected so far. Right: the conversation, which
 // reads as notes from a person at a desk, not as a chat thread. The persona context rides
 // along on every request, so the desk answers in the right language for the right person.
+// The selected language always wins: a persona plays in it, and scripted turns redraw when it changes.
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePersona } from "@/lib/context";
-import { getPersona } from "@/lib/ai/personas";
+import { getPersona, scriptedLine } from "@/lib/ai/personas";
 import { AssistantTurn, DeskNote } from "@/components/desk/assistant-turn";
 import { Composer } from "@/components/desk/composer";
 import { QuickReplies } from "@/components/desk/quick-replies";
 import { VisitPanel } from "@/components/desk/visit-panel";
 import { collectVisit } from "@/components/desk/tool-output";
+import { localizeParts, localizeUserText } from "@/components/desk/localize";
 import { useDeskT } from "@/components/desk/strings";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
 
@@ -27,7 +29,7 @@ export function Conversation() {
   const busy = status === "submitted" || status === "streaming";
   // When a persona script is active, its next line leads the quick replies so the demo can be tapped through.
   const userCount = messages.filter((m) => m.role === "user").length;
-  const scriptLead = context.personaId ? getPersona(context.personaId)?.turns[userCount]?.user : undefined;
+  const scriptLead = scriptedLine(context.personaId, userCount, context.lang);
 
   const send = useCallback(
     (text: string, override?: PersonaContext) => {
@@ -38,7 +40,7 @@ export function Conversation() {
   );
 
   // The stored context hydrates in a parent effect, which runs after this one, so the opening
-  // decision waits a tick. Persona chips do not wait: their context comes from the URL.
+  // decision waits a tick. Persona chips wait too: the persona sets who, the stored context says which language.
   const [armed, setArmed] = useState(false);
   useEffect(() => {
     const id = setTimeout(() => setArmed(true), 0);
@@ -50,17 +52,19 @@ export function Conversation() {
   const started = useRef(false);
   const [pending, setPending] = useState<{ text: string; ctx: PersonaContext } | null>(null);
   useEffect(() => {
-    if (started.current) return;
+    if (started.current || !armed) return;
+    started.current = true;
     const persona = getPersona(urlPersona);
     if (persona) {
-      started.current = true;
-      setContext(persona.context);
+      const { audience, goal, personaId } = persona.context;
+      setContext({ audience, goal, personaId });
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPending({ text: persona.turns[0].user, ctx: persona.context });
+      setPending({
+        text: scriptedLine(persona.id, 0, context.lang) ?? persona.turns[0].user,
+        ctx: { audience, goal, personaId, lang: context.lang },
+      });
       return;
     }
-    if (!armed) return;
-    started.current = true;
     // Arrived cold: the greeting below is the first turn, and nothing is sent.
     if (context.audience === "other" && context.goal === "unsure") return;
     // Arrived through the landing sentence: say it out loud, and drop any persona from a
@@ -87,7 +91,12 @@ export function Conversation() {
     bottom.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages.length, status]);
 
-  const visit = collectVisit<ProductCard[], EligibilityResult, ApplicationPrefill>(messages);
+  const lang = context.lang;
+  const shown = useMemo(
+    () => messages.map((m) => (m.role === "assistant" ? { ...m, parts: localizeParts(m.parts, lang) } : m)),
+    [messages, lang],
+  );
+  const visit = useMemo(() => collectVisit<ProductCard[], EligibilityResult, ApplicationPrefill>(shown), [shown]);
   const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant");
   const showReplies = !busy && (messages.length === 0 || lastAssistant !== undefined);
 
@@ -99,10 +108,15 @@ export function Conversation() {
         <div className="flex-1 space-y-8 pb-4">
           {messages.length === 0 && !pending && <DeskNote text={t("desk.greeting")} />}
 
-          {messages.map((message) =>
+          {shown.map((message, index) =>
             message.role === "user" ? (
               <p key={message.id} className="max-w-prose pl-4 text-right leading-relaxed text-ufcu-ink/90 sm:ml-auto">
-                {message.parts.map((part) => (part.type === "text" ? part.text : "")).join("")}
+                {localizeUserText(
+                  message.parts.map((part) => (part.type === "text" ? part.text : "")).join(""),
+                  context.personaId,
+                  shown.slice(0, index).filter((m) => m.role === "user").length,
+                  lang,
+                )}
               </p>
             ) : (
               <AssistantTurn key={message.id} parts={message.parts} />

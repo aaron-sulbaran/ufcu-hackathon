@@ -1,6 +1,7 @@
 // Identity-path rules. Inputs come from the conversation, never from a sensitive field:
 // the assistant asks "do you have a Social Security Number yet?", never for the number itself.
 import rules from "@/data/eligibility.json";
+import { t } from "@/lib/i18n-core";
 import type { EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
 
 export interface EligibilityInput {
@@ -30,8 +31,10 @@ interface BusinessRule {
 const PATHS = rules.paths as Record<IdentityPath, PathRule>;
 const BUSINESS = rules.business as BusinessRule;
 
-export function pathLabel(path: IdentityPath): string {
-  return PATHS[path].label;
+export function pathLabel(path: IdentityPath, lang: Lang = "en"): string {
+  const base = PATHS[path];
+  if (lang === "en") return base.label;
+  return base.i18n?.[lang]?.label ?? base.label;
 }
 
 function localizedDocuments(path: IdentityPath, lang: Lang): string[] {
@@ -67,13 +70,13 @@ function choosePath(input: EligibilityInput): IdentityPath {
   return "branch_assist";
 }
 
-function affiliationNote(affiliation?: string): string {
+function affiliationNote(lang: Lang, affiliation?: string): string {
   const list = rules.affiliations as string[];
-  if (!affiliation) return rules.accRoute.note;
+  if (!affiliation) return t(lang, "desk.elig.anyone");
   const match = list.find(
     (a) => a.toLowerCase() === affiliation.toLowerCase() || a.toLowerCase().includes(affiliation.toLowerCase()),
   );
-  return match ? `You qualify for membership through ${match}.` : rules.accRoute.note;
+  return match ? t(lang, "desk.elig.qualify", { org: match }) : t(lang, "desk.elig.anyone");
 }
 
 export function checkEligibility(input: EligibilityInput, context?: PersonaContext): EligibilityResult {
@@ -81,7 +84,7 @@ export function checkEligibility(input: EligibilityInput, context?: PersonaConte
   const base = PATHS[path];
   const lang: Lang = context?.lang ?? "en";
   const documents = [...localizedDocuments(path, lang)];
-  const notes = [...localizedNotes(path, lang), affiliationNote(input.affiliation)];
+  const notes = [...localizedNotes(path, lang), affiliationNote(lang, input.affiliation)];
   const sourceUrls = [...base.sourceUrls];
 
   if (input.isBusiness) {

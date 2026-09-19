@@ -9,12 +9,20 @@ import { useApplyT } from "@/lib/apply/strings";
 import { MEMBERSHIP_PRODUCT } from "@/lib/apply/rules";
 import { accountsSchema, fieldErrors, type FieldErrors } from "@/lib/apply/schemas";
 import { productById } from "@/lib/products";
+import { usePersona } from "@/lib/context";
+import { getPersona, localizePersona } from "@/lib/ai/personas";
 
 export function StepAccounts() {
   const t = useApplyT();
   const { state, setAccounts, goTo } = useApplication();
   const [errors, setErrors] = useState<FieldErrors>({});
   const accounts = state.accounts;
+  const { context } = usePersona();
+  // A persona's reasons were saved in the language of the conversation; redraw them in the current one.
+  const persona = getPersona(state.prefill?.context?.personaId);
+  const reasons = persona
+    ? { ...state.prefill?.productReasons, ...localizePersona(persona, context.lang).prefill.productReasons }
+    : state.prefill?.productReasons;
 
   const offered = Array.from(
     new Set([MEMBERSHIP_PRODUCT, ...(state.prefill?.products ?? []), ...accounts.products]),
@@ -47,7 +55,7 @@ export function StepAccounts() {
             <BundleCard
               key={id}
               product={product}
-              reason={state.prefill?.productReasons?.[id] ?? product.reason}
+              reason={reasons?.[id] ?? product.reason}
               locked={id === MEMBERSHIP_PRODUCT}
               included={accounts.products.includes(id)}
               onToggle={() => toggle(id)}

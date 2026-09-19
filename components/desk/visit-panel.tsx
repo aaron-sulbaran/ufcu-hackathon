@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard } from "@/lib/types";
 import { pathLabel } from "@/lib/ai/eligibility";
 import { savePrefill } from "@/lib/apply/prefill";
-import { productById } from "@/lib/products";
+import { localizeProduct, productById } from "@/lib/products";
 import { useDeskT } from "@/components/desk/strings";
 
 export interface Visit {
@@ -30,7 +30,11 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
     context.goal === "unsure"
       ? t("desk.sentence.unsure", { audience: t(`audience.${context.audience}`) })
       : t("desk.sentence", { audience: t(`audience.${context.audience}`), goal: t(`goal.${context.goal}`) });
-  const names = (prefill?.products ?? []).map((id) => productById(id)?.name ?? id);
+  const lang = context.lang;
+  const names = (prefill?.products ?? []).map((id) => {
+    const product = productById(id);
+    return product ? localizeProduct(product, lang).name : id;
+  });
   const empty = !products && !eligibility && !prefill;
 
   return (
@@ -67,8 +71,8 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
             <ul className="space-y-2">
               {products.map((p) => (
                 <li key={p.id} className="text-sm leading-snug">
-                  <span className="font-semibold">{p.name}</span>
-                  {p.reason && <span className="block text-ufcu-muted">{p.reason}</span>}
+                  <span className="font-semibold">{localizeProduct(p, lang).name}</span>
+                  {p.reason && <span className="block text-ufcu-muted">{t(p.reason)}</span>}
                 </li>
               ))}
             </ul>
@@ -78,7 +82,7 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
         {eligibility && (
           <section className="space-y-1.5">
             <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bring")}</p>
-            <p className="text-sm font-semibold leading-snug">{pathLabel(eligibility.path)}</p>
+            <p className="text-sm font-semibold leading-snug">{pathLabel(eligibility.path, lang)}</p>
             <ul className="space-y-1 text-sm leading-snug">
               {eligibility.documents.map((doc) => (
                 <li key={doc} className="flex items-start gap-2">
@@ -98,7 +102,7 @@ export function VisitPanel({ context, visit }: { context: PersonaContext; visit:
             <p className="text-sm leading-snug text-white">{t("desk.secure.note")}</p>
             <dl className="space-y-0.5 text-sm text-white">
               {prefill.firstName && <Row label={t("desk.receipt.name")} value={prefill.firstName} />}
-              <Row label={t("desk.receipt.path")} value={pathLabel(prefill.path)} />
+              <Row label={t("desk.receipt.path")} value={pathLabel(prefill.path, lang)} />
               <Row label={t("desk.receipt.products")} value={names.join(", ")} />
             </dl>
             <Link href="/apply" className="btn btn-white w-full" style={{ color: "var(--ufcu-cta)" }}>

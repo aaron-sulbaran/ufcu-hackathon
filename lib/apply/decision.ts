@@ -2,27 +2,22 @@
 // while the person keeps the path that persona was written for; otherwise the rules below decide.
 import type { Decision, IdentityPath, Result, TrustReadout } from "@/lib/types";
 import { findPersonaForPath } from "@/lib/apply/personas";
-import { BRANCH } from "@/lib/apply/rules";
 
+// The item and the steps are i18n keys; the Decision card renders them in the current language.
+// The branch name, address, and hours in those strings match BRANCH in lib/apply/rules.ts.
 function ruleBased(path: IdentityPath, trust?: TrustReadout): Decision {
   if (path === "foreign_status" && trust?.route === "video") {
     return {
       kind: "needs_item",
-      item: "a five-minute video call with a banker to confirm your passport",
-      how: [
-        "Pick one of the times on the verification step and stay on this page.",
-        `Or walk into the ${BRANCH.name} at ${BRANCH.address}, ${BRANCH.hours}.`,
-      ],
+      item: "apply.decision.video.item",
+      how: ["apply.decision.video.how0", "apply.decision.video.how1"],
     };
   }
   if (trust?.route === "branch") {
     return {
       kind: "needs_item",
-      item: "a signature in person",
-      how: [
-        `Bring your documents to the ${BRANCH.name} at ${BRANCH.address}, ${BRANCH.hours}.`,
-        `Call ${BRANCH.phone} first if you want to know what to bring.`,
-      ],
+      item: "apply.decision.branch.item",
+      how: ["apply.decision.branch.how0", "apply.decision.branch.how1"],
     };
   }
   return { kind: "approved" };

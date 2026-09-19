@@ -1,12 +1,16 @@
 "use client";
 // MOCK: the decision comes from lib/apply/decision.ts, not from a core banking system.
+// Its item, steps, and reason are i18n keys (or plain text from an older saved session); t() handles both.
 import { AlertCircle, CheckCircle2, ExternalLink, Info } from "lucide-react";
 import { SimulatedBadge } from "@/components/apply/simulated-badge";
 import { useApplyT } from "@/lib/apply/strings";
 import type { Decision as DecisionValue } from "@/lib/types";
+import { usePersona } from "@/lib/context";
+import { localizeProduct } from "@/lib/products";
 
 export function Decision({ decision }: { decision: DecisionValue }) {
   const t = useApplyT();
+  const { context } = usePersona();
 
   return (
     <div className="card-ufcu flex flex-col gap-5 border-2 border-ufcu-navy p-6">
@@ -28,11 +32,11 @@ export function Decision({ decision }: { decision: DecisionValue }) {
 
       {decision.kind === "needs_item" && (
         <div className="flex flex-col gap-4">
-          <p className="panel-gray text-sm text-ufcu-ink">{decision.item}</p>
+          <p className="panel-gray text-sm text-ufcu-ink">{t(decision.item)}</p>
           <div className="flex flex-col gap-2">
             <h3 className="font-heading text-lg font-semibold text-ufcu-navy">{t("apply.decision.needs.how")}</h3>
             <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-ufcu-ink">
-              {decision.how.map((h) => <li key={h}>{h}</li>)}
+              {decision.how.map((h) => <li key={h}>{t(h)}</li>)}
             </ul>
           </div>
         </div>
@@ -40,14 +44,14 @@ export function Decision({ decision }: { decision: DecisionValue }) {
 
       {decision.kind === "not_yet" && (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-ufcu-ink">{decision.reason}</p>
+          <p className="text-sm text-ufcu-ink">{t(decision.reason)}</p>
           {decision.alternatives.length > 0 && (
             <div className="flex flex-col gap-2">
               <h3 className="font-heading text-lg font-semibold text-ufcu-navy">{t("apply.decision.alternatives")}</h3>
               <ul className="flex flex-col gap-2">
                 {decision.alternatives.map((alt) => (
                   <li key={alt.id} className="card-ufcu flex flex-col gap-1 p-4">
-                    <p className="font-heading text-base font-semibold text-ufcu-navy">{alt.name}</p>
+                    <p className="font-heading text-base font-semibold text-ufcu-navy">{localizeProduct(alt, context.lang).name}</p>
                     <p className="text-sm text-ufcu-ink">{alt.tagline}</p>
                     <a
                       href={alt.sourceUrl}

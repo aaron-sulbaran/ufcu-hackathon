@@ -16,13 +16,13 @@ const EN: Record<Audience, Set3> = {
 };
 
 const ES: Record<Audience, Set3> = {
-  student: ["Como construyo credito?", "Como configuro el deposito directo?", "Donde estan los cajeros del campus?"],
-  international_student: ["Puedo abrir sin SSN?", "Puedo usar Zelle?", "Como recibo dinero del extranjero?"],
-  new_to_austin: ["Que cuenta corriente me conviene?", "Donde esta la sucursal mas cercana?", "Como muevo mi deposito directo?"],
-  switching_banks: ["Que cambia si me cambio?", "Como muevo mi deposito directo?", "Mi dinero esta asegurado?"],
-  business: ["Que documentos necesita una LLC?", "Necesito una cuenta personal primero?", "Cuanto cuesta la cuenta de negocio?"],
-  retiree: ["Que cuenta da mas intereses?", "Puedo hablar con una persona?", "Donde esta la sucursal mas cercana?"],
-  other: ["Quien puede ser miembro?", "Cuenta corriente o de ahorros?", "Cuanto cuesta abrir una cuenta?"],
+  student: ["¿Cómo construyo crédito?", "¿Cómo configuro el depósito directo?", "¿Dónde están los cajeros del campus?"],
+  international_student: ["¿Puedo abrir sin SSN?", "¿Puedo usar Zelle?", "¿Cómo recibo dinero del extranjero?"],
+  new_to_austin: ["¿Qué cuenta corriente me conviene?", "¿Dónde está la sucursal más cercana?", "¿Cómo muevo mi depósito directo?"],
+  switching_banks: ["¿Qué cambia si me cambio?", "¿Cómo muevo mi depósito directo?", "¿Mi dinero está asegurado?"],
+  business: ["¿Qué documentos necesita una LLC?", "¿Necesito una cuenta personal primero?", "¿Cuánto cuesta la cuenta de negocio?"],
+  retiree: ["¿Qué cuenta da más intereses?", "¿Puedo hablar con una persona?", "¿Dónde está la sucursal más cercana?"],
+  other: ["¿Quién puede ser miembro?", "¿Cuenta corriente o de ahorros?", "¿Cuánto cuesta abrir una cuenta?"],
 };
 
 const KO: Record<Audience, Set3> = {
@@ -35,10 +35,30 @@ const KO: Record<Audience, Set3> = {
   other: ["누가 회원이 될 수 있나요?", "체킹과 세이빙스의 차이는?", "계좌 개설 비용은?"],
 };
 
+const PT: Record<Audience, Set3> = {
+  student: ["Como construo crédito?", "Como configuro o depósito direto?", "Onde ficam os caixas eletrônicos do campus?"],
+  international_student: ["Posso abrir conta sem SSN?", "Posso usar o Zelle?", "Como recebo dinheiro do meu país?"],
+  new_to_austin: ["Qual conta corrente combina comigo?", "Onde fica a agência mais próxima?", "Como transfiro meu depósito direto?"],
+  switching_banks: ["O que muda se eu trocar de banco?", "Como transfiro meu depósito direto?", "Meu dinheiro tem seguro?"],
+  business: ["Quais documentos uma LLC precisa?", "Preciso de uma conta pessoal primeiro?", "Quanto custa a conta empresarial?"],
+  retiree: ["Qual conta rende mais?", "Posso falar com uma pessoa?", "Onde fica a agência mais próxima?"],
+  other: ["Quem pode se associar?", "Conta corrente ou poupança?", "Quanto custa abrir uma conta?"],
+};
+
+const FR: Record<Audience, Set3> = {
+  student: ["Comment bâtir mon crédit ?", "Comment configurer le dépôt direct ?", "Où sont les distributeurs du campus ?"],
+  international_student: ["Puis-je ouvrir un compte sans SSN ?", "Puis-je utiliser Zelle ?", "Comment recevoir de l'argent de mon pays ?"],
+  new_to_austin: ["Quel compte courant me convient ?", "Où est l'agence la plus proche ?", "Comment transférer mon dépôt direct ?"],
+  switching_banks: ["Qu'est-ce qui change si je change de banque ?", "Comment transférer mon dépôt direct ?", "Mon argent est-il assuré ?"],
+  business: ["Quels documents pour une LLC ?", "Faut-il d'abord un compte personnel ?", "Combien coûte le compte professionnel ?"],
+  retiree: ["Quel compte rapporte le plus ?", "Puis-je parler à quelqu'un ?", "Où est l'agence la plus proche ?"],
+  other: ["Qui peut devenir membre ?", "Compte courant ou épargne ?", "Combien coûte l'ouverture d'un compte ?"],
+};
+
+const SETS: Record<Lang, Record<Audience, Set3>> = { en: EN, es: ES, ko: KO, pt: PT, fr: FR };
+
 function setFor(lang: Lang, audience: Audience): Set3 {
-  if (lang === "es") return ES[audience];
-  if (lang === "ko") return KO[audience];
-  return EN[audience];
+  return (SETS[lang] ?? EN)[audience];
 }
 
 export function QuickReplies({
