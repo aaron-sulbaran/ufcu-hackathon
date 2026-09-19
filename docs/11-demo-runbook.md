@@ -4,7 +4,8 @@ Run on the presenting laptop with `pnpm dev` already up and http://localhost:300
 window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted turns either way.
 
 ## How the modes work
-- Persona chips (Maya, Joon, Daniela, Robert) follow their script: instant, identical every time,
+- Persona chips live under "See a sample visit" at the bottom of the landing (collapsed; click it
+  once at the start of the demo, or go straight to /desk?persona=joon). They follow their script: instant, identical every time,
   badge "Scripted mode". The quick-reply buttons under each desk turn lead with the script's next
   line, so the whole persona path is taps, no typing.
 - Anything typed in the composer goes to Claude live (needs ANTHROPIC_API_KEY in .env.local). If the
@@ -14,7 +15,8 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
   prefill already replaces an old application, but Start over is the clean habit.
 
 ## Beat 1: Joon (Korean, no SSN) about 90 seconds
-1. Landing: header language switch already set by the chip; click "Try as Joon".
+1. Landing: scroll to "See a sample visit", click it, then "Try it" on Joon (or open
+   /desk?persona=joon directly). The chip sets Korean.
 2. Desk turn 1 arrives in Korean with the eligibility card (passport, I-20, W-8BEN, address) and
    two account cards. Point at "Source on ufcu.org".
 3. Tap the first quick reply (the Zelle question). Desk explains Zelle needs an SSN, with source.
@@ -36,7 +38,7 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
     including the Zelle caveat and "Add your SSN later".
 
 ## Beat 2: Maya (English, first account, credit) about 60 seconds
-1. Header: Start over. Landing: "Try as Maya".
+1. Header: Start over. Landing: "See a sample visit", then "Try it" on Maya (or /desk?persona=maya).
 2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Tap the lead
    quick reply twice. Continue card appears.
 3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Step 3 checks her details
@@ -48,14 +50,16 @@ window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted
    Credit Builder Loan, campus ATMs.
 
 ## Beat 3: live question (15 seconds, only if time)
-Type "Can I use Zelle without an SSN?" in the composer as Maya or Joon. The answer comes from
+On the landing, type "Can I use Zelle without an SSN?" into the "Or just ask" box, or use one of the
+starter pills; the desk opens and answers. One source card shows; the rest sit under "More
+information". The answer comes from
 Claude with the Zelle source card. If wifi is dead the same question gets the scripted card.
 
 ## Beat 4: Daniela (Spanish, business, switching) one slide, not live
 The five minutes are Joon (step-up), Maya (no step-up), the trust slide, the architecture slide, and
 the close. Daniela's Switch Kit lives on the persona slide; only go live if the first two beats
 finish under 3:00.
-"Try as Daniela": Spanish desk, business document checklist, then the Switch Kit under its own
+"See a sample visit" then "Try it" on Daniela: Spanish desk, business document checklist, then the Switch Kit under its own
 heading on the decision screen.
 
 ## Recovery
