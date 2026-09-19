@@ -79,7 +79,7 @@ export function StepPath() {
               {t("apply.checklist.title")}
             </h2>
             <ul className="flex list-disc flex-col gap-1 pl-5 text-sm">
-              {rule.documents.map((d) => <li key={d}>{d}</li>)}
+              {rule.documents.map((d) => <li key={d}>{t(d)}</li>)}
             </ul>
           </div>
           <div className="flex flex-col gap-2">
@@ -88,7 +88,7 @@ export function StepPath() {
               {t("apply.notes.title")}
             </h2>
             <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-muted-foreground">
-              {rule.notes.map((n) => <li key={n}>{n}</li>)}
+              {rule.notes.map((n) => <li key={n}>{t(n)}</li>)}
             </ul>
           </div>
         </CardContent>

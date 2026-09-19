@@ -55,7 +55,7 @@ export function ReviewSummary() {
     <div className="flex flex-col gap-3">
       <Section titleKey="apply.review.path" step={1}>
         <p className="text-sm">{t(rule.labelKey)}</p>
-        <p className="text-sm text-muted-foreground">{rule.documents.join(" - ")}</p>
+        <p className="text-sm text-muted-foreground">{rule.documents.map((d) => t(d)).join(" - ")}</p>
       </Section>
 
       <Section titleKey="apply.review.about" step={2}>

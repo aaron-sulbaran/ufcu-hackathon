@@ -17,6 +17,8 @@ export interface PathRule {
   path: IdentityPath;
   labelKey: string;
   subKey: string;
+  // Translation keys (resolved through useApplyT()), not literal English. Keep entries in this
+  // documented order; it drives the checklist rendering in step 1 and the review summary.
   documents: string[];
   notes: string[];
 }
@@ -28,13 +30,13 @@ export const PATH_RULES: Record<IdentityPath, PathRule> = {
     labelKey: "apply.path.ssn",
     subKey: "apply.path.ssn.sub",
     documents: [
-      "A government photo ID: driver license, state ID, military ID, U.S. passport, or permanent resident card",
-      "Your Social Security number",
-      "Your Austin address (no P.O. boxes)",
+      "apply.doc.gov_id",
+      "apply.doc.ssn",
+      "apply.doc.address",
     ],
     notes: [
-      "Savings opens with $1 and is what makes you a member.",
-      "Anyone can join UFCU. You do not have to be a UT student.",
+      "apply.note.savings_member",
+      "apply.note.anyone_can_join",
     ],
   },
   itin: {
@@ -42,13 +44,13 @@ export const PATH_RULES: Record<IdentityPath, PathRule> = {
     labelKey: "apply.path.itin",
     subKey: "apply.path.itin.sub",
     documents: [
-      "A government photo ID: passport, consular ID, or state ID",
-      "Your ITIN letter or card",
-      "Proof of your Austin address: lease, utility bill, or UT housing letter",
+      "apply.doc.gov_id_itin",
+      "apply.doc.itin",
+      "apply.doc.address_proof",
     ],
     notes: [
-      "No SSN needed to open; you can add one later if you get one.",
-      "Zelle requires an SSN. Wires and transfer services work in the meantime.",
+      "apply.note.no_ssn_needed",
+      "apply.note.zelle_ssn",
     ],
   },
   foreign_status: {
@@ -56,15 +58,15 @@ export const PATH_RULES: Record<IdentityPath, PathRule> = {
     labelKey: "apply.path.foreign_status",
     subKey: "apply.path.foreign_status.sub",
     documents: [
-      "Your passport",
-      "Your I-20 or DS-2019",
-      "W-8BEN acknowledgment, which you check in step 2",
-      "Proof of your Austin address: lease, utility bill, or UT housing letter",
+      "apply.doc.passport",
+      "apply.doc.i20",
+      "apply.doc.w8ben",
+      "apply.doc.address_proof",
     ],
     notes: [
-      "No SSN needed to open; you can add an SSN or ITIN later.",
-      "Zelle requires an SSN. Use a wire or an international transfer service for now.",
-      "A new address often means a five-minute video call with a banker before the account opens.",
+      "apply.note.no_ssn_needed_later",
+      "apply.note.zelle_ssn_intl",
+      "apply.note.new_address_video",
     ],
   },
   minor: {
@@ -72,13 +74,13 @@ export const PATH_RULES: Record<IdentityPath, PathRule> = {
     labelKey: "apply.path.minor",
     subKey: "apply.path.minor.sub",
     documents: [
-      "Your school ID or state ID",
-      "A parent or guardian, with their own government photo ID",
-      "Your Social Security number",
+      "apply.doc.school_id",
+      "apply.doc.guardian",
+      "apply.doc.ssn",
     ],
     notes: [
-      "Teen Checking covers ages 13 to 17.",
-      "A parent or guardian signs with you at the University Branch, so this path finishes in person.",
+      "apply.note.teen_checking",
+      "apply.note.guardian_signs",
     ],
   },
   branch_assist: {
@@ -86,11 +88,11 @@ export const PATH_RULES: Record<IdentityPath, PathRule> = {
     labelKey: "apply.path.branch_assist",
     subKey: "apply.path.branch_assist.sub",
     documents: [
-      "Whatever ID you have, even if it is expired or incomplete",
-      "Anything with your Austin address on it",
+      "apply.doc.any_id",
+      "apply.doc.any_address",
     ],
     notes: [
-      "A banker sorts the rest with you in person. Nothing here is a dead end.",
+      "apply.note.banker_sorts",
     ],
   },
 };
