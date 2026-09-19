@@ -90,7 +90,7 @@ export function ReviewSummary() {
               )}
             </p>
             <p className="text-sm">
-              {t("apply.trust.confidence", { n: trust.confidence })}. {t(`apply.route.${trust.route}.title`)}
+              {t(`apply.route.${trust.route}.title`)}
               {verify.slot ? ` ${t("apply.route.video.picked", { time: verify.slot })}` : ""}
             </p>
           </>

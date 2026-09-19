@@ -3,22 +3,23 @@
 // most people finish there and are never asked for a photo. Stage 2, the step-up, only appears when
 // stage 1 could not confirm everything, and replaces a branch trip with a document and a selfie.
 // Verified once here and reused for every account in the bundle, which is the point we make on the
-// review step.
-import { useEffect, useMemo, useState } from "react";
+// review step. The member sees one outcome card per stage; the four-check readout is demo material
+// and sits collapsed at the bottom of the step.
+import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { StepNav, StepShell } from "@/components/apply/step-shell";
 import { StageOnePanel } from "@/components/apply/stage-one-panel";
+import { OutcomeCard, IdentityOutcome } from "@/components/apply/outcome-card";
 import { VerifyPanel } from "@/components/apply/verify-panel";
 import { TrustReadout } from "@/components/apply/trust-readout";
 import { SimulatedBadge } from "@/components/apply/simulated-badge";
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
-import { stageOne, stageOneRows, mockVerify, type StageOneResult } from "@/lib/apply/mock-verify";
+import { stageOne, mockVerify } from "@/lib/apply/mock-verify";
 import { needsEnrollmentDoc } from "@/lib/apply/rules";
 import { fieldErrors, verifySchema, type FieldErrors } from "@/lib/apply/schemas";
 
-// MOCK: the stage 1 pause and the row reveal stand in for the vendor round trip.
-const REVEAL_MS = [450, 900, 1350];
+// MOCK: the stage 1 pause stands in for the vendor round trip.
 const SETTLE_MS = 1800;
 
 export function StepVerify() {
@@ -26,8 +27,6 @@ export function StepVerify() {
   const { state, personaId, setVerify, update, goTo } = useApplication();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [running, setRunning] = useState(false);
-  const [revealed, setRevealed] = useState(0);
-  const [outcome, setOutcome] = useState<StageOneResult | null>(null);
   const verify = state.verify;
   const verification = state.verification;
   const path = state.path;
@@ -42,8 +41,6 @@ export function StepVerify() {
     void (async () => {
       const { data } = await stageOne({ path, personaId });
       if (cancelled || !data) return;
-      setOutcome(data);
-      REVEAL_MS.forEach((ms, i) => timers.push(setTimeout(() => setRevealed(i + 1), ms)));
       timers.push(
         setTimeout(() => {
           update({
@@ -59,10 +56,8 @@ export function StepVerify() {
     };
   }, [verification, path, personaId, update]);
 
-  const stage = verification?.stage ?? outcome?.stage;
+  const stage = verification?.stage;
   const checking = !verification;
-  const shown = verification ? REVEAL_MS.length : revealed;
-  const rows = useMemo(() => (stage ? stageOneRows(path, stage) : []), [stage, path]);
   const stepUp = verification?.stage === "stepup";
 
   const run = async () => {
@@ -87,14 +82,11 @@ export function StepVerify() {
 
   return (
     <StepShell step={3} titleKey="apply.step3.title" subKey="apply.step3.lead">
-      <StageOnePanel rows={rows} revealed={shown} checking={checking} stage={stage} />
+      {checking && <StageOnePanel />}
 
       {stepUp && (
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <h3>{t("apply.stepup.title")}</h3>
-            <p className="max-w-prose text-ufcu-ink">{t("apply.stepup.why")}</p>
-          </div>
+          <OutcomeCard titleKey="apply.outcome.stepup.title" bodyKey="apply.outcome.stepup.body" />
 
           <div className="panel-gray flex flex-col gap-2">
             <div className="flex items-center justify-between gap-3">
@@ -132,9 +124,8 @@ export function StepVerify() {
       )}
 
       {state.trust && (
-        <TrustReadout
-          readout={state.trust}
-          stage={stage}
+        <IdentityOutcome
+          route={state.trust.route}
           slot={verify.slot}
           onSlot={(slot) => setVerify({ slot })}
           slotError={errors.slot}
@@ -142,6 +133,22 @@ export function StepVerify() {
       )}
 
       <StepNav onContinue={onContinue} disabled={!state.trust} />
+
+      {state.trust && (
+        <details className="border-t border-ufcu-gray-line pt-4">
+          <summary className="w-fit cursor-pointer list-none text-xs font-semibold text-ufcu-muted underline-offset-2 hover:underline [&::-webkit-details-marker]:hidden">
+            {t("apply.demo.how")}
+          </summary>
+          <div className="pt-3">
+            <TrustReadout
+              readout={state.trust}
+              stage={stage}
+              slot={verify.slot}
+              onSlot={(slot) => setVerify({ slot })}
+            />
+          </div>
+        </details>
+      )}
     </StepShell>
   );
 }

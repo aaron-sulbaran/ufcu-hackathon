@@ -8,7 +8,7 @@ import { NextSteps } from "@/components/apply/next-steps";
 import { useApplication } from "@/lib/apply/state";
 import { useApplyT } from "@/lib/apply/strings";
 import { usePersona } from "@/lib/context";
-import { decide } from "@/lib/apply/decision";
+import { creditOutcome, decide } from "@/lib/apply/decision";
 import { nextStepsFor } from "@/lib/apply/next-steps";
 
 export function StepReview() {
@@ -42,9 +42,13 @@ export function StepReview() {
     // Derived from the stored timestamps, so the number survives a refresh on the decision screen.
     const seconds = Math.max(0, Math.floor(((state.finishedAt ?? state.startedAt) - state.startedAt) / 1000));
     const elapsed = { m: Math.floor(seconds / 60), s: String(seconds % 60).padStart(2, "0") };
+    // Additive to the decision: the credit card answers for itself when one was asked for.
+    const credit = creditOutcome({
+      products: state.accounts.products, audience, goal, path: state.path,
+    });
     return (
       <section className="flex flex-col gap-6 py-8">
-        <Decision decision={state.decision} />
+        <Decision decision={state.decision} credit={credit} />
         {state.finishedAt && (
           <div className="panel-gray flex flex-col gap-1">
             <p className="font-heading text-2xl font-bold text-ufcu-cta">{t("apply.done.elapsed", elapsed)}</p>

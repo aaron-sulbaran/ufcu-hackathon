@@ -6,13 +6,58 @@ import { SimulatedBadge } from "@/components/apply/simulated-badge";
 import { useApplyT } from "@/lib/apply/strings";
 import type { Decision as DecisionValue } from "@/lib/types";
 import { usePersona } from "@/lib/context";
-import { localizeProduct } from "@/lib/products";
+import { localizeProduct, productById } from "@/lib/products";
+import type { CreditOutcome } from "@/lib/apply/decision";
 
-export function Decision({ decision }: { decision: DecisionValue }) {
+// The credit card answers for itself, under the main decision. Never "denied": either the card is
+// approved with its one next step, or it is "not yet" with the two products that fix that.
+function CreditBlock({ credit }: { credit: CreditOutcome }) {
+  const t = useApplyT();
+  const { context } = usePersona();
+
+  if (credit.kind === "approved") {
+    return (
+      <div className="card-ufcu flex flex-col gap-2 p-5">
+        <h3 className="flex items-start gap-2 font-heading text-xl font-semibold text-ufcu-navy">
+          <CheckCircle2 className="mt-1 size-5 shrink-0" aria-hidden />
+          {t("apply.credit.approved.title")}
+        </h3>
+        <p className="max-w-prose text-ufcu-ink">{t(credit.step)}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="card-ufcu flex flex-col gap-4 p-5">
+      <h3 className="font-heading text-xl font-semibold text-ufcu-navy">{t("apply.credit.notyet.title")}</h3>
+      <p className="max-w-prose text-ufcu-ink">{t(credit.reason)}</p>
+      <ul className="grid gap-4 sm:grid-cols-2">
+        {credit.alternatives.map((alt) => {
+          const product = alt.productId ? productById(alt.productId) : undefined;
+          const name = product ? localizeProduct(product, context.lang).name : t(alt.titleKey);
+          return (
+            <li key={alt.id} className="panel-gray flex flex-col gap-2">
+              <p className="font-heading text-base font-semibold text-ufcu-navy">{name}</p>
+              <p className="text-sm text-ufcu-ink">{t(alt.bodyKey)}</p>
+              <a href={alt.sourceUrl} target="_blank" rel="noreferrer" className="btn btn-cta mt-auto w-fit">
+                {t("apply.credit.add")}
+                <ExternalLink className="size-3.5" aria-hidden />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="text-sm font-semibold text-ufcu-navy">{t(credit.comeBack)}</p>
+    </div>
+  );
+}
+
+export function Decision({ decision, credit }: { decision: DecisionValue; credit?: CreditOutcome | null }) {
   const t = useApplyT();
   const { context } = usePersona();
 
   return (
+    <>
     <div className="card-ufcu flex flex-col gap-5 border-2 border-ufcu-navy p-6">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
@@ -69,6 +114,9 @@ export function Decision({ decision }: { decision: DecisionValue }) {
           )}
         </div>
       )}
-    </div>
+      </div>
+
+      {credit && <CreditBlock credit={credit} />}
+    </>
   );
 }
