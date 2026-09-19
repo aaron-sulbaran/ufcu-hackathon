@@ -54,15 +54,22 @@ export interface VerifyValues {
   slot: string;
 }
 
-export function verifySchema(path: IdentityPath, hasReadout: boolean, needsSlot: boolean) {
+// Documents are only asked for on the step-up path; when stage 1 confirmed the details there is
+// nothing to capture, so the only requirement left is a readout (and a slot when one is offered).
+export function verifySchema(
+  path: IdentityPath,
+  opts: { stepUp: boolean; hasReadout: boolean; needsSlot: boolean },
+) {
   return z
     .object({ idDoc: z.boolean(), selfie: z.boolean(), enrollment: z.boolean(), slot: z.string() })
     .superRefine((v, ctx) => {
-      if (!v.idDoc || !v.selfie) ctx.addIssue({ code: "custom", message: "apply.err.docs", path: ["idDoc"] });
-      if (needsEnrollmentDoc(path) && !v.enrollment)
-        ctx.addIssue({ code: "custom", message: "apply.err.enrollment", path: ["enrollment"] });
-      if (!hasReadout) ctx.addIssue({ code: "custom", message: "apply.err.verify", path: ["readout"] });
-      if (needsSlot && !v.slot) ctx.addIssue({ code: "custom", message: "apply.err.slot", path: ["slot"] });
+      if (opts.stepUp) {
+        if (!v.idDoc || !v.selfie) ctx.addIssue({ code: "custom", message: "apply.err.docs", path: ["idDoc"] });
+        if (needsEnrollmentDoc(path) && !v.enrollment)
+          ctx.addIssue({ code: "custom", message: "apply.err.enrollment", path: ["enrollment"] });
+      }
+      if (!opts.hasReadout) ctx.addIssue({ code: "custom", message: "apply.err.verify", path: ["readout"] });
+      if (opts.needsSlot && !v.slot) ctx.addIssue({ code: "custom", message: "apply.err.slot", path: ["slot"] });
     });
 }
 

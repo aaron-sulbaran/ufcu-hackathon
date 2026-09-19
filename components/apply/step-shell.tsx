@@ -32,11 +32,13 @@ export function StepNav({
   onContinue,
   continueKey = "apply.next",
   busy = false,
+  disabled = false,
   formError,
 }: {
   onContinue: () => void;
   continueKey?: string;
   busy?: boolean;
+  disabled?: boolean;
   formError?: string;
 }) {
   const t = useApplyT();
@@ -55,7 +57,7 @@ export function StepNav({
         <button
           type="button"
           onClick={onContinue}
-          disabled={busy}
+          disabled={busy || disabled}
           className={`btn btn-cta${hero ? " btn-hero" : ""}`}
         >
           {t(busy ? "apply.submitting" : continueKey)}

@@ -4,6 +4,7 @@
 import { SimulatedBadge } from "@/components/apply/simulated-badge";
 import { RouteCard } from "@/components/apply/route-card";
 import { useApplyT } from "@/lib/apply/strings";
+import type { VerificationStage } from "@/lib/apply/mock-verify";
 import type { TrustCheck, TrustReadout as Readout } from "@/lib/types";
 
 const CHECK_LABELS: Record<TrustCheck["id"], string> = {
@@ -26,13 +27,22 @@ const STATUS_LABEL: Record<TrustCheck["status"], string> = {
   fail: "apply.trust.fail",
 };
 
+// On the instant path no document and no selfie were ever asked for, so these two checks are shown
+// as not needed rather than as a pass for something that never happened.
+const SKIPPED_DETAIL: Partial<Record<TrustCheck["id"], string>> = {
+  document: "apply.detail.doc.notNeeded",
+  face: "apply.detail.face.notNeeded",
+};
+
 export function TrustReadout({
   readout,
+  stage,
   slot,
   onSlot,
   slotError,
 }: {
   readout: Readout;
+  stage?: VerificationStage;
   slot: string;
   onSlot: (slot: string) => void;
   slotError?: string;
@@ -46,28 +56,44 @@ export function TrustReadout({
       </div>
 
       <ul className="flex flex-col gap-2">
-        {readout.checks.map((check) => (
-          <li
-            key={check.id}
-            className="flex items-start justify-between gap-3 border-b border-ufcu-gray-line pb-2 last:border-b-0 last:pb-0"
-          >
-            <span className="flex flex-col gap-0.5">
-              <span className="text-sm font-semibold text-ufcu-navy">{t(CHECK_LABELS[check.id])}</span>
-              <span className="text-sm text-ufcu-muted">{t(check.detail)}</span>
-            </span>
-            <span
-              className={`shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold ${PILL[check.status]}`}
+        {readout.checks.map((check) => {
+          const skipped = stage === "instant" && Boolean(SKIPPED_DETAIL[check.id]);
+          return (
+            <li
+              key={check.id}
+              className="flex items-start justify-between gap-3 border-b border-ufcu-gray-line pb-2 last:border-b-0 last:pb-0"
             >
-              {t(STATUS_LABEL[check.status])}
-            </span>
-          </li>
-        ))}
+              <span className="flex flex-col gap-0.5">
+                <span className="text-sm font-semibold text-ufcu-navy">{t(CHECK_LABELS[check.id])}</span>
+                <span className="text-sm text-ufcu-muted">
+                  {t(skipped ? (SKIPPED_DETAIL[check.id] as string) : check.detail)}
+                </span>
+              </span>
+              <span
+                className={`shrink-0 rounded-full px-3 py-0.5 text-xs font-semibold ${
+                  skipped ? "bg-ufcu-gray-line text-ufcu-muted" : PILL[check.status]
+                }`}
+              >
+                {t(skipped ? "apply.trust.notNeeded" : STATUS_LABEL[check.status])}
+              </span>
+            </li>
+          );
+        })}
       </ul>
 
       <div className="flex items-baseline gap-3">
         <span className="font-heading text-4xl font-bold text-ufcu-navy">{readout.confidence}</span>
         <span className="text-sm text-ufcu-muted">{t("apply.trust.confidenceLabel")}</span>
       </div>
+
+      {stage && (
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-semibold text-ufcu-navy">{t("apply.trust.how")}</p>
+          <p className="max-w-prose text-sm text-ufcu-ink">
+            {t(stage === "instant" ? "apply.trust.how.instant" : "apply.trust.how.stepup")}
+          </p>
+        </div>
+      )}
 
       <RouteCard route={readout.route} slot={slot} onSlot={onSlot} error={slotError} />
 

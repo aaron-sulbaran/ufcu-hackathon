@@ -62,6 +62,13 @@ export function StepPath() {
   const [formError, setFormError] = useState<string | undefined>();
   const rule = pathRule(state.path);
 
+  // A different path means a different identity check, so the stage that already ran no longer
+  // describes this application. Step 3 starts over from stage 1.
+  const onSelect = (next: IdentityPath) => {
+    if (next === state.path) return;
+    update({ path: next, verification: undefined, trust: undefined });
+  };
+
   const onContinue = () => {
     const parsed = pathSchema.safeParse({ path: state.path });
     if (!parsed.success) { setFormError("apply.err.path"); return; }
@@ -72,9 +79,9 @@ export function StepPath() {
     <StepShell step={1} titleKey="apply.step1.title" subKey="apply.cip">
       <div className="flex flex-col gap-3">
         {SELECTABLE_PATHS.map((p) => (
-          <PathOption key={p} path={p} selected={state.path === p} onSelect={(next) => update({ path: next })} />
+          <PathOption key={p} path={p} selected={state.path === p} onSelect={onSelect} />
         ))}
-        <PathOption path="minor" selected={state.path === "minor"} onSelect={(next) => update({ path: next })} />
+        <PathOption path="minor" selected={state.path === "minor"} onSelect={onSelect} />
       </div>
 
       <div className="panel-gray flex flex-col gap-6">

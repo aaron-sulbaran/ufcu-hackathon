@@ -4,10 +4,19 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import type { ApplicationPrefill, Decision, IdentityPath, NextStep, TrustReadout } from "@/lib/types";
 import { clearPrefill, loadPrefill } from "@/lib/apply/prefill";
 import { DEFAULT_PRODUCTS, MEMBERSHIP_PRODUCT } from "@/lib/apply/rules";
+import type { VerificationStage } from "@/lib/apply/mock-verify";
 import type { AboutValues, AccountsValues, VerifyValues } from "@/lib/apply/schemas";
 
 const KEY = "frontdesk.application";
 export const TOTAL_STEPS = 5;
+
+// Which of the two identity stages ran. Persisted so a refresh on step 3 does not repeat stage 1,
+// and so the review step and the decision can say how identity was confirmed. No image data is
+// stored here because none exists: the capture panels only flip a flag.
+export interface VerificationInfo {
+  stage: VerificationStage;
+  stageOneDone: boolean;
+}
 
 export interface ApplicationState {
   prefill: ApplicationPrefill | null;
@@ -16,6 +25,7 @@ export interface ApplicationState {
   about: AboutValues;
   verify: VerifyValues;
   accounts: AccountsValues;
+  verification?: VerificationInfo;
   trust?: TrustReadout;
   decision?: Decision;
   nextSteps?: NextStep[];

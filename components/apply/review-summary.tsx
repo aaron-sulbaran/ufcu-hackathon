@@ -75,10 +75,19 @@ export function ReviewSummary() {
 
       <Section titleKey="apply.review.verify" step={3}>
         {trust ? (
-          <p className="text-sm">
-            {t("apply.trust.confidence", { n: trust.confidence })}. {t(`apply.route.${trust.route}.title`)}
-            {verify.slot ? ` ${t("apply.route.video.picked", { time: verify.slot })}` : ""}
-          </p>
+          <>
+            <p className="text-sm font-semibold text-ufcu-navy">
+              {t(
+                state.verification?.stage === "stepup"
+                  ? "apply.review.identity.stepup"
+                  : "apply.review.identity.instant",
+              )}
+            </p>
+            <p className="text-sm">
+              {t("apply.trust.confidence", { n: trust.confidence })}. {t(`apply.route.${trust.route}.title`)}
+              {verify.slot ? ` ${t("apply.route.video.picked", { time: verify.slot })}` : ""}
+            </p>
+          </>
         ) : (
           <p className="text-sm text-destructive">{t("apply.err.verify")}</p>
         )}
