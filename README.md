@@ -10,7 +10,7 @@ source-linked conversation that gets a person from "I think I need a bank accoun
 trustworthy application in minutes, without ever typing sensitive data into a chatbot.
 
 ## Status
-Planning complete, build day pending. No application code exists yet by design; code starts at 9:25 AM Saturday.
+Build day. The full vertical slice runs locally: landing, Front Desk conversation (live Claude plus scripted personas), Secure Zone application with a simulated trust readout, five languages. See docs/11-demo-runbook.md for the exact demo clicks.
 
 ## Read in this order
 1. [docs/00-brief.md](docs/00-brief.md): the challenge, deliverables, schedule, judging.
@@ -24,11 +24,12 @@ Planning complete, build day pending. No application code exists yet by design; 
 9. [docs/08-brand.md](docs/08-brand.md): UFCU palette, contrast rules, CSS variables.
 10. [docs/09-rubric-map.md](docs/09-rubric-map.md): the official scorecard mapped to what we build and demo.
 11. [docs/10-competitor-switch.md](docs/10-competitor-switch.md): competitor first screens and the switching story.
-12. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
+12. [docs/11-demo-runbook.md](docs/11-demo-runbook.md): exact clicks for the demo, modes, recovery.
+13. [docs/research/](docs/research/): source-linked UFCU research that grounds the assistant.
 
 Coding agents: read [AGENTS.md](AGENTS.md) first.
 
-## Running (once code exists)
+## Running
 ```bash
 pnpm install
 cp .env.example .env.local   # add ANTHROPIC_API_KEY

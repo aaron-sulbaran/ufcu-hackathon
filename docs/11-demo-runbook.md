@@ -1,0 +1,57 @@
+# 11. Demo runbook (exact clicks)
+
+Run on the presenting laptop with `pnpm dev` already up and http://localhost:3000 open in a fresh
+window at 125% zoom. Wifi may be on or off; the persona chips serve the scripted turns either way.
+
+## How the modes work
+- Persona chips (Maya, Joon, Daniela, Robert) follow their script: instant, identical every time,
+  badge "Scripted mode". The quick-reply buttons under each desk turn lead with the script's next
+  line, so the whole persona path is taps, no typing.
+- Anything typed in the composer goes to Claude live (needs ANTHROPIC_API_KEY in .env.local). If the
+  key is missing or the call fails, the same request falls back to a scripted answer with matching
+  ufcu.org cards. Set FRONT_DESK_OFFLINE=1 to force scripted for everything.
+- Before each run: click "Start over" in the Secure Zone header, or clear site data. A new persona's
+  prefill already replaces an old application, but Start over is the clean habit.
+
+## Beat 1: Joon (Korean, no SSN) about 90 seconds
+1. Landing: header language switch already set by the chip; click "Try as Joon".
+2. Desk turn 1 arrives in Korean with the eligibility card (passport, I-20, W-8BEN, address) and
+   two account cards. Point at "Source on ufcu.org".
+3. Tap the first quick reply (the Zelle question). Desk explains Zelle needs an SSN, with source.
+4. Tap the first quick reply again ("I'd like to open"). The Continue card appears and the left
+   panel "Your visit so far" shows name, path, accounts. Say: "Nothing sensitive was typed here."
+5. Click "Continue to secure application". Point at the chrome change and "No AI reads this page."
+6. Step 1: foreign-status path preselected, checklist visible. Continue.
+7. Step 2: click "Use sample data" (labeled Simulated). Point at "Why we ask" and the W-8BEN
+   acknowledgment. Continue.
+8. Step 3: "Use sample" on both panels, Verify. Trust readout: consistency "review", confidence 82,
+   route: video call with a banker. Pick 10:30 AM. Continue.
+9. Step 4: bundle with Savings locked and "Verified once, applied to Savings and Free Checking".
+   Tick the three disclosures (ESIGN, Membership Agreement, W-8BEN). Continue.
+10. Step 5: Submit. Decision: "One more thing", booked slot echoed, elapsed time, next steps
+    including the Zelle caveat and "Add your SSN later".
+
+## Beat 2: Maya (English, first account, credit) about 60 seconds
+1. Header: Start over. Landing: "Try as Maya".
+2. Desk turn 1: three cards (Savings, Simply U, Credit Builder Loan) with reasons. Tap the lead
+   quick reply twice. Continue card appears.
+3. Secure Zone: SSN path preselected. Continue. "Use sample data". Continue. Samples, Verify:
+   instant, confidence 96. Continue. Step 4: "Verified once, applied to Savings, Simply U, and the
+   Credit Builder Loan". Tick. Continue. Submit.
+4. Decision: approved, "Start to finish 0:3x" next to "The same opening today takes two hosts, a
+   branch appointment, and a callback." Next steps: UT Workday direct deposit, digital banking,
+   Credit Builder Loan, campus ATMs.
+
+## Beat 3: live question (15 seconds, only if time)
+Type "Can I use Zelle without an SSN?" in the composer as Maya or Joon. The answer comes from
+Claude with the Zelle source card. If wifi is dead the same question gets the scripted card.
+
+## Beat 4: Daniela (Spanish, business, switching) one slide or 20 seconds live
+"Try as Daniela": Spanish desk, business document checklist, then the Switch Kit under its own
+heading on the decision screen.
+
+## Recovery
+- Blank desk after a chip: reload the page; the auto-start waits for the browser to hydrate.
+- A stale run shows up: click Start over.
+- Live answer rambles: tap a quick reply instead; the scripted path resumes only if the text
+  matches, so prefer chips for the persona beats and typing for the live beat.

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Header } from "@/components/shared/header";
 import { Conversation } from "@/components/desk/conversation";
 import { DeskTitle } from "@/components/desk/desk-title";
+import { SiteFooter } from "@/components/home/site-footer";
 
 export const metadata = {
   title: "Front Desk | UFCU",
@@ -18,6 +19,7 @@ export default function DeskPage() {
           <Conversation />
         </Suspense>
       </main>
+      <SiteFooter />
     </>
   );
 }
