@@ -31,22 +31,37 @@ export function VisitPanel({
   const [mounted, setMounted] = useState(false);
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMounted(true); }, []);
-  const { products, eligibility, prefill } = visit;
+  const { products, prefill } = visit;
   // The conversation owns the prefill now and writes it as it changes, so the panel only reads.
 
+  // Rebuilt every render out of the live context, so switching the goal rewrites the sentence
+  // on the next paint rather than waiting for another turn.
+  const firstName = prefill?.firstName;
+  const audience = t(`audience.${context.audience}`);
   const who =
     context.goal === "unsure"
-      ? t("desk.sentence.unsure", { audience: t(`audience.${context.audience}`) })
-      : t("desk.sentence", { audience: t(`audience.${context.audience}`), goal: t(`goal.${context.goal}`) });
+      ? t("desk.sentence.unsure", { audience })
+      : firstName
+        ? t("desk.visit.named", { name: firstName, audience, goal: t(`goal.${context.goal}`) })
+        : t("desk.sentence", { audience, goal: t(`goal.${context.goal}`) });
+
   const lang = context.lang;
-  const names =
-    products && products.length > 0
-      ? products.map((p) => localizeProduct(p, lang).name)
-      : (prefill?.products ?? []).map((id) => {
-          const product = productById(id);
-          return product ? localizeProduct(product, lang).name : id;
-        });
-  const empty = !products && !eligibility && !prefill;
+  // The handoff carries the whole bundle (savings first); a bare turn only carries its own cards.
+  const fromTurn = new Map((products ?? []).map((p) => [p.id, p]));
+  const ids = prefill?.products ?? [...fromTurn.keys()];
+  const seen = new Set<string>();
+  const items: { id: string; name: string; tagline: string }[] = [];
+  for (const id of ids) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const card = fromTurn.get(id) ?? productById(id);
+    if (!card) continue;
+    const local = localizeProduct(card, lang);
+    // Savings is the membership account, so it reads as a note rather than a pitch.
+    items.push({ id, name: local.name, tagline: id === "savings" ? t("desk.visit.savingsNote") : local.tagline });
+  }
+  // Stable sort, so savings falls to the end and everything else keeps the bundle's order.
+  items.sort((a, b) => Number(a.id === "savings") - Number(b.id === "savings"));
 
   return (
     <aside className="md:sticky md:top-4 md:max-h-[calc(100vh-2rem)] md:w-80 md:shrink-0 md:self-start md:overflow-auto">
@@ -71,6 +86,37 @@ export function VisitPanel({
       </div>
 
       <div className={`${open ? "mt-3 block" : "hidden"} panel-gray space-y-5 text-ufcu-ink md:mt-0 md:block`}>
+        <header className="space-y-1">
+          <h3 className="hidden md:block" style={{ fontSize: "1.25rem", lineHeight: 1.4 }}>
+            {t("desk.visit.title")}
+          </h3>
+          <p className="text-sm text-ufcu-muted">{t("desk.visit.empty")}</p>
+        </header>
+
+        <section className="space-y-1">
+          <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who2")}</p>
+          <p className="text-sm leading-snug" suppressHydrationWarning>
+            {mounted ? who : ""}
+          </p>
+        </section>
+
+        {items.length > 0 && (
+          <section className="space-y-1.5">
+            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bundle2")}</p>
+            <ul className="space-y-2">
+              {items.map((item) => (
+                <li key={item.id} className="flex items-start gap-2">
+                  <span aria-hidden="true" className="mt-2.5 h-px w-2 shrink-0 bg-ufcu-navy" />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold leading-snug text-ufcu-navy">{item.name}</p>
+                    {item.tagline && <p className="truncate text-sm text-ufcu-muted">{item.tagline}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="promo-teal space-y-3" style={{ padding: "1.25rem" }}>
           <h3 style={{ fontSize: "1.125rem", lineHeight: 1.35, fontWeight: 700, color: "#fff" }}>
             {t("desk.ready")}
@@ -98,31 +144,6 @@ export function VisitPanel({
             </Link>
           )}
         </section>
-
-        <div className="space-y-4">
-          <p className="text-base font-semibold text-ufcu-navy">{t("desk.visit")}</p>
-
-          <section className="space-y-1">
-            <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.who")}</p>
-            <p className="text-sm leading-snug" suppressHydrationWarning>{mounted ? who : ""}</p>
-            {prefill?.firstName && <p className="text-sm font-semibold">{prefill.firstName}</p>}
-          </section>
-
-          {empty && <p className="text-sm text-ufcu-muted">{t("desk.visit.empty")}</p>}
-
-          {names.length > 0 && (
-            <section className="space-y-1.5">
-              <p className="text-sm font-semibold text-ufcu-navy">{t("desk.visit.bundle")}</p>
-              <ul className="space-y-1">
-                {names.map((name) => (
-                  <li key={name} className="text-sm leading-snug">
-                    {name}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </div>
       </div>
     </aside>
   );

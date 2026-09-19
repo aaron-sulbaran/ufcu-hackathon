@@ -4,6 +4,7 @@
 import { useState, type ReactNode } from "react";
 import type { ApplicationPrefill, EligibilityResult, ProductCard as Product, ResourceCard as Resource } from "@/lib/types";
 import { ProductCard } from "@/components/cards/product-card";
+import { MembershipTile } from "@/components/cards/membership-tile";
 import { ResourceCard } from "@/components/cards/resource-card";
 import { EligibilityCard } from "@/components/cards/eligibility-card";
 import { ContinueCard } from "@/components/desk/continue-card";
@@ -96,12 +97,16 @@ function withoutProductPages(resources: Resource[], products: Product[]): Resour
 export function AssistantTurn({
   parts,
   shownProducts,
+  showMembership,
   onOpenProduct,
 }: {
   parts: { type: string }[];
   // Every product card this visit has shown, so a page one of them already links to is not
   // repeated as a resource card several turns later.
   shownProducts?: Product[];
+  // True only on the first turn that recommended savings. A later turn that names it again
+  // draws nothing: the left panel already lists membership for the rest of the visit.
+  showMembership?: boolean;
   onOpenProduct?: (product: Product) => void;
 }) {
   const t = useDeskT();
@@ -135,13 +140,19 @@ export function AssistantTurn({
       {parts.map((part, i) => {
         const products = toolOutput<Product[]>(part, "recommendProducts");
         if (products) {
+          // Savings leaves the grid so the turn shows only the accounts that were a choice.
+          const savings = products.find((product) => product.id === "savings");
+          const rest = products.filter((product) => product.id !== "savings");
           return (
-            <div key={`products-${i}`} className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible">
-              {products.map((product) => (
-                <div key={product.id} className="w-64 shrink-0 snap-start sm:w-auto">
-                  <ProductCard product={product} onOpen={onOpenProduct} />
+            <div key={`products-${i}`} className="space-y-3">
+              {rest.length > 0 && (
+                <div className={`grid gap-3 ${rest.length > 1 ? "md:grid-cols-2" : ""}`}>
+                  {rest.map((product) => (
+                    <ProductCard key={product.id} product={product} onOpen={onOpenProduct} />
+                  ))}
                 </div>
-              ))}
+              )}
+              {savings && showMembership && <MembershipTile product={savings} />}
             </div>
           );
         }

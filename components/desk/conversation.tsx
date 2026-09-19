@@ -15,7 +15,7 @@ import { AssistantTurn, DeskNote } from "@/components/desk/assistant-turn";
 import { Composer } from "@/components/desk/composer";
 import { QuickReplies } from "@/components/desk/quick-replies";
 import { VisitPanel } from "@/components/desk/visit-panel";
-import { collectRecommended, collectVisit } from "@/components/desk/tool-output";
+import { collectRecommended, collectVisit, toolOutput } from "@/components/desk/tool-output";
 import { localizeParts, localizeUserText } from "@/components/desk/localize";
 import { useDeskT } from "@/components/desk/strings";
 import type { ApplicationPrefill, Audience, EligibilityResult, Goal, PersonaContext, ProductCard } from "@/lib/types";
@@ -140,6 +140,18 @@ export function Conversation() {
   );
   const visit = useMemo(() => collectVisit<ProductCard[], EligibilityResult, ApplicationPrefill>(shown), [shown]);
   const recommended = collectRecommended<ProductCard>(shown);
+  // The membership tile belongs to the first turn that recommended savings and to no other:
+  // after that the left panel carries it for the rest of the visit.
+  const membershipTurn = useMemo(() => {
+    for (const message of shown) {
+      if (message.role !== "assistant") continue;
+      for (const part of message.parts) {
+        const list = toolOutput<ProductCard[]>(part, "recommendProducts");
+        if (list?.some((product) => product.id === "savings")) return message.id;
+      }
+    }
+    return null;
+  }, [shown]);
   const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant");
   const showReplies = !busy && (messages.length === 0 || lastAssistant !== undefined);
 
@@ -248,6 +260,7 @@ export function Conversation() {
                 key={message.id}
                 parts={message.parts}
                 shownProducts={recommended}
+                showMembership={message.id === membershipTurn}
                 onOpenProduct={openProduct}
               />
             ),

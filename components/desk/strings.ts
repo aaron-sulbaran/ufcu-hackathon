@@ -17,9 +17,15 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.visit.bundle": "What we put together",
   "desk.visit.bring": "What to bring",
   "desk.visit.ready": "Ready to continue",
+  // The panel labels carry their own colon; the older keys stay for the other languages.
+  "desk.visit.who2": "Who you are:",
+  "desk.visit.bundle2": "What we put together:",
+  "desk.visit.savingsNote": "Included with every membership.",
 
   "desk.sentence": "I'm {audience} and I want {goal}.",
   "desk.sentence.unsure": "I'm {audience} and I'm not sure what I need yet.",
+  // Once a name is known the sentence leads with it instead of "I'm".
+  "desk.visit.named": "{name}, {audience} who wants {goal}.",
 
   "desk.secure.note": "Nothing sensitive was typed here; the rest happens on the secure page.",
   "desk.receipt.name": "Name",
@@ -58,6 +64,11 @@ export const DESK_STRINGS: Record<string, string> = {
   "card.open.money_market": "Open a money market account",
   "card.open.certificate": "Open a certificate",
   "card.included": "Included with membership",
+  // Savings never rides in the card grid; it gets the slim tile under it.
+  "card.membership.title": "Savings (Membership Account)",
+  "card.membership.body":
+    "Included with every membership. Opens with $1 and every other account attaches to it.",
+  "card.learn.short": "Learn more",
 };
 
 function fill(text: string, vars?: Record<string, string | number>): string {
