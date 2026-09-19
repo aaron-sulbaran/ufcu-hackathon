@@ -30,7 +30,7 @@ export function Hero() {
         <p className="max-w-3xl text-ufcu-ink [hyphens:none]">{t("landing.sub")}</p>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-5 border-t border-ufcu-gray-line pt-8">
         <h2>{t("landing.h2")}</h2>
         <PersonaSentence />
       </div>
