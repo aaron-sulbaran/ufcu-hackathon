@@ -96,7 +96,7 @@ export function SiteFooter() {
       <section className="relative overflow-hidden bg-ufcu-navy">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-[18%] -top-[10%] h-[140%] w-[70%] rounded-full border-[70px] border-white/5"
+          className="pointer-events-none absolute -right-[28%] -top-[25%] h-[170%] w-[62%] rounded-full border-[90px] border-white/[0.06]"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">

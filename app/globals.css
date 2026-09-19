@@ -253,3 +253,8 @@ a:hover { text-decoration: underline; }
 .promo-teal a:not(.btn) { color: #fff; }
 input[type="radio"], input[type="checkbox"] { accent-color: var(--ufcu-navy); width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) { .btn, .hdr-block { transition: none; } }
+
+/* Footer sits on orange and navy: the global heading and link colors must not win there. */
+footer h2, footer h3, footer p, footer span { color: #fff; }
+footer a { color: #fff; }
+footer a:hover { color: var(--ufcu-secondary-lighter); }
