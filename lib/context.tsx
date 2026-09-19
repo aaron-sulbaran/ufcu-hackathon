@@ -18,6 +18,8 @@ const PersonaCtx = createContext<Ctx | null>(null);
 export function PersonaProvider({ children }: { children: ReactNode }) {
   const [context, setRaw] = useState<PersonaContext>(DEFAULT);
   useEffect(() => {
+    // Hydrate from localStorage once; the sync setState is intentional (external store, one-shot).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     try { const raw = localStorage.getItem(KEY); if (raw) setRaw({ ...DEFAULT, ...JSON.parse(raw) }); } catch {}
   }, []);
   const setContext = (next: Partial<PersonaContext>) =>
