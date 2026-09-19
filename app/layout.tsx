@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4, Noto_Sans_KR } from "next/font/google";
+import { Inter, Montserrat, Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { PersonaProvider } from "@/lib/context";
 
-const inter = Inter({ variable: "--font-sans", subsets: ["latin", "latin-ext"] });
-const serif = Source_Serif_4({ variable: "--font-heading-serif", subsets: ["latin"] });
+const inter = Inter({ variable: "--font-sans", subsets: ["latin", "latin-ext"], weight: ["300", "400", "500", "600", "700"] });
+const montserrat = Montserrat({ variable: "--font-heading-sans", subsets: ["latin", "latin-ext"], weight: ["600", "700"] });
 const notoKr = Noto_Sans_KR({ variable: "--font-kr", subsets: ["latin"], weight: ["400", "600"] });
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif.variable} ${notoKr.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${notoKr.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
         <PersonaProvider>{children}</PersonaProvider>
       </body>

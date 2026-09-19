@@ -162,7 +162,93 @@
   --color-ufcu-accent: var(--ufcu-accent); --color-ufcu-accent-subtle: var(--ufcu-accent-subtle);
   --color-ufcu-accent-lighter: var(--ufcu-accent-lighter); --color-ufcu-accent-darker: var(--ufcu-accent-darker);
   --color-ufcu-accent-darkest: var(--ufcu-accent-darkest);
-  --font-heading: var(--font-heading-serif);
 }
 /* Contrast rules: white text only on primary, primary-darkest, secondary-darker, accent-darker.
    Never white body text on #EF6820 or #F2780C. Links in body use secondary-darker. */
+
+/* ---------- ufcu.org fidelity layer (DESIGN.md). Site values from /dist/css/main.min.css ---------- */
+:root {
+  --ufcu-navy: #121f48;        /* site primary: page bands, headings, nav */
+  --ufcu-ink: #121926;         /* body text */
+  --ufcu-cta: #ce4b0d;         /* filled buttons, the "u" accent */
+  --ufcu-cta-hover: #eb7231;
+  --ufcu-brand-orange: #ff671d;
+  --ufcu-link: #005f73;        /* body links and the teal promo card */
+  --ufcu-purple: #6247aa;      /* Log In block */
+  --ufcu-gray-band: #ededed;
+  --ufcu-gray-panel: #f3f3f3;
+  --ufcu-gray-line: #e6e6e6;
+  --ufcu-muted: #6c7689;
+
+  --foreground: var(--ufcu-ink);
+  --card-foreground: var(--ufcu-ink);
+  --primary: var(--ufcu-navy);
+  --muted-foreground: var(--ufcu-muted);
+  --border: var(--ufcu-gray-line);
+  --input: var(--ufcu-navy);
+  --ring: var(--ufcu-navy);
+  --radius: 0.5rem;
+  --shadow-md: rgba(0, 0, 0, 0.1) 0 4px 6px -1px, rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
+}
+@theme inline {
+  --color-ufcu-navy: var(--ufcu-navy); --color-ufcu-ink: var(--ufcu-ink);
+  --color-ufcu-cta: var(--ufcu-cta); --color-ufcu-cta-hover: var(--ufcu-cta-hover);
+  --color-ufcu-brand-orange: var(--ufcu-brand-orange); --color-ufcu-link: var(--ufcu-link);
+  --color-ufcu-purple: var(--ufcu-purple); --color-ufcu-gray-band: var(--ufcu-gray-band);
+  --color-ufcu-gray-panel: var(--ufcu-gray-panel); --color-ufcu-gray-line: var(--ufcu-gray-line);
+  --color-ufcu-muted: var(--ufcu-muted);
+  --font-heading: var(--font-heading-sans);
+  --shadow-ufcu: var(--shadow-md);
+}
+
+/* Type: Montserrat headings, Inter body, per the site's own scale. */
+body { font-size: 0.875rem; line-height: 1.57; color: var(--ufcu-ink); }
+@media (min-width: 75em) { body { font-size: 1rem; line-height: 1.8125; } }
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 { font-family: var(--font-heading-sans); font-weight: 700; color: var(--ufcu-navy); text-wrap: balance; }
+h1, .h1 { font-size: clamp(2.375rem, 5vw, 2.5rem); line-height: 1.25; }
+h2, .h2 { font-size: clamp(1.875rem, 5vw, 2rem); line-height: 1.3; }
+h3, .h3 { font-size: clamp(1.5rem, 4.5vw, 1.75rem); font-weight: 600; line-height: 1.4; }
+h4, .h4 { font-size: 1.125rem; line-height: 1.4; }
+.page-band h1 { font-size: clamp(2.375rem, 5vw, 3.125rem); line-height: 1; color: #fff; margin: 0; }
+a { color: var(--ufcu-link); }
+a:hover { text-decoration: underline; }
+.u { color: var(--ufcu-cta); }
+.disclaimer { font-size: 0.75rem; font-weight: 300; }
+
+/* Buttons: the site has one shape, a pill. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 0; border-radius: 110px;
+  font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; line-height: 1.5; padding: 12px 20px; cursor: pointer;
+  text-decoration: none; transition: background 0.4s ease-out, border-color 0.4s ease-out, color 0.2s ease-out; }
+.btn:focus-visible { outline: 2px solid var(--ufcu-navy); outline-offset: 2px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-cta { background: var(--ufcu-cta); color: #fff; }
+.btn-cta:hover, .btn-cta:focus-visible { background: var(--ufcu-cta-hover); color: #fff; text-decoration: none; }
+.btn-white { background: #fff; color: var(--ufcu-cta); border: 2px solid #fff; font-weight: 700; padding: 10px 24px; }
+.btn-white:hover, .btn-white:focus-visible { border-color: var(--ufcu-cta); text-decoration: none; }
+.btn-outline { background: transparent; color: var(--ufcu-navy); border: 2px solid var(--ufcu-navy); padding: 10px 20px; }
+.btn-outline:hover, .btn-outline:focus-visible { background: var(--ufcu-navy); color: #fff; text-decoration: none; }
+.btn-outline-white { background: transparent; color: #fff; border: 2px solid #fff; padding: 10px 20px; }
+.btn-outline-white:hover { background: #fff; color: var(--ufcu-navy); }
+.btn-hero { min-width: 200px; }
+
+/* Blocks in the header, the site's navy and purple action cells. */
+.hdr-block { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0 1.25rem; height: 100%; color: #fff; font-family: var(--font-sans); font-weight: 600; font-size: 0.9375rem; text-decoration: none; }
+.hdr-block:hover { text-decoration: none; filter: brightness(1.08); }
+.hdr-block-navy { background: var(--ufcu-navy); }
+.hdr-block-purple { background: var(--ufcu-purple); }
+
+/* Page band and breadcrumb, straight from the site. */
+.page-band { background: var(--ufcu-navy); color: #fff; padding: 2rem 0; }
+.breadcrumb { color: var(--ufcu-muted); font-size: 0.875rem; padding: 8px 0 16px; }
+.breadcrumb a { color: var(--ufcu-muted); }
+.breadcrumb .current { color: var(--ufcu-ink); }
+
+/* Inputs and panels. */
+.input-ufcu { height: 44px; width: 100%; border: 1px solid var(--ufcu-navy); border-radius: 4px; padding: 0 12px; background: #fff; color: var(--ufcu-ink); font-family: var(--font-sans); font-size: 1rem; }
+.input-ufcu:focus-visible { outline: 2px solid var(--ufcu-navy); outline-offset: 1px; }
+.panel-gray { background: var(--ufcu-gray-panel); border-radius: 8px; padding: 1.5rem; }
+.card-ufcu { background: #fff; border: 1px solid var(--ufcu-gray-line); border-radius: 12px; }
+.promo-teal { background: var(--ufcu-link); color: #fff; border-radius: 16px; padding: 2rem; }
+.promo-teal a { color: #fff; }
+input[type="radio"], input[type="checkbox"] { accent-color: var(--ufcu-navy); width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) { .btn, .hdr-block { transition: none; } }
