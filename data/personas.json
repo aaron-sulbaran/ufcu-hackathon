@@ -349,16 +349,16 @@
               "result": {
                 "path": "foreign_status",
                 "documents": [
-                  "Passport",
-                  "I-20 or DS-2019",
-                  "W-8BEN acknowledgment (certificate of foreign status)",
-                  "Proof of your Austin address, such as a lease or utility bill"
+                  "여권",
+                  "I-20 또는 DS-2019",
+                  "W-8BEN 확인서(외국인 신분 증명서)",
+                  "오스틴 주소 증빙 서류(임대 계약서 또는 공과금 고지서 등)"
                 ],
                 "notes": [
-                  "No SSN needed to open; add an SSN or ITIN later",
-                  "Zelle requires an SSN, per UFCU branch staff; use a transfer to a non-UFCU member, or a wire, instead",
-                  "A banker at the University Branch completes this path in person or by video.",
-                  "You qualify for membership through University of Texas at Austin."
+                  "개설 시 SSN이 필요하지 않으며, 나중에 SSN이나 ITIN을 추가하실 수 있습니다",
+                  "UFCU 지점 직원에 따르면 Zelle에는 SSN이 필요하므로, 대신 UFCU 비회원에게 보내는 송금이나 전신 송금(wire)을 이용하세요",
+                  "University Branch의 은행원이 대면 또는 화상으로 이 절차를 도와드립니다.",
+                  "University of Texas at Austin 소속으로 회원 자격이 있습니다."
                 ],
                 "sourceUrls": [
                   "https://ufcu.org/open-account",
@@ -751,22 +751,22 @@
               "result": {
                 "path": "ssn",
                 "documents": [
-                  "Texas driver license or state ID",
-                  "Social Security Number",
-                  "An email address and a phone number",
-                  "Certificate of Formation filed with the Texas Secretary of State (LLC, PLLC, corporation, LP)",
-                  "EIN letter, or an SSN for a single-member LLC or sole proprietorship",
-                  "Assumed Name Certificate (DBA) if the business name is not the owner's name",
-                  "Government-issued photo ID for every signer and every 25% owner"
+                  "Licencia de conducir de Texas o identificación estatal",
+                  "Número de Seguro Social",
+                  "Un correo electrónico y un número de teléfono",
+                  "Certificado de Constitución presentado ante la Secretaría de Estado de Texas (LLC, PLLC, corporación, LP)",
+                  "Carta de EIN, o un SSN si es una LLC de un solo miembro o negocio propio (sole proprietorship)",
+                  "Certificado de Nombre Supuesto (DBA) si el nombre del negocio no es el del propietario",
+                  "Identificación con fotografía emitida por el gobierno para cada firmante y cada propietario con el 25% o más"
                 ],
                 "notes": [
-                  "You must be 18 or older to open online.",
-                  "Savings opens with $1 and is the account that carries your membership.",
-                  "Checking accounts open with $0.",
-                  "No affiliation? Anyone can join UFCU through the American Consumer Council for free, handled during enrollment.",
-                  "Membership opens with a personal Savings account first; the business account attaches to it.",
-                  "The Beneficial Ownership Rule applies to entities filed with a Secretary of State, not to sole proprietorships.",
-                  "Business accounts do not get Zelle, per UFCU branch staff."
+                  "Debe tener 18 años o más para abrir la cuenta en línea.",
+                  "La cuenta de ahorros se abre con $1 y es la cuenta que lleva su membresía.",
+                  "Las cuentas de cheques se abren con $0.",
+                  "¿Sin afiliación? Cualquier persona puede unirse a UFCU de forma gratuita a través del American Consumer Council, gestionado durante la inscripción.",
+                  "La membresía se abre primero con una cuenta de ahorros personal; la cuenta de negocio se conecta a esa cuenta.",
+                  "La Regla de Titularidad Beneficiaria (Beneficial Ownership Rule) aplica a entidades registradas ante la Secretaría de Estado, no a negocios propios (sole proprietorships).",
+                  "Las cuentas de negocio no tienen Zelle, según el personal de las sucursales de UFCU."
                 ],
                 "sourceUrls": [
                   "https://ufcu.org/open-account",

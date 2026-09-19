@@ -1,7 +1,7 @@
 // Identity-path rules. Inputs come from the conversation, never from a sensitive field:
 // the assistant asks "do you have a Social Security Number yet?", never for the number itself.
 import rules from "@/data/eligibility.json";
-import type { EligibilityResult, IdentityPath } from "@/lib/types";
+import type { EligibilityResult, IdentityPath, Lang, PersonaContext } from "@/lib/types";
 
 export interface EligibilityInput {
   hasSsn?: boolean;
@@ -12,10 +12,48 @@ export interface EligibilityInput {
   isBusiness?: boolean;
 }
 
-const PATHS = rules.paths as Record<IdentityPath, { label: string; documents: string[]; notes: string[]; sourceUrls: string[] }>;
+interface PathRule {
+  label: string;
+  documents: string[];
+  notes: string[];
+  sourceUrls: string[];
+  i18n?: Partial<Record<Exclude<Lang, "en">, { label: string; documents: string[]; notes: string[] }>>;
+}
+
+interface BusinessRule {
+  documents: string[];
+  notes: string[];
+  sourceUrls: string[];
+  i18n?: Partial<Record<Exclude<Lang, "en">, { documents: string[]; notes: string[] }>>;
+}
+
+const PATHS = rules.paths as Record<IdentityPath, PathRule>;
+const BUSINESS = rules.business as BusinessRule;
 
 export function pathLabel(path: IdentityPath): string {
   return PATHS[path].label;
+}
+
+function localizedDocuments(path: IdentityPath, lang: Lang): string[] {
+  const base = PATHS[path];
+  if (lang === "en") return base.documents;
+  return base.i18n?.[lang]?.documents ?? base.documents;
+}
+
+function localizedNotes(path: IdentityPath, lang: Lang): string[] {
+  const base = PATHS[path];
+  if (lang === "en") return base.notes;
+  return base.i18n?.[lang]?.notes ?? base.notes;
+}
+
+function localizedBusinessDocuments(lang: Lang): string[] {
+  if (lang === "en") return BUSINESS.documents;
+  return BUSINESS.i18n?.[lang]?.documents ?? BUSINESS.documents;
+}
+
+function localizedBusinessNotes(lang: Lang): string[] {
+  if (lang === "en") return BUSINESS.notes;
+  return BUSINESS.i18n?.[lang]?.notes ?? BUSINESS.notes;
 }
 
 function choosePath(input: EligibilityInput): IdentityPath {
@@ -38,16 +76,17 @@ function affiliationNote(affiliation?: string): string {
   return match ? `You qualify for membership through ${match}.` : rules.accRoute.note;
 }
 
-export function checkEligibility(input: EligibilityInput): EligibilityResult {
+export function checkEligibility(input: EligibilityInput, context?: PersonaContext): EligibilityResult {
   const path = choosePath(input);
   const base = PATHS[path];
-  const documents = [...base.documents];
-  const notes = [...base.notes, affiliationNote(input.affiliation)];
+  const lang: Lang = context?.lang ?? "en";
+  const documents = [...localizedDocuments(path, lang)];
+  const notes = [...localizedNotes(path, lang), affiliationNote(input.affiliation)];
   const sourceUrls = [...base.sourceUrls];
 
   if (input.isBusiness) {
-    documents.push(...rules.business.documents);
-    notes.push(...rules.business.notes);
+    documents.push(...localizedBusinessDocuments(lang));
+    notes.push(...localizedBusinessNotes(lang));
     for (const url of rules.business.sourceUrls) if (!sourceUrls.includes(url)) sourceUrls.push(url);
   }
 

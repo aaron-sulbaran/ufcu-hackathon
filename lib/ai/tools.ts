@@ -95,7 +95,7 @@ export function buildTools(context: PersonaContext): ToolSet {
         affiliation: z.string().optional().describe("School or employer, for example University of Texas at Austin"),
         isBusiness: z.boolean().optional().describe("True if they are opening a business account"),
       }),
-      execute: async (input): Promise<EligibilityResult> => runEligibility(input),
+      execute: async (input): Promise<EligibilityResult> => runEligibility(input, context),
     }),
 
     startApplication: tool({

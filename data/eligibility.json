@@ -15,7 +15,61 @@
       "sourceUrls": [
         "https://ufcu.org/open-account",
         "https://ufcu.org/personal/savings/overview"
-      ]
+      ],
+      "i18n": {
+        "es": {
+          "label": "Camino estándar, usando su Número de Seguro Social",
+          "documents": [
+            "Licencia de conducir de Texas o identificación estatal",
+            "Número de Seguro Social",
+            "Un correo electrónico y un número de teléfono"
+          ],
+          "notes": [
+            "Debe tener 18 años o más para abrir la cuenta en línea.",
+            "La cuenta de ahorros se abre con $1 y es la cuenta que lleva su membresía.",
+            "Las cuentas de cheques se abren con $0."
+          ]
+        },
+        "ko": {
+          "label": "표준 경로: 사회보장번호(SSN) 이용",
+          "documents": [
+            "텍사스 운전면허증 또는 주 신분증",
+            "사회보장번호(SSN)",
+            "이메일 주소와 전화번호"
+          ],
+          "notes": [
+            "온라인으로 계좌를 개설하려면 만 18세 이상이어야 합니다.",
+            "저축 계좌는 $1로 개설되며, 회원 자격을 유지하는 계좌입니다.",
+            "체킹 계좌는 $0로 개설됩니다."
+          ]
+        },
+        "pt": {
+          "label": "Caminho padrão, usando seu Número de Seguro Social (SSN)",
+          "documents": [
+            "Carteira de motorista do Texas ou identidade estadual",
+            "Número de Seguro Social (SSN)",
+            "Um endereço de e-mail e um número de telefone"
+          ],
+          "notes": [
+            "Você deve ter 18 anos ou mais para abrir a conta on-line.",
+            "A conta poupança é aberta com $1 e é a conta que mantém sua associação.",
+            "As contas correntes são abertas com $0."
+          ]
+        },
+        "fr": {
+          "label": "Parcours standard, avec votre numéro de sécurité sociale (SSN)",
+          "documents": [
+            "Permis de conduire du Texas ou pièce d'identité de l'État",
+            "Numéro de sécurité sociale (SSN)",
+            "Une adresse e-mail et un numéro de téléphone"
+          ],
+          "notes": [
+            "Vous devez avoir 18 ans ou plus pour ouvrir un compte en ligne.",
+            "Le compte d'épargne s'ouvre avec 1 $ et c'est ce compte qui porte votre adhésion.",
+            "Les comptes courants s'ouvrent avec 0 $."
+          ]
+        }
+      }
     },
     "itin": {
       "label": "ITIN path, for members with a taxpayer number instead of a Social Security Number",
@@ -32,7 +86,61 @@
       "sourceUrls": [
         "https://ufcu.org/open-account",
         "https://ufcu.org/resources/member-services/banking/zelle"
-      ]
+      ],
+      "i18n": {
+        "es": {
+          "label": "Camino ITIN, para miembros con un número de identificación fiscal en lugar de un Número de Seguro Social",
+          "documents": [
+            "Identificación con fotografía emitida por el gobierno",
+            "Número de Identificación Personal del Contribuyente (ITIN)",
+            "Comprobante de su domicilio en Austin"
+          ],
+          "notes": [
+            "La página de apertura de cuenta acepta un Número de Seguro Social o un ITIN.",
+            "Puede agregar un Número de Seguro Social más adelante si obtiene uno.",
+            "La inscripción en Zelle requiere un Número de Seguro Social, según el personal de las sucursales de UFCU."
+          ]
+        },
+        "ko": {
+          "label": "ITIN 경로: 사회보장번호 대신 개인 납세자 번호(ITIN)를 가진 회원용",
+          "documents": [
+            "정부 발급 사진이 부착된 신분증",
+            "개인 납세자 번호(ITIN)",
+            "오스틴 주소 증빙 서류"
+          ],
+          "notes": [
+            "계좌 개설 페이지에서는 사회보장번호 또는 ITIN을 모두 인정합니다.",
+            "나중에 사회보장번호를 받으시면 추가하실 수 있습니다.",
+            "UFCU 지점 직원에 따르면 Zelle 등록에는 사회보장번호가 필요합니다."
+          ]
+        },
+        "pt": {
+          "label": "Caminho ITIN, para associados com um número de identificação fiscal em vez de um Número de Seguro Social",
+          "documents": [
+            "Identidade com foto emitida pelo governo",
+            "Número de Identificação Individual do Contribuinte (ITIN)",
+            "Comprovante de endereço em Austin"
+          ],
+          "notes": [
+            "A página de abertura de conta aceita um Número de Seguro Social ou um ITIN.",
+            "Você pode adicionar um Número de Seguro Social mais tarde, caso obtenha um.",
+            "Segundo a equipe das agências da UFCU, o cadastro no Zelle exige um Número de Seguro Social."
+          ]
+        },
+        "fr": {
+          "label": "Parcours ITIN, pour les membres ayant un numéro d'identification fiscale au lieu d'un numéro de sécurité sociale",
+          "documents": [
+            "Pièce d'identité avec photo délivrée par le gouvernement",
+            "Numéro d'identification fiscal individuel (ITIN)",
+            "Justificatif de votre adresse à Austin"
+          ],
+          "notes": [
+            "La page d'ouverture de compte accepte un numéro de sécurité sociale ou un ITIN.",
+            "Vous pourrez ajouter un numéro de sécurité sociale plus tard si vous en obtenez un.",
+            "Selon le personnel des agences UFCU, l'inscription à Zelle nécessite un numéro de sécurité sociale."
+          ]
+        }
+      }
     },
     "foreign_status": {
       "label": "Foreign status path, for international students and others without a US taxpayer number",
@@ -51,7 +159,65 @@
         "https://ufcu.org/open-account",
         "https://ufcu.org/resources/member-services/banking/zelle",
         "https://ufcu.org/locations/details/university"
-      ]
+      ],
+      "i18n": {
+        "es": {
+          "label": "Camino de estatus extranjero, para estudiantes internacionales y otras personas sin número de contribuyente de EE. UU.",
+          "documents": [
+            "Pasaporte",
+            "I-20 o DS-2019",
+            "Reconocimiento W-8BEN (certificado de estatus extranjero)",
+            "Comprobante de su domicilio en Austin, como un contrato de alquiler o una factura de servicios"
+          ],
+          "notes": [
+            "No necesita un SSN para abrir la cuenta; puede agregar un SSN o un ITIN más adelante",
+            "Zelle requiere un SSN, según el personal de las sucursales de UFCU; use en su lugar una transferencia a alguien que no sea miembro de UFCU, o una transferencia bancaria",
+            "Un asesor de la sucursal de University Branch completa este trámite en persona o por video."
+          ]
+        },
+        "ko": {
+          "label": "외국인 신분 경로: 미국 납세자 번호가 없는 유학생 등을 위한 경로",
+          "documents": [
+            "여권",
+            "I-20 또는 DS-2019",
+            "W-8BEN 확인서(외국인 신분 증명서)",
+            "오스틴 주소 증빙 서류(임대 계약서 또는 공과금 고지서 등)"
+          ],
+          "notes": [
+            "개설 시 SSN이 필요하지 않으며, 나중에 SSN이나 ITIN을 추가하실 수 있습니다",
+            "UFCU 지점 직원에 따르면 Zelle에는 SSN이 필요하므로, 대신 UFCU 비회원에게 보내는 송금이나 전신 송금(wire)을 이용하세요",
+            "University Branch의 은행원이 대면 또는 화상으로 이 절차를 도와드립니다."
+          ]
+        },
+        "pt": {
+          "label": "Caminho de status estrangeiro, para estudantes internacionais e outras pessoas sem número de contribuinte dos EUA",
+          "documents": [
+            "Passaporte",
+            "I-20 ou DS-2019",
+            "Reconhecimento W-8BEN (certificado de status estrangeiro)",
+            "Comprovante de endereço em Austin, como contrato de aluguel ou conta de serviços públicos"
+          ],
+          "notes": [
+            "Não é necessário SSN para abrir a conta; adicione um SSN ou ITIN mais tarde",
+            "Segundo a equipe das agências da UFCU, o Zelle exige um SSN; use em vez disso uma transferência para quem não é membro da UFCU, ou uma transferência bancária (wire)",
+            "Um gerente da University Branch conclui esse processo pessoalmente ou por vídeo."
+          ]
+        },
+        "fr": {
+          "label": "Parcours pour statut étranger, pour les étudiants internationaux et les autres personnes sans numéro de contribuable américain",
+          "documents": [
+            "Passeport",
+            "I-20 ou DS-2019",
+            "Attestation W-8BEN (certificat de statut étranger)",
+            "Justificatif de votre adresse à Austin, comme un bail ou une facture de services publics"
+          ],
+          "notes": [
+            "Aucun SSN n'est nécessaire pour ouvrir le compte ; vous pourrez ajouter un SSN ou un ITIN plus tard",
+            "Selon le personnel des agences UFCU, Zelle nécessite un SSN ; utilisez plutôt un virement vers une personne non membre d'UFCU, ou un virement télégraphique (wire)",
+            "Un conseiller de la University Branch termine cette démarche en personne ou par visioconférence."
+          ]
+        }
+      }
     },
     "minor": {
       "label": "Under 18, opened with a parent or guardian",
@@ -68,7 +234,61 @@
       "sourceUrls": [
         "https://ufcu.org/personal/checking/overview",
         "https://ufcu.org/open-account"
-      ]
+      ],
+      "i18n": {
+        "es": {
+          "label": "Menor de 18 años, abierta con un padre, madre o tutor",
+          "documents": [
+            "Su identificación con fotografía o identificación escolar",
+            "Número de Seguro Social",
+            "Un padre, madre, tutor u otro adulto como cotitular, con su identificación"
+          ],
+          "notes": [
+            "Teen Checking está disponible para edades de 13 a 17 años y se convierte en Free Checking a los 18.",
+            "Un padre, madre o tutor debe ser cotitular de la cuenta.",
+            "Solo se necesitan un SSN y un tutor para abrir Teen Checking en una sucursal."
+          ]
+        },
+        "ko": {
+          "label": "18세 미만: 부모 또는 보호자와 함께 개설",
+          "documents": [
+            "본인의 사진 신분증 또는 학생증",
+            "사회보장번호",
+            "공동 명의자로 참여할 부모, 보호자 또는 다른 성인과 그 신분증"
+          ],
+          "notes": [
+            "Teen Checking은 13~17세를 대상으로 하며, 18세가 되면 Free Checking으로 전환됩니다.",
+            "부모 또는 보호자가 계좌의 공동 명의자여야 합니다.",
+            "지점에서 Teen Checking을 개설하려면 SSN과 보호자만 있으면 됩니다."
+          ]
+        },
+        "pt": {
+          "label": "Menores de 18 anos, abertura com um dos pais ou responsável",
+          "documents": [
+            "Sua identidade com foto ou carteira estudantil",
+            "Número de Seguro Social",
+            "Um dos pais, responsável ou outro adulto como cotitular, com identidade"
+          ],
+          "notes": [
+            "A Teen Checking atende dos 13 aos 17 anos e é convertida em Free Checking aos 18.",
+            "Um dos pais ou responsável deve ser cotitular da conta.",
+            "Basta um SSN e um responsável para abrir a Teen Checking em uma agência."
+          ]
+        },
+        "fr": {
+          "label": "Moins de 18 ans, ouverture avec un parent ou tuteur",
+          "documents": [
+            "Votre pièce d'identité avec photo ou carte scolaire",
+            "Numéro de sécurité sociale",
+            "Un parent, tuteur ou autre adulte en tant que cotitulaire, avec sa pièce d'identité"
+          ],
+          "notes": [
+            "Teen Checking s'adresse aux 13-17 ans et devient un compte Free Checking à 18 ans.",
+            "Un parent ou tuteur doit être cotitulaire du compte.",
+            "Seuls un SSN et un tuteur sont nécessaires pour ouvrir un compte Teen Checking en agence."
+          ]
+        }
+      }
     },
     "branch_assist": {
       "label": "A banker finishes this one with you",
@@ -85,7 +305,61 @@
       "sourceUrls": [
         "https://ufcu.org/open-account",
         "https://ufcu.org/locations/details/university"
-      ]
+      ],
+      "i18n": {
+        "es": {
+          "label": "Un asesor bancario completa este trámite con usted",
+          "documents": [
+            "Cualquier identificación con fotografía emitida por el gobierno que tenga",
+            "Cualquier documento que muestre su domicilio en Austin",
+            "Su número de contribuyente, si tiene uno"
+          ],
+          "notes": [
+            "UFCU pide a las personas cuyos documentos el formulario en línea no puede aceptar que reserven una cita en una sucursal.",
+            "La University Branch, en 2244 Guadalupe St, atiende estos casos todos los días.",
+            "Llame al (512) 467-8080 o reserve en appointments.ufcu.org."
+          ]
+        },
+        "ko": {
+          "label": "은행원이 직접 도와드리는 경로입니다",
+          "documents": [
+            "보유하신 정부 발급 사진 신분증",
+            "오스틴 주소를 증명하는 서류",
+            "납세자 번호(있는 경우)"
+          ],
+          "notes": [
+            "온라인 양식으로 처리할 수 없는 서류를 가진 분들께는 UFCU가 지점 예약을 안내합니다.",
+            "2244 Guadalupe St에 위치한 University Branch에서 매일 이 절차를 처리합니다.",
+            "(512) 467-8080으로 전화하시거나 appointments.ufcu.org에서 예약하세요."
+          ]
+        },
+        "pt": {
+          "label": "Um gerente conclui esse processo com você",
+          "documents": [
+            "Qualquer identidade com foto emitida pelo governo que você tenha",
+            "Qualquer documento que comprove seu endereço em Austin",
+            "Seu número de contribuinte, se você tiver um"
+          ],
+          "notes": [
+            "A UFCU pede que as pessoas cujos documentos o formulário on-line não aceita agendem um horário em uma agência.",
+            "A University Branch, em 2244 Guadalupe St, atende esses casos todos os dias.",
+            "Ligue para (512) 467-8080 ou agende em appointments.ufcu.org."
+          ]
+        },
+        "fr": {
+          "label": "Un conseiller termine cette démarche avec vous",
+          "documents": [
+            "Toute pièce d'identité avec photo délivrée par le gouvernement que vous possédez",
+            "Tout document indiquant votre adresse à Austin",
+            "Votre numéro de contribuable, si vous en avez un"
+          ],
+          "notes": [
+            "UFCU demande aux personnes dont les documents ne peuvent pas être traités via le formulaire en ligne de prendre rendez-vous en agence.",
+            "La University Branch, au 2244 Guadalupe St, traite ces demandes tous les jours.",
+            "Appelez le (512) 467-8080 ou réservez sur appointments.ufcu.org."
+          ]
+        }
+      }
     }
   },
   "business": {
@@ -103,7 +377,61 @@
     "sourceUrls": [
       "https://ufcu.org/business/business-requirements",
       "https://ufcu.org/business/checking/checking"
-    ]
+    ],
+    "i18n": {
+      "es": {
+        "documents": [
+          "Certificado de Constitución presentado ante la Secretaría de Estado de Texas (LLC, PLLC, corporación, LP)",
+          "Carta de EIN, o un SSN si es una LLC de un solo miembro o negocio propio (sole proprietorship)",
+          "Certificado de Nombre Supuesto (DBA) si el nombre del negocio no es el del propietario",
+          "Identificación con fotografía emitida por el gobierno para cada firmante y cada propietario con el 25% o más"
+        ],
+        "notes": [
+          "La membresía se abre primero con una cuenta de ahorros personal; la cuenta de negocio se conecta a esa cuenta.",
+          "La Regla de Titularidad Beneficiaria (Beneficial Ownership Rule) aplica a entidades registradas ante la Secretaría de Estado, no a negocios propios (sole proprietorships).",
+          "Las cuentas de negocio no tienen Zelle, según el personal de las sucursales de UFCU."
+        ]
+      },
+      "ko": {
+        "documents": [
+          "텍사스 주무장관(Secretary of State)에 제출한 설립 증명서(Certificate of Formation, LLC/PLLC/법인/LP 해당)",
+          "EIN 통지서, 또는 단독 소유 LLC나 개인사업자의 경우 SSN",
+          "사업체명이 소유자 이름과 다를 경우 상호명 등록증(DBA, Assumed Name Certificate)",
+          "모든 서명자 및 지분 25% 이상 소유자의 정부 발급 사진 신분증"
+        ],
+        "notes": [
+          "회원 자격은 먼저 개인 저축 계좌로 개설되며, 사업체 계좌는 그 계좌에 연결됩니다.",
+          "실소유자 확인 규정(Beneficial Ownership Rule)은 주무장관에 등록된 법인에 적용되며, 개인사업자에게는 적용되지 않습니다.",
+          "UFCU 지점 직원에 따르면 사업체 계좌는 Zelle을 이용할 수 없습니다."
+        ]
+      },
+      "pt": {
+        "documents": [
+          "Certificado de Constituição registrado na Secretaria de Estado do Texas (LLC, PLLC, corporação, LP)",
+          "Carta de EIN, ou um SSN para LLC de sócio único ou empresa individual (sole proprietorship)",
+          "Certificado de Nome Fictício (DBA), caso o nome da empresa não seja o do proprietário",
+          "Identidade com foto emitida pelo governo para cada signatário e cada proprietário com 25% ou mais de participação"
+        ],
+        "notes": [
+          "A associação é aberta primeiro com uma conta poupança pessoal; a conta empresarial se conecta a ela.",
+          "A Regra de Titularidade Beneficiária (Beneficial Ownership Rule) se aplica a entidades registradas na Secretaria de Estado, não a empresas individuais (sole proprietorships).",
+          "Segundo a equipe das agências da UFCU, contas empresariais não têm acesso ao Zelle."
+        ]
+      },
+      "fr": {
+        "documents": [
+          "Certificat de constitution déposé auprès du secrétaire d'État du Texas (LLC, PLLC, société, LP)",
+          "Lettre EIN, ou un SSN pour une LLC à membre unique ou une entreprise individuelle",
+          "Certificat de nom commercial (DBA) si le nom de l'entreprise diffère de celui du propriétaire",
+          "Pièce d'identité avec photo délivrée par le gouvernement pour chaque signataire et chaque propriétaire détenant 25 % ou plus"
+        ],
+        "notes": [
+          "L'adhésion s'ouvre d'abord avec un compte d'épargne personnel ; le compte professionnel y est ensuite rattaché.",
+          "La règle du bénéficiaire effectif (Beneficial Ownership Rule) s'applique aux entités enregistrées auprès du secrétaire d'État, pas aux entreprises individuelles.",
+          "Selon le personnel des agences UFCU, les comptes professionnels ne bénéficient pas de Zelle."
+        ]
+      }
+    }
   },
   "affiliations": [
     "Ascension/Seton",
