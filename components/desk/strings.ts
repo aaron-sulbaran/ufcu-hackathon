@@ -30,6 +30,9 @@ export const DESK_STRINGS: Record<string, string> = {
   "desk.become": "Become a member",
   "desk.quick.open": "I want to open an account",
 
+  // One source card is shown up front; the rest of the turn's pages sit behind this.
+  "desk.more": "More information ({n})",
+
   "desk.error": "That did not go through.",
   "desk.retry": "Try again",
 

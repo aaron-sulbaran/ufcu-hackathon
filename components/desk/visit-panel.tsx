@@ -110,14 +110,18 @@ export function VisitPanel({
               {t("desk.promo.title")}
             </h3>
             <p className="text-sm leading-snug text-white">{t("desk.secure.note")}</p>
-            <dl className="space-y-0.5 text-sm text-white">
+            <dl className="flex flex-col text-sm text-white" style={{ gap: "0.75rem" }}>
               {prefill.firstName && <Row label={t("desk.receipt.name")} value={prefill.firstName} />}
               <Row label={t("desk.receipt.path")} value={pathLabel(prefill.path, lang)} />
               <Row label={t("desk.receipt.products")} value={names.join(", ")} />
             </dl>
-            <Link href="/apply" className="btn btn-white w-full" style={{ color: "var(--ufcu-cta)" }}>
+            <Link
+              href="/apply"
+              className="btn btn-white w-full justify-center text-center"
+              style={{ color: "var(--ufcu-cta)" }}
+            >
               <LockIcon />
-              {t("desk.continue")}
+              <span className="min-w-0">{t("desk.continue")}</span>
             </Link>
           </section>
         )}
@@ -126,11 +130,15 @@ export function VisitPanel({
   );
 }
 
+// Stacked, not side by side: a long account list wrapped under a hanging indent read like a
+// nested menu. Label on its own line, value beneath it, wrapping to the panel's own left edge.
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex gap-1.5">
-      <dt className="shrink-0 font-semibold">{label}:</dt>
-      <dd className="min-w-0">{value}</dd>
+    <div>
+      <dt className="font-semibold" style={{ fontSize: "0.8125rem", lineHeight: 1.4 }}>
+        {label}
+      </dt>
+      <dd className="ml-0 leading-snug">{value}</dd>
     </div>
   );
 }

@@ -46,8 +46,10 @@ export function suggestedFor(context: PersonaContext): ProductCard[] {
   return recommendedProducts(picks, context);
 }
 
+// Sorted by score, best first: the desk shows index 0 full width and hides the rest behind
+// "More information", so the order here is what decides which page a person actually reads.
 export function resourcesFor(query: string, context: PersonaContext): ResourceCard[] {
-  return retrieve(query, context.audience, 3).map(({ doc }) => ({
+  return [...retrieve(query, context.audience, 3)].sort((a, b) => b.score - a.score).map(({ doc }) => ({
     title: doc.title,
     summary: firstSentence(doc.body),
     sourceUrl: doc.url,
@@ -76,7 +78,7 @@ export function buildTools(context: PersonaContext): ToolSet {
 
     showResources: tool({
       description:
-        "Show up to 3 resource cards that link to real ufcu.org pages. Use this whenever the person asks how something works.",
+        "Show up to 3 resource cards that link to real ufcu.org pages. Use this whenever the person asks how something works. The desk shows only the best page up front; the others sit behind a More information link, so name at most one page in your sentence.",
       inputSchema: z.object({
         query: z
           .string()

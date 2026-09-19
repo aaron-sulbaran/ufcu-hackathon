@@ -55,6 +55,9 @@ export function Conversation() {
   const router = useRouter();
   const params = useSearchParams();
   const urlPersona = params.get("persona");
+  // The landing search box hands its sentence over as /desk?q=..., which the desk says out loud
+  // as the person's first turn. A persona chip outranks it: that run is a scripted demo.
+  const urlQuery = params.get("q")?.trim() || null;
 
   const [transport] = useState(() => new DefaultChatTransport({ api: "/api/chat" }));
   const { messages, sendMessage, status, error, regenerate } = useChat({ transport });
@@ -113,6 +116,13 @@ export function Conversation() {
       });
       return;
     }
+    // Arrived from the landing search box: send what they typed, once, as their own words, and
+    // drop any persona from a previous run so the desk does not answer as someone else.
+    if (urlQuery) {
+      if (context.personaId) setContext({ personaId: undefined });
+      setPending({ text: urlQuery, ctx: { ...context, personaId: undefined } });
+      return;
+    }
     // Arrived cold: the greeting below is the first turn, and nothing is sent.
     if (context.audience === "other" && context.goal === "unsure") return;
     // Arrived through the landing sentence: say it out loud, and drop any persona from a
@@ -124,7 +134,7 @@ export function Conversation() {
         ? t("desk.sentence.unsure", { audience: t(`audience.${context.audience}`) })
         : t("desk.sentence", { audience: t(`audience.${context.audience}`), goal: t(`goal.${context.goal}`) });
     setPending({ text, ctx });
-  }, [urlPersona, armed, context, setContext, t]);
+  }, [urlPersona, urlQuery, armed, context, setContext, t]);
 
   useEffect(() => {
     if (!pending || status !== "ready") return;
