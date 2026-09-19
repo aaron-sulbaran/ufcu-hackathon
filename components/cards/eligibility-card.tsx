@@ -4,17 +4,19 @@
 import type { EligibilityResult } from "@/lib/types";
 import { pathLabel } from "@/lib/ai/eligibility";
 import { SourceLink } from "@/components/cards/source-link";
+import { useDeskT } from "@/components/desk/strings";
 
 export function EligibilityCard({ result }: { result: EligibilityResult }) {
+  const t = useDeskT();
   return (
     <article className="flex flex-col gap-3 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary shadow-sm">
       <header className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">Your path</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-ufcu-accent-darker">{t("card.path")}</p>
         <h3 className="font-heading text-lg leading-tight">{pathLabel(result.path)}</h3>
       </header>
 
       <div>
-        <p className="mb-1.5 text-sm font-semibold">What to bring</p>
+        <p className="mb-1.5 text-sm font-semibold">{t("card.bring")}</p>
         <ul className="space-y-1.5">
           {result.documents.map((doc) => (
             <li key={doc} className="flex items-start gap-2 text-sm">

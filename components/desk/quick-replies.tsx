@@ -53,14 +53,14 @@ export function QuickReplies({
   disabled?: boolean;
 }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="grid gap-2 sm:grid-cols-3">
       {setFor(lang, audience).map((q) => (
         <button
           key={q}
           type="button"
           disabled={disabled}
           onClick={() => onPick(q)}
-          className="rounded-full border border-ufcu-primary-subtle bg-white px-3 py-1.5 text-sm text-ufcu-primary hover:border-ufcu-secondary-darker hover:text-ufcu-secondary-darker disabled:opacity-50"
+          className="rounded-xl border border-ufcu-primary-subtle bg-white px-4 py-3 text-left text-base leading-snug text-ufcu-primary hover:border-ufcu-secondary-darker hover:text-ufcu-secondary-darker disabled:opacity-50 sm:text-[0.95rem]"
         >
           {q}
         </button>

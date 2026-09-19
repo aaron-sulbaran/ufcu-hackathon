@@ -19,7 +19,8 @@
       "path": "ssn",
       "products": [
         "savings",
-        "simply-u"
+        "simply-u",
+        "credit-builder"
       ],
       "firstName": "Maya",
       "schoolAffiliation": "University of Texas at Austin",
@@ -27,7 +28,12 @@
         "First bank account",
         "Wants to build credit",
         "Campus job paid through UT Workday"
-      ]
+      ],
+      "productReasons": {
+        "savings": "Your membership account. Every UFCU relationship opens with it, for $1.",
+        "simply-u": "$0 to open, no monthly fee, and no overdraft fees, so a first account cannot cost you money.",
+        "credit-builder": "Payments are reported to the credit bureaus, and the deposit comes back to you at payoff."
+      }
     },
     "turns": [
       {
@@ -121,7 +127,7 @@
                     "build_credit",
                     "credit_card"
                   ],
-                  "reason": "Payments are reported to all three credit bureaus, and the deposit comes back to you at payoff."
+                  "reason": "Payments are reported to the credit bureaus, and the deposit comes back to you at payoff."
                 }
               ]
             },
@@ -224,7 +230,8 @@
                 "path": "ssn",
                 "products": [
                   "savings",
-                  "simply-u"
+                  "simply-u",
+                  "credit-builder"
                 ],
                 "firstName": "Maya",
                 "schoolAffiliation": "University of Texas at Austin",
@@ -232,7 +239,12 @@
                   "First bank account",
                   "Wants to build credit",
                   "Campus job paid through UT Workday"
-                ]
+                ],
+                "productReasons": {
+                  "savings": "Your membership account. Every UFCU relationship opens with it, for $1.",
+                  "simply-u": "$0 to open, no monthly fee, and no overdraft fees, so a first account cannot cost you money.",
+                  "credit-builder": "Payments are reported to the credit bureaus, and the deposit comes back to you at payoff."
+                }
               }
             }
           ]
@@ -282,7 +294,7 @@
       },
       {
         "title": "Start the Credit Builder Loan",
-        "detail": "$500 to $2,500 at a flat 3.00% APR, 6 to 24 months, $30 minimum payment, reported to all three bureaus.",
+        "detail": "$500 to $2,500 at a flat 3.00% APR, 6 to 24 months, $30 minimum payment, reported to the credit bureaus.",
         "sourceUrl": "https://ufcu.org/personal/loans/credit-builder"
       },
       {
@@ -320,7 +332,11 @@
         "No SSN yet",
         "F-1 student, arrived three weeks ago",
         "Has passport, I-20, and a West Campus lease"
-      ]
+      ],
+      "productReasons": {
+        "savings": "회원 자격을 만드는 계좌입니다. $1로 열리고, 다른 모든 계좌가 여기에 연결됩니다.",
+        "free-checking": "월 수수료가 없고 최소 잔액도 없으며, 데빗 카드가 바로 발급됩니다."
+      }
     },
     "turns": [
       {
@@ -530,7 +546,11 @@
                   "No SSN yet",
                   "F-1 student, arrived three weeks ago",
                   "Has passport, I-20, and a West Campus lease"
-                ]
+                ],
+                "productReasons": {
+                  "savings": "회원 자격을 만드는 계좌입니다. $1로 열리고, 다른 모든 계좌가 여기에 연결됩니다.",
+                  "free-checking": "월 수수료가 없고 최소 잔액도 없으며, 데빗 카드가 바로 발급됩니다."
+                }
               }
             }
           ]
@@ -569,7 +589,7 @@
       "item": "A five-minute video call with a banker to confirm your passport",
       "how": [
         "Book a slot at the University Branch, 2244 Guadalupe St; the next opening is today.",
-        "Or walk in Monday to Friday, 9 AM to 5 PM, and bring your passport and I-20."
+        "Or walk in Monday to Friday, 10 AM to 4 PM, and bring your passport and I-20."
       ]
     },
     "nextSteps": [
@@ -622,7 +642,11 @@
         "Food truck LLC in Austin, has EIN and formation documents",
         "Business documents step follows the personal membership",
         "Moving personal banking from Wells Fargo"
-      ]
+      ],
+      "productReasons": {
+        "savings": "Abre su membresia con $1 y es la cuenta a la que se conecta la cuenta de negocio.",
+        "business-checking": "Para su LLC: tarjeta de debito de negocio y banca digital; las cuotas estan en la pagina de tarifas de negocio."
+      }
     },
     "turns": [
       {
@@ -685,7 +709,7 @@
                     "checking",
                     "unsure"
                   ],
-                  "reason": "Para su LLC: tarjeta de debito de negocio y banca digital, sin cuota mensual en el nivel basico."
+                  "reason": "Para su LLC: tarjeta de debito de negocio y banca digital; las cuotas estan en la pagina de tarifas de negocio."
                 }
               ]
             },
@@ -794,7 +818,11 @@
                   "Food truck LLC in Austin, has EIN and formation documents",
                   "Business documents step follows the personal membership",
                   "Moving personal banking from Wells Fargo"
-                ]
+                ],
+                "productReasons": {
+                  "savings": "Abre su membresia con $1 y es la cuenta a la que se conecta la cuenta de negocio.",
+                  "business-checking": "Para su LLC: tarjeta de debito de negocio y banca digital; las cuotas estan en la pagina de tarifas de negocio."
+                }
               }
             }
           ]
@@ -882,7 +910,11 @@
         "Moving from Ohio, starting at Ascension Seton next month",
         "Currently banks with Chase",
         "Prefers large type and a phone number"
-      ]
+      ],
+      "productReasons": {
+        "savings": "Your membership account. It opens with $1 and everything else attaches to it.",
+        "plus-checking": "Earns dividends up to 2.25% APY, and the $10 monthly fee is waived at $4,000 in monthly deposits or a $10,000 combined balance."
+      }
     },
     "turns": [
       {
@@ -949,7 +981,7 @@
                     "checking",
                     "savings"
                   ],
-                  "reason": "Earns dividends up to 2.25% APY, and the $10 monthly fee is waived once your Seton paycheck lands here."
+                  "reason": "Earns dividends up to 2.25% APY, and the $10 monthly fee is waived at $4,000 in monthly deposits or a $10,000 combined balance."
                 }
               ]
             },
@@ -1029,7 +1061,11 @@
                   "Moving from Ohio, starting at Ascension Seton next month",
                   "Currently banks with Chase",
                   "Prefers large type and a phone number"
-                ]
+                ],
+                "productReasons": {
+                  "savings": "Your membership account. It opens with $1 and everything else attaches to it.",
+                  "plus-checking": "Earns dividends up to 2.25% APY, and the $10 monthly fee is waived at $4,000 in monthly deposits or a $10,000 combined balance."
+                }
               }
             }
           ]

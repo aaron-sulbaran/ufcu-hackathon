@@ -4,7 +4,7 @@ import type { Audience } from "@/lib/types";
 
 const STOP = new Set([
   "the", "a", "an", "and", "or", "but", "if", "of", "to", "in", "on", "for", "with", "my", "me", "i",
-  "is", "are", "do", "does", "can", "what", "how", "do", "you", "your", "it", "at", "be", "have",
+  "is", "are", "does", "can", "what", "how", "you", "your", "it", "at", "be", "have",
   "get", "need", "want", "about", "from", "this", "that", "there", "was", "were", "will", "would",
 ]);
 
@@ -13,8 +13,12 @@ export interface Scored {
   score: number;
 }
 
+// Strip accents first: a Spanish "credito" and "crédito" have to score the same, and a
+// query that carries no Latin letters at all falls through to the audience fallback.
 function terms(query: string): string[] {
   return query
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, " ")
     .split(/\s+/)

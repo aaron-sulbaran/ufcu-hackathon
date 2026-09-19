@@ -12,16 +12,17 @@ import {
   toUIMessageStream,
   type UIMessage,
 } from "ai";
-import { buildTools, recommendedProducts } from "@/lib/ai/tools";
+import { buildTools, resourcesFor, suggestedFor } from "@/lib/ai/tools";
+import { scriptedHelp, scriptedIntro } from "@/lib/ai/copy";
 import { systemPrompt } from "@/lib/ai/prompt";
-import { getPersona, nextScriptedTurn } from "@/lib/ai/personas";
-import { scriptedStream, type ScriptedPayload } from "@/lib/ai/scripted-stream";
+import { nextScriptedTurn } from "@/lib/ai/personas";
+import { scriptedChunks, scriptedStream, type ScriptedPayload } from "@/lib/ai/scripted-stream";
 import type { PersonaContext } from "@/lib/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const DEFAULT_MODEL = "claude-haiku-4-5-20251001";
+const DEFAULT_MODEL = "claude-haiku-4-5";
 const DEFAULT_CONTEXT: PersonaContext = { audience: "other", goal: "unsure", lang: "en" };
 
 interface ChatBody {
@@ -30,78 +31,134 @@ interface ChatBody {
   personaId?: string;
 }
 
-function countUserTurns(messages: UIMessage[]): number {
-  return messages.filter((m) => m.role === "user").length;
+interface LoosePart {
+  type: string;
+  text?: string;
 }
 
-function fallbackPayload(context: PersonaContext, personaId: string | undefined, turnIndex: number): ScriptedPayload {
-  const turn = nextScriptedTurn(personaId, turnIndex);
-  if (turn) return { text: turn.assistant.text, tools: turn.assistant.tools ?? [] };
+function messageText(message: UIMessage): string {
+  return (message.parts as LoosePart[])
+    .map((p) => (p.type === "text" && typeof p.text === "string" ? p.text : ""))
+    .join(" ")
+    .trim();
+}
 
-  const persona = getPersona(personaId);
-  if (persona) {
-    const last = persona.turns[persona.turns.length - 1];
-    return { text: last.assistant.text, tools: last.assistant.tools ?? [] };
+function lastUserText(messages: UIMessage[]): string {
+  const users = messages.filter((m) => m.role === "user");
+  const last = users[users.length - 1];
+  return last ? messageText(last) : "";
+}
+
+// The offer is made once. If any earlier assistant turn already carried it, it never returns.
+function alreadyOffered(messages: UIMessage[]): boolean {
+  return messages.some(
+    (m) => m.role === "assistant" && (m.parts as LoosePart[]).some((p) => p.type === "tool-startApplication"),
+  );
+}
+
+function sameQuestion(a: string, b: string): boolean {
+  const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").replace(/[.,!?]/g, "").trim();
+  return norm(a) === norm(b);
+}
+
+// Scripted answers follow the script only while the person is on it. Off-script questions get a
+// short line plus the ufcu.org pages that match, so the demo never replays the last turn.
+function fallbackPayload(
+  context: PersonaContext,
+  personaId: string | undefined,
+  messages: UIMessage[],
+): ScriptedPayload {
+  const asked = lastUserText(messages);
+  const turnIndex = Math.max(0, messages.filter((m) => m.role === "user").length - 1);
+  const turn = nextScriptedTurn(personaId, turnIndex);
+
+  if (turn && sameQuestion(turn.user, asked)) {
+    const tools = (turn.assistant.tools ?? []).filter(
+      (call) => call.name !== "startApplication" || !alreadyOffered(messages),
+    );
+    return { text: turn.assistant.text, tools };
   }
 
-  return {
-    text: "I'm in scripted mode right now, so I'm working from what I already know about UFCU. Here is what usually fits.",
-    tools: [
-      {
-        name: "recommendProducts",
-        result: recommendedProducts(
-          [
-            { id: "savings", reason: "Your membership account. Every UFCU relationship opens with it, for $1." },
-            { id: "simply-u", reason: "No monthly fee, no minimum balance, and no overdraft fees." },
-          ],
-          context,
-        ),
-      },
-    ],
-  };
+  const resources = resourcesFor(asked, context);
+
+  // First turn with no script to follow: open with a bundle, the way a persona turn does.
+  if (turnIndex === 0) {
+    return {
+      text: scriptedIntro(context.lang),
+      tools: [
+        { name: "recommendProducts", result: suggestedFor(context) },
+        { name: "showResources", result: resources },
+      ],
+    };
+  }
+
+  if (resources.length > 0) {
+    return { text: scriptedHelp(context.lang), tools: [{ name: "showResources", result: resources }] };
+  }
+  return { text: scriptedIntro(context.lang), tools: [{ name: "recommendProducts", result: suggestedFor(context) }] };
 }
 
 export async function POST(req: Request) {
-  const body = (await req.json()) as ChatBody;
-  const messages = body.messages ?? [];
-  const context = body.context ?? DEFAULT_CONTEXT;
+  const body = (await req.json().catch(() => null)) as ChatBody | null;
+  if (!body || !Array.isArray(body.messages)) {
+    return new Response(JSON.stringify({ error: "messages array required" }), {
+      status: 400,
+      headers: { "content-type": "application/json" },
+    });
+  }
+  const messages = body.messages;
+  const context: PersonaContext = { ...DEFAULT_CONTEXT, ...(body.context ?? {}) };
   const personaId = body.personaId ?? context.personaId;
-  const turnIndex = Math.max(0, countUserTurns(messages) - 1);
 
   const forcedOffline = process.env.FRONT_DESK_OFFLINE === "1" || !process.env.ANTHROPIC_API_KEY;
 
   if (forcedOffline) {
     return createUIMessageStreamResponse({
-      stream: scriptedStream(fallbackPayload(context, personaId, turnIndex)),
+      stream: scriptedStream(fallbackPayload(context, personaId, messages)),
       headers: { "x-frontdesk-mode": "scripted" },
     });
   }
 
-  try {
-    const result = streamText({
-      model: anthropic(process.env.FRONT_DESK_MODEL ?? DEFAULT_MODEL),
-      instructions: systemPrompt(context),
-      messages: await convertToModelMessages(messages),
-      stopWhen: isStepCount(4),
-      tools: buildTools(context),
-    });
+  const result = streamText({
+    model: anthropic(process.env.FRONT_DESK_MODEL ?? DEFAULT_MODEL),
+    instructions: systemPrompt(context),
+    messages: await convertToModelMessages(messages),
+    stopWhen: isStepCount(4),
+    tools: buildTools(context),
+  });
 
-    const stream = createUIMessageStream({
-      execute: ({ writer }) => {
-        writer.merge(
-          toUIMessageStream({
-            stream: result.stream,
-            onEnd: ({ outcome }) => writer.setOutcome(outcome),
-          }),
-        );
-      },
-    });
+  // streamText reports a bad key, a bad model id, or a dropped connection as an error chunk
+  // rather than a thrown error, so the fallback lives in the reader loop, not in a catch.
+  const stream = createUIMessageStream({
+    execute: async ({ writer }) => {
+      const reader = toUIMessageStream({
+        stream: result.stream,
+        onEnd: ({ outcome }) => writer.setOutcome(outcome),
+      }).getReader();
+      let wroteStart = false;
+      let wroteStep = false;
+      let delivered = false;
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) return;
+        if (value.type === "error") {
+          if (delivered) continue;
+          if (!wroteStart) writer.write({ type: "start" });
+          if (!wroteStep) writer.write({ type: "start-step" });
+          for (const chunk of scriptedChunks(fallbackPayload(context, personaId, messages), false)) {
+            writer.write(chunk);
+          }
+          writer.write({ type: "finish-step" });
+          writer.write({ type: "finish" });
+          return;
+        }
+        if (value.type === "start") wroteStart = true;
+        if (value.type === "start-step") wroteStep = true;
+        if (value.type === "text-delta" || value.type.startsWith("tool-")) delivered = true;
+        writer.write(value);
+      }
+    },
+  });
 
-    return createUIMessageStreamResponse({ stream, headers: { "x-frontdesk-mode": "live" } });
-  } catch {
-    return createUIMessageStreamResponse({
-      stream: scriptedStream(fallbackPayload(context, personaId, turnIndex)),
-      headers: { "x-frontdesk-mode": "scripted" },
-    });
-  }
+  return createUIMessageStreamResponse({ stream, headers: { "x-frontdesk-mode": "live" } });
 }

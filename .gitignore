@@ -10,6 +10,7 @@ dist/
 .env
 .env.*
 !.env.example
+.env.local
 
 # os / editor
 .DS_Store

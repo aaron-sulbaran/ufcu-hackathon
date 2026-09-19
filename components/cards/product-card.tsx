@@ -2,8 +2,10 @@
 // Product card. Lane B imports this for the account-selection step; keep the props simple.
 import type { ProductCard as Product } from "@/lib/types";
 import { SourceLink } from "@/components/cards/source-link";
+import { useDeskT } from "@/components/desk/strings";
 
 export function ProductCard({ product, reason }: { product: Product; reason?: string }) {
+  const t = useDeskT();
   const why = reason ?? product.reason;
   return (
     <article className="flex h-full min-w-[15rem] flex-col gap-3 rounded-xl border border-ufcu-primary-subtle bg-white p-4 text-ufcu-primary shadow-sm">
@@ -18,11 +20,11 @@ export function ProductCard({ product, reason }: { product: Product; reason?: st
 
       <dl className="grid grid-cols-2 gap-2 text-sm">
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Opens with</dt>
+          <dt className="text-xs uppercase tracking-wide text-muted-foreground">{t("card.opensWith")}</dt>
           <dd className="font-semibold">{product.minToOpen}</dd>
         </div>
         <div>
-          <dt className="text-xs uppercase tracking-wide text-muted-foreground">Monthly fee</dt>
+          <dt className="text-xs uppercase tracking-wide text-muted-foreground">{t("card.monthlyFee")}</dt>
           <dd className="font-semibold">{product.monthlyFee}</dd>
         </div>
       </dl>

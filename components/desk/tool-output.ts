@@ -27,3 +27,19 @@ export function partText(part: { type: string }): string | null {
   const p = part as LoosePart & { text?: string };
   return p.type === "text" && typeof p.text === "string" ? p.text : null;
 }
+
+// The left panel reads the latest result of each tool, so "Your visit so far" always shows
+// the current bundle and checklist rather than whatever scrolled past.
+export function collectVisit<P, E, A>(messages: { parts: { type: string }[] }[]) {
+  let products: P | null = null;
+  let eligibility: E | null = null;
+  let prefill: A | null = null;
+  for (const message of messages) {
+    for (const part of message.parts) {
+      products = toolOutput<P>(part, "recommendProducts") ?? products;
+      eligibility = toolOutput<E>(part, "checkEligibility") ?? eligibility;
+      prefill = toolOutput<A>(part, "startApplication") ?? prefill;
+    }
+  }
+  return { products, eligibility, prefill };
+}

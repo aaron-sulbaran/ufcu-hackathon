@@ -3,6 +3,7 @@ import { tool, type ToolSet } from "ai";
 import { z } from "zod";
 import { PRODUCTS, productById } from "@/lib/products";
 import { retrieve, firstSentence } from "@/lib/ai/retrieve";
+import { savingsReason } from "@/lib/ai/copy";
 import { checkEligibility as runEligibility } from "@/lib/ai/eligibility";
 import type { ApplicationPrefill, EligibilityResult, PersonaContext, ProductCard, ResourceCard } from "@/lib/types";
 
@@ -25,7 +26,7 @@ export function recommendedProducts(
     const savings = productById("savings");
     if (savings) {
       if (cards.length === 3) cards.pop();
-      cards.unshift({ ...savings, reason: "Your membership account. Every UFCU relationship opens with it, for $1." });
+      cards.unshift({ ...savings, reason: savingsReason(context.lang) });
     }
   }
   if (cards.length === 0) {
@@ -33,6 +34,15 @@ export function recommendedProducts(
     return fallback.map((p) => ({ ...p, reason: p.tagline }));
   }
   return cards.slice(0, 3);
+}
+
+// The scripted opening for someone who arrived through the landing sentence rather than a
+// persona chip: the catalog rows that match what they said, savings added by the helper.
+export function suggestedFor(context: PersonaContext): ProductCard[] {
+  const picks = PRODUCTS.filter((p) => p.audiences?.includes(context.audience) && p.goals?.includes(context.goal))
+    .slice(0, 3)
+    .map((p) => ({ id: p.id, reason: p.id === "savings" ? savingsReason(context.lang) : p.tagline }));
+  return recommendedProducts(picks, context);
 }
 
 export function resourcesFor(query: string, context: PersonaContext): ResourceCard[] {
@@ -67,7 +77,9 @@ export function buildTools(context: PersonaContext): ToolSet {
       description:
         "Show up to 3 resource cards that link to real ufcu.org pages. Use this whenever the person asks how something works.",
       inputSchema: z.object({
-        query: z.string().describe("What the person is asking about, in a few words"),
+        query: z
+          .string()
+          .describe("English keywords matching the page tags, for example: zelle ssn wire, even when you are replying in another language"),
       }),
       execute: async ({ query }): Promise<ResourceCard[]> => resourcesFor(query, context),
     }),
@@ -96,16 +108,26 @@ export function buildTools(context: PersonaContext): ToolSet {
         preferredName: z.string().optional(),
         schoolAffiliation: z.string().optional(),
         notes: z.array(z.string()).default([]).describe("Short lines the application should carry over"),
+        reasons: z
+          .array(z.object({ id: z.string(), reason: z.string() }))
+          .default([])
+          .describe("The same one-line reason you gave for each recommended product, so the application can show it"),
       }),
-      execute: async (input): Promise<ApplicationPrefill> => ({
-        context,
-        path: input.path,
-        products: input.products.filter((id) => productById(id) !== undefined),
-        firstName: input.firstName,
-        preferredName: input.preferredName,
-        schoolAffiliation: input.schoolAffiliation,
-        notes: input.notes,
-      }),
+      execute: async (input): Promise<ApplicationPrefill> => {
+        const products = input.products.filter((id) => productById(id) !== undefined);
+        const productReasons: Record<string, string> = {};
+        for (const { id, reason } of input.reasons) if (products.includes(id)) productReasons[id] = reason;
+        return {
+          context,
+          path: input.path,
+          products,
+          firstName: input.firstName,
+          preferredName: input.preferredName,
+          schoolAffiliation: input.schoolAffiliation,
+          notes: input.notes,
+          productReasons,
+        };
+      },
     }),
   };
 }

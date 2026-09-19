@@ -12,7 +12,7 @@ export default function DeskPage() {
   return (
     <>
       <Header secure={false} />
-      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4">
         <DeskTitle />
         <Suspense fallback={<p className="py-8 text-muted-foreground">...</p>}>
           <Conversation />
