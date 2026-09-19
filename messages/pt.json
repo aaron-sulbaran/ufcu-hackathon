@@ -138,7 +138,7 @@
   "apply.route.video.picked": "Agendado para hoje às {time}.",
   "apply.route.branch.title": "Finalize na University Branch",
   "apply.route.branch.body": "Este caminho é assinado pessoalmente. Leve seus documentos e um dos pais ou responsável.",
-  "apply.branch.hours": "De segunda a sexta, das 10h às 16h",
+  "apply.branch.hours": "Segunda a sexta, 10h as 16h",
   "apply.accounts.sub": "Verificado uma vez, aplicado a todas as contas deste pacote.",
   "apply.accounts.membership": "Conta de associação. Sempre incluída.",
   "apply.accounts.add": "Adicionar",
@@ -211,5 +211,18 @@
   "apply.err.products": "A poupança é a conta de associação e permanece no pacote.",
   "apply.err.esign": "Concorde em receber seus documentos por e-mail.",
   "apply.err.agreement": "Concorde com o Acordo de Associação e Conta.",
-  "desk.greeting": "Oi, seja bem-vindo. Eu sou a recepção da University Branch. O que te traz aqui hoje?"
+  "desk.greeting": "Oi, seja bem-vindo. Eu sou a recepção da University Branch. O que te traz aqui hoje?",
+  "apply.startover": "Comecar de novo",
+  "apply.cip.title": "Por que pedimos isso",
+  "apply.and": "e",
+  "apply.sample.fill": "Usar dados de exemplo",
+  "apply.sample.note": "Preenche esta etapa com dados ficticios para que uma demonstracao nao precise de dez campos digitados.",
+  "apply.review.name": "Nome",
+  "apply.accounts.money": "{min} para abrir, {fee} por mes",
+  "apply.accounts.applied": "Verificado uma vez, aplicado a {names}.",
+  "apply.review.memory": "Seu numero de identificacao fica apenas nesta aba do navegador. Aqui ele aparece mascarado e nunca e salvo, entao ao recarregar sera pedido de novo.",
+  "apply.done.compare": "A mesma abertura hoje passa por dois sites, um agendamento na agencia e uma ligacao de retorno.",
+  "apply.next.atm.any.title": "Caixas eletronicos sem tarifa perto de voce",
+  "apply.next.atm.any.detail": "O mapa de caixas da UFCU mostra as maquinas que voce pode usar sem tarifa, incluindo as da rede compartilhada.",
+  "apply.next.switchkit": "Kit de mudanca"
 }

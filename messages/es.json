@@ -138,7 +138,7 @@
   "apply.route.video.picked": "Reservado para hoy a las {time}.",
   "apply.route.branch.title": "Termine en la sucursal University Branch",
   "apply.route.branch.body": "Este camino se firma en persona. Traiga sus documentos y a su padre, madre o tutor.",
-  "apply.branch.hours": "De lunes a viernes, de 10 a. m. a 4 p. m.",
+  "apply.branch.hours": "Lunes a viernes, 10 AM a 4 PM",
   "apply.accounts.sub": "Verificado una vez, se aplica a todas las cuentas de este paquete.",
   "apply.accounts.membership": "Cuenta de membresía. Siempre incluida.",
   "apply.accounts.add": "Agregar",
@@ -211,5 +211,18 @@
   "apply.err.products": "La cuenta de ahorros es la cuenta de membresía y permanece en el paquete.",
   "apply.err.esign": "Acepte recibir sus documentos por correo electrónico.",
   "apply.err.agreement": "Acepte el Acuerdo de Membresía y Cuenta.",
-  "desk.greeting": "Hola, bienvenido. Soy la recepcion de la sucursal University. En que te puedo ayudar hoy?"
+  "desk.greeting": "Hola, bienvenido. Soy la recepcion de la sucursal University. En que te puedo ayudar hoy?",
+  "apply.startover": "Empezar de nuevo",
+  "apply.cip.title": "Por que pedimos esto",
+  "apply.and": "y",
+  "apply.sample.fill": "Usar datos de ejemplo",
+  "apply.sample.note": "Llena este paso con datos inventados para que una demostracion no requiera diez campos escritos.",
+  "apply.review.name": "Nombre",
+  "apply.accounts.money": "{min} para abrir, {fee} al mes",
+  "apply.accounts.applied": "Verificado una vez, aplicado a {names}.",
+  "apply.review.memory": "Su numero de identificacion se queda en esta pestana del navegador. Aqui se muestra enmascarado y nunca se guarda, asi que al recargar se le pedira de nuevo.",
+  "apply.done.compare": "La misma apertura hoy requiere dos sitios web, una cita en sucursal y una llamada de seguimiento.",
+  "apply.next.atm.any.title": "Cajeros sin comision cerca de usted",
+  "apply.next.atm.any.detail": "El mapa de cajeros de UFCU muestra las maquinas que puede usar sin comision, incluidas las de la red compartida.",
+  "apply.next.switchkit": "Kit de cambio"
 }

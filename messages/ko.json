@@ -138,7 +138,7 @@
   "apply.route.video.picked": "오늘 {time}으로 예약되었습니다.",
   "apply.route.branch.title": "University Branch에서 마무리하기",
   "apply.route.branch.body": "이 절차는 직접 방문하여 서명해야 합니다. 서류와 부모님 또는 보호자를 함께 데려오세요.",
-  "apply.branch.hours": "평일 오전 10시부터 오후 4시까지",
+  "apply.branch.hours": "월요일부터 금요일, 오전 10시부터 오후 4시",
   "apply.accounts.sub": "한 번 확인하면 이 묶음의 모든 계좌에 적용됩니다.",
   "apply.accounts.membership": "회원 계좌. 항상 포함됩니다.",
   "apply.accounts.add": "추가",
@@ -211,5 +211,18 @@
   "apply.err.products": "저축 계좌는 회원 계좌이며 항상 묶음에 포함됩니다.",
   "apply.err.esign": "서류를 이메일로 받는 데 동의해 주세요.",
   "apply.err.agreement": "회원 및 계좌 약관에 동의해 주세요.",
-  "desk.greeting": "안녕하세요, 어서 오세요. University 지점 안내 데스크입니다. 오늘 어떤 일로 오셨나요?"
+  "desk.greeting": "안녕하세요, 어서 오세요. University 지점 안내 데스크입니다. 오늘 어떤 일로 오셨나요?",
+  "apply.startover": "처음부터 다시",
+  "apply.cip.title": "이 정보를 요청하는 이유",
+  "apply.and": "및",
+  "apply.sample.fill": "샘플 데이터 사용",
+  "apply.sample.note": "시연을 위해 이 단계를 가상의 정보로 채웁니다. 열 개의 항목을 직접 입력할 필요가 없습니다.",
+  "apply.review.name": "이름",
+  "apply.accounts.money": "개설 시 {min}, 월 {fee}",
+  "apply.accounts.applied": "한 번 확인된 신원이 {names}에 모두 적용됩니다.",
+  "apply.review.memory": "신분증 번호는 이 브라우저 탭에만 남습니다. 여기서는 가려서 표시되며 저장되지 않으므로 새로고침하면 다시 입력해야 합니다.",
+  "apply.done.compare": "같은 계좌 개설이 오늘은 두 개의 웹사이트, 지점 방문 예약, 그리고 회신 전화를 거칩니다.",
+  "apply.next.atm.any.title": "가까운 수수료 없는 ATM",
+  "apply.next.atm.any.detail": "UFCU ATM 지도에서 공유 네트워크 ATM을 포함해 수수료 없이 이용할 수 있는 기기를 확인할 수 있습니다.",
+  "apply.next.switchkit": "은행 이전 키트"
 }

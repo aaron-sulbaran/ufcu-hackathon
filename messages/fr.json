@@ -138,7 +138,7 @@
   "apply.route.video.picked": "Réservé pour aujourd'hui à {time}.",
   "apply.route.branch.title": "Terminez à la University Branch",
   "apply.route.branch.body": "Ce parcours se termine en personne. Apportez vos documents et votre parent ou tuteur.",
-  "apply.branch.hours": "Du lundi au vendredi, de 10h à 16h",
+  "apply.branch.hours": "Du lundi au vendredi, de 10 h a 16 h",
   "apply.accounts.sub": "Vérifié une fois, appliqué à tous les comptes de ce pack.",
   "apply.accounts.membership": "Compte d'adhésion. Toujours inclus.",
   "apply.accounts.add": "Ajouter",
@@ -211,5 +211,18 @@
   "apply.err.products": "L'épargne est le compte d'adhésion et reste dans le pack.",
   "apply.err.esign": "Acceptez de recevoir vos documents par e-mail.",
   "apply.err.agreement": "Acceptez le contrat d'adhésion et de compte.",
-  "desk.greeting": "Bonjour, bienvenue. Je suis l'accueil de la University Branch. Qu'est-ce qui vous amène aujourd'hui ?"
+  "desk.greeting": "Bonjour, bienvenue. Je suis l'accueil de la University Branch. Qu'est-ce qui vous amène aujourd'hui ?",
+  "apply.startover": "Recommencer",
+  "apply.cip.title": "Pourquoi nous demandons cela",
+  "apply.and": "et",
+  "apply.sample.fill": "Utiliser des donnees fictives",
+  "apply.sample.note": "Remplit cette etape avec des donnees inventees pour qu une demonstration ne demande pas dix champs a saisir.",
+  "apply.review.name": "Nom",
+  "apply.accounts.money": "{min} pour ouvrir, {fee} par mois",
+  "apply.accounts.applied": "Verifie une fois, applique a {names}.",
+  "apply.review.memory": "Votre numero d identification reste dans cet onglet. Il est masque ici et jamais enregistre, donc un rechargement vous le redemandera.",
+  "apply.done.compare": "La meme ouverture prend aujourd hui deux sites, un rendez-vous en agence et un rappel telephonique.",
+  "apply.next.atm.any.title": "Distributeurs sans frais pres de chez vous",
+  "apply.next.atm.any.detail": "La carte des distributeurs UFCU indique les appareils utilisables sans frais, y compris ceux du reseau partage.",
+  "apply.next.switchkit": "Kit de changement de banque"
 }
