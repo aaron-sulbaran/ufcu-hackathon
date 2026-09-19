@@ -3,7 +3,6 @@
 // a dotted rule, the legal row with social icons, and the partners line. Text is dictionary keys, so
 // it follows the selected language; phone numbers, legal identifiers, and partner names stay literal.
 import { useT } from "@/lib/i18n";
-import { Facebook, Instagram, Linkedin, Youtube } from "@/components/home/social-icons";
 
 const COLUMNS = [
   {
@@ -54,6 +53,21 @@ const SOCIAL = [
   { label: "Instagram", href: "https://www.instagram.com/ufcu_tx/", Icon: Instagram },
 ];
 
+
+type IconProps = { className?: string };
+function Facebook({ className }: IconProps) {
+  return <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z" /></svg>;
+}
+function Linkedin({ className }: IconProps) {
+  return <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden><path d="M6.9 8.5H3.6V21h3.3V8.5zM5.3 3a1.9 1.9 0 100 3.8 1.9 1.9 0 000-3.8zM21 13.3c0-3.6-1.9-5.2-4.5-5.2-2 0-2.9 1.1-3.4 1.9V8.5H9.8V21h3.3v-6.9c0-1.8.3-3.6 2.6-3.6 2.2 0 2.2 2.1 2.2 3.7V21H21v-7.7z" /></svg>;
+}
+function Youtube({ className }: IconProps) {
+  return <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden><path d="M23 7.2a2.9 2.9 0 00-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .5a2.9 2.9 0 00-2 2C.5 9 .5 12 .5 12s0 3 .5 4.8a2.9 2.9 0 002 2c1.8.5 9 .5 9 .5s7.2 0 9-.5a2.9 2.9 0 002-2c.5-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.1V8.9l6 3.1-6 3.1z" /></svg>;
+}
+function Instagram({ className }: IconProps) {
+  return <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
+}
+
 const link = "text-white underline underline-offset-4 decoration-white/70 hover:decoration-white";
 
 function XMark() {
@@ -84,7 +98,7 @@ export function SiteFooter() {
       <section className="relative overflow-hidden bg-ufcu-navy">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-[18%] -top-[10%] h-[140%] w-[70%] rounded-full border-[70px] border-white/5"
+          className="pointer-events-none absolute -right-[28%] -top-[25%] h-[170%] w-[62%] rounded-full border-[90px] border-white/[0.06]"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
