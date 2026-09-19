@@ -22,10 +22,11 @@ and a live 5-minute demo with 2 minutes of judge Q&A. Slides optional.
 
 "What good looks like": **simple**, and **accessible to all generations** (boomer through alpha).
 
-## Judging
-The official scorecard and rubric arrive Saturday morning at kickoff. Build plan step 0 is a
-10-minute rubric read where we re-rank features against it. Until then we optimize for the five
-deliverable bullets above plus the two "good" adjectives.
+## Judging (official scorecard, received at kickoff)
+100 points. A. Member onboarding and product fit 25; B. Speed and friction reduction 20; C. UX
+intuitiveness and creativity 20; D. Technical execution and feasibility 15; E. Compliance, trust and
+risk awareness 10; F. Pitch and communication 10. Each rated 1 to 5 and weighted. Full mapping of what
+earns a 5 to what we build is in docs/09-rubric-map.md. Deliverables are due 2:30 PM, not 3:00.
 
 ## Definition of a member
 Anyone with a deposit account (savings, checking, certificate), a loan (credit card, auto, line of credit),
@@ -38,11 +39,11 @@ or a mortgage. Savings is the membership share account; everything else attaches
 | 9:00 to 9:25 | Kickoff, prompt discussion, rubric | Rubric read, re-rank, assign lanes |
 | 9:25 to 12:00 | Working session 1 (2h35m) | Setup sprint + build blocks 1 and 2 |
 | 12:00 | Lunch (take it to the desk) | Check-in 2: integration, scope freeze |
-| 12:00 to 3:00 | Working session 2 (3h) | Build block 3, feature freeze 1:45, demo prep |
+| 12:00 to 2:30 | Working session 2 | Build block 3, feature freeze 1:30, demo prep, deliverables due 2:30 |
 | 3:00 to 4:30 | Presentations, 5 min demo + 2 min Q&A | Present |
 | 4:30 to 5:30 | Judging, awards, photos | |
 
-Effective build time: about 5 hours 20 minutes including the setup sprint. Plan for 4.5 hours of real code.
+Effective build time: about 4 hours 50 minutes including the setup sprint. Plan for 4 hours of real code.
 
 ## Prizes
 1st $2,000, 2nd $1,000, all participants $50. Cash is nice; the judges are UFCU's CTO office
